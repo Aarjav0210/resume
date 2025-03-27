@@ -1,16 +1,16 @@
 import React from "react";
 import TerminalHeader from "@/app/components/TerminalHeader";
 import WorkExperienceCard from "@/app/components/WorkExperienceCard";
-import { SkillIconProps } from "../components/SkillIcon";
+import ScrollToContinue from "@/app/components/ScrollToContinue";
 
 export default function WorkExperience() {
     return (
-        <section className="snap-start h-screen grid grid-rows-[120px_1fr_120px]">
+        <section className="snap-start h-screen grid grid-rows-[120px_1fr_200px]">
             <div className="flex flex-col row-start-1 gap-[32px] items-start justify-center p-8 sm:p-20 w-full">
                 <TerminalHeader username="aarjav_jain" text="ls work_experience" textSize={{ lg: 'text-4xl', md: 'text-3xl', sm: 'text-2xl' }} />
             </div>
 
-            <div className="grid grid-cols-3 gap-[32px] p-8 sm:p-20 w-full h-full">
+            <div className="grid grid-cols-3 gap-[32px] px-20 py-8 w-full h-full">
                 <WorkExperienceCard
                     company="Deutsche Bank AG (2)"
                     timePeriod="Jul 24' - Present"
@@ -74,6 +74,10 @@ export default function WorkExperience() {
                     role="Mathematics Tutor"
                     keywords={['A-Levels Mathematics', 'Special Needs']}
                 />
+            </div>
+
+            <div className="row-start-3 justify-center mt-4">
+                <ScrollToContinue beforeText="Scroll or press " keyPressIconText="Enter" afterText=" to continue"/>
             </div>
         </section>
     );

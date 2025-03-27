@@ -12,7 +12,7 @@ interface WorkExperienceCardProps {
 
 const WorkExperienceCard: React.FC<WorkExperienceCardProps> = ({ company, timePeriod, role, keywords, skills }) => {
     return (
-        <div className="bg-[#1E1E1E] grid grid-rows-3 rounded-[20px] p-8">
+        <div className="bg-[#1E1E1E] grid grid-rows-3 rounded-[20px] p-8 min-w-[400px]">
             <div id='card-header' className='flex flex-col row-start-1 items-start justify-start gap-1'>
                 <h2 className="text-2xl text-[#4CF0E8]">{company}</h2>
                 <h3 className="text-md text-[#84EF12] whitespace-pre-wrap">{timePeriod}  |  {role}</h3>
