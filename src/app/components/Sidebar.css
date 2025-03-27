@@ -1,0 +1,69 @@
+/* Sidebar.css */
+.sidebar {
+    position: fixed;
+    right: -250px; /* Hidden by default */
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    transition: right 0.5s ease; /* Slower transition for sidebar */
+    z-index: 1001; /* Ensure sidebar is above other content */
+}
+
+.sidebar.open {
+    right: 0; /* Show the sidebar */
+}
+
+.toggle-button {
+    font-size: 24px;
+    transition: transform 0.3s ease;
+    z-index: 1002; /* Ensure button is above the sidebar */
+    background: transparent; /* Make background transparent */
+    border: none; /* Remove default button border */
+    cursor: pointer; /* Change cursor to pointer */
+}
+
+.rotate-icon {
+    display: inline-block; /* Ensure it can be transformed */
+    transition: transform 0.3s ease; /* Smooth rotation */
+}
+
+.rotate-icon.open {
+    transform: rotate(-90deg); /* Rotate the < character */
+}
+
+.no-scroll {
+    overflow: hidden; /* Disable scrolling */
+}
+
+/* Mask overlay styles */
+.mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(19, 19, 19, 0.65); /* Color #131313 with 65% opacity */
+    z-index: 900; /* Ensure it is below the sidebar but above other content */
+    opacity: 0; /* Start with opacity 0 */
+    transition: opacity 0.3s ease; /* Smooth transition for opacity */
+}
+
+.mask.show {
+    opacity: 1; /* Fully visible when the sidebar is open */
+}
+
+.nav-links {
+    /* display: flex; */
+    /* flex-direction: column; */
+}
+
+.nav-link {
+    /* background: transparent; */
+    /* border: none; */
+    /* color: white; */
+    /* text-align: right; */
+    /* margin-right: 20px; */
+    /* cursor: pointer; */
+    /* transition: text-decoration 0.3s ease; */
+}

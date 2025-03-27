@@ -5,7 +5,7 @@ import ScrollToContinue from "@/app/components/ScrollToContinue";
 
 export default function WorkExperience() {
     return (
-        <section className="snap-start h-screen grid grid-rows-[120px_1fr_200px]">
+        <section id="work-experience" className="snap-start h-screen grid grid-rows-[120px_1fr_200px]">
             <div className="flex flex-col row-start-1 gap-[32px] items-start justify-center p-8 sm:p-20 w-full">
                 <TerminalHeader username="aarjav_jain" text="ls work_experience" textSize={{ lg: 'text-4xl', md: 'text-3xl', sm: 'text-2xl' }} />
             </div>
