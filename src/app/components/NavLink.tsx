@@ -15,7 +15,6 @@ const NavLink: React.FC<NavLinkProps> = ({ section, currentSection, onNavigate, 
             className={className}
             onClick={() => onNavigate(section)}
         >
-            {/* <span className="text-[#4CF0E8]">{displayText || section}</span> */}
             <span className={`text-[#4CF0E8] ${currentSection === section ? 'underline' : ''}`}>{displayText || section}</span>
             <span className="text-[#84EF12]">&lt;</span>
         </button>

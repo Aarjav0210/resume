@@ -8,9 +8,6 @@ const Sidebar: React.FC<{ onClose: () => void; currentSection: string; setCurren
 
     const toggleSidebar = () => {
         setIsOpen(!isOpen);
-        if (!isOpen) {
-            // No need to update current section here, it's managed in Home
-        }
     };
 
     useEffect(() => {

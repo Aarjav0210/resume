@@ -39,7 +39,7 @@ export default function Education() {
             </div>
 
             <div className="row-start-3 justify-center mt-4">
-                <ScrollToContinue beforeText="Scroll or press " keyPressIconText="Enter" afterText=" to continue"/>
+                {/* <ScrollToContinue beforeText="Scroll or press " keyPressIconText="Enter" afterText=" to continue"/> */}
             </div>
         </section>
     );
