@@ -1,21 +1,12 @@
 // components/WorkExperienceModal.tsx
 import React, { useRef } from 'react'
 import SkillIcon from '@/app/components/SkillIcon'
-import Description from '../types/Description'
+import type { WorkEntry } from '@/app/types/WorkEntry'
 
-export interface WorkEntry {
-  company: string
-  timePeriod: string
-  role: string
-  description: Description[]
-  skills?: { bgColor: string; textColor: string; text: string }[]
-}
-
-interface WorkExperienceModalProps {
+export interface WorkExperienceModalProps {
   entry: WorkEntry
   onClose: () => void
 }
-
 const CLICK_THRESHOLD = 200 // ms
 
 const WorkExperienceModal: React.FC<WorkExperienceModalProps> = ({ entry, onClose }) => {
