@@ -5,11 +5,6 @@ import Typewriter from "@/app/components/Typewriter";
 import ScrollToContinue from "@/app/components/ScrollToContinue";
 
 export default function Landing({ currentSection, setCurrentSection }: { currentSection: string; setCurrentSection: (section: string) => void }) {
-  // const [isSidebarOpen, setSidebarOpen] = useState(false);
-
-  // const toggleSidebar = () => {
-  //   setSidebarOpen(!isSidebarOpen);
-  // };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
