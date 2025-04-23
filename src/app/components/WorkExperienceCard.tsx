@@ -1,15 +1,9 @@
 // components/WorkExperienceCard.tsx
 import React from 'react'
 import SkillIcon from '@/app/components/SkillIcon'
-import Description from '../types/Description'
+import type { WorkEntry } from '@/app/types/WorkEntry'
 
-export interface WorkExperienceCardProps {
-  id: number
-  company: string
-  timePeriod: string
-  role: string
-  description: Description[]
-  skills?: { bgColor: string; textColor: string; text: string }[]
+export interface WorkExperienceCardProps extends WorkEntry {
   disabled?: boolean
   onSelect: (id: number) => void
 }
