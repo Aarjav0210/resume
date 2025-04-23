@@ -87,7 +87,7 @@ export default function WorkExperienceView() {
   const selectedEntry = entries.find((e) => e.id === isSelected)
 
   return (
-    <section id="work-experience" className="snap-start h-screen grid grid-rows-[120px_1fr_200px]">
+    <section id="work-experience" className="snap-start h-screen grid grid-rows-[120px_1fr_120px]">
       {/* Header */}
       <div className="flex flex-col row-start-1 gap-8 items-start justify-center p-8 sm:p-20 w-full">
         <TerminalHeader
@@ -98,7 +98,7 @@ export default function WorkExperienceView() {
       </div>
 
       {/* Scrollable cards with fades */}
-      <FadingScroll className="rounded-[20px] mx-20 my-9" fadeHeight={50} backgroundColor="#171717">
+      <FadingScroll className="row-start-2 rounded-[20px] mx-20 my-9" fadeHeight={50} backgroundColor="#171717">
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
           {entries.map((entry) => (
             <WorkExperienceCard
