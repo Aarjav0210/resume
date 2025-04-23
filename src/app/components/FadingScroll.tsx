@@ -45,12 +45,30 @@ const FadingScroll: React.FC<FadingScrollProps> = ({
             <div ref={containerRef} className='overflow-x-auto h-full w-full scrollbar-hide'>
                 {children}
             </div>
-            {showTop && (
+            {/* {showTop && (
                 <div className='pointer-events-none absolute inset-x-0 top-0' style={gradientStyle('to bottom')}/>
             )}
             {showBottom && (
                 <div className='pointer-events-none absolute inset-x-0 bottom-0' style={gradientStyle('to top')}/>
-            )}
+            )} */}
+            <div 
+                className={`
+                    pointer-events-none
+                    absolute inset-x-0 top-0
+                    transition-opacity duration-100
+                    ${showTop ? 'opacity-100' : 'opacity-0'}
+                `}
+                style={gradientStyle('to bottom')}
+            />
+            <div 
+                className={`
+                    pointer-events-none
+                    absolute inset-x-0 bottom-0
+                    transition-opacity duration-300
+                    ${showTop ? 'opacity-100' : 'opacity-0'}
+                `}
+                style={gradientStyle('to top')}
+            />
         </div>
     );
 };
