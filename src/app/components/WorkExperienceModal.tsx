@@ -1,27 +1,35 @@
 // components/WorkExperienceModal.tsx
-import React, { ReactNode, useRef } from 'react'
+import React, { useRef } from 'react'
+import SkillIcon from '@/app/components/SkillIcon'
+import Description from '../types/Description'
+
+export interface WorkEntry {
+  company: string
+  timePeriod: string
+  role: string
+  description: Description[]
+  skills?: { bgColor: string; textColor: string; text: string }[]
+}
 
 interface WorkExperienceModalProps {
-  children: ReactNode
+  entry: WorkEntry
   onClose: () => void
 }
 
-const CLICK_THRESHOLD = 25 // ms
+const CLICK_THRESHOLD = 200 // ms
 
-const WorkExperienceModal: React.FC<WorkExperienceModalProps> = ({ children, onClose }) => {
-  // Track when the press started
+const WorkExperienceModal: React.FC<WorkExperienceModalProps> = ({ entry, onClose }) => {
   const downTimeRef = useRef<number | null>(null)
 
-  // Backdrop: any click here closes immediately
   const handleBackdropClick = () => {
     onClose()
   }
 
-  // Modal content: only close if quick click (< threshold)
   const handleMouseDown = (e: React.MouseEvent) => {
     e.stopPropagation()
     downTimeRef.current = Date.now()
   }
+
   const handleMouseUp = (e: React.MouseEvent) => {
     e.stopPropagation()
     if (downTimeRef.current !== null) {
@@ -32,7 +40,7 @@ const WorkExperienceModal: React.FC<WorkExperienceModalProps> = ({ children, onC
     }
     downTimeRef.current = null
   }
-  // Prevent the built-in click event from bubbling out
+
   const stopClick = (e: React.MouseEvent) => e.stopPropagation()
 
   return (
@@ -41,12 +49,46 @@ const WorkExperienceModal: React.FC<WorkExperienceModalProps> = ({ children, onC
       onClick={handleBackdropClick}
     >
       <div
-        className="bg-[#1E1E1E] rounded-2xl p-8 max-w-lg w-full text-white select-text cursor-text"
+        className="bg-[#1E1E1E] rounded-[20px] shadow-xl p-10 max-w-lg w-full text-white select-text cursor-text"
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
         onClick={stopClick}
       >
-        {children}
+        {/* Header */}
+        <div className="flex flex-col items-start gap-1 mb-4">
+          <h2 className="text-3xl text-[#4CF0E8]">{entry.company}</h2>
+          <p className="text-base text-[#84EF12]">
+            {entry.timePeriod} | {entry.role}
+          </p>
+        </div>
+
+        {/* Description */}
+        <div className="mb-6">
+          <h4 className="text-lg text-white mb-2">Description</h4>
+          <div className="prose prose-invert text-sm whitespace-pre-wrap">
+            {entry.description.map((part, idx) =>
+              part.type === 'keyword' ? (
+                <span key={idx} className="text-[#84EF12]">
+                  {part.content}
+                </span>
+              ) : (
+                <span key={idx}>{part.content}</span>
+              )
+            )}
+          </div>
+        </div>
+
+        {/* Skills */}
+        {entry.skills && (
+          <div>
+            <h4 className="text-lg text-white mb-2">Skills</h4>
+            <div className="flex flex-wrap gap-2">
+              {entry.skills.map((skill, idx) => (
+                <SkillIcon key={idx} {...skill} />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )

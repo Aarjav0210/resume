@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import TerminalHeader from '@/app/components/TerminalHeader'
 import WorkExperienceCard from '@/app/components/WorkExperienceCard'
-import WorkExperienceModal from '@/app/components/WorkExperienceModal'
+import WorkExperienceModal, { WorkEntry } from '@/app/components/WorkExperienceModal'
 import ScrollToContinue from '@/app/components/ScrollToContinue'
 import FadingScroll from '@/app/components/FadingScroll'
 import Description from '../types/Description'
@@ -41,9 +41,8 @@ export default function WorkExperienceView() {
   ]
 
   // All work experience entries
-  const entries = [
+  const entries: WorkEntry[] = [
     {
-      id: 0,
       company: 'Deutsche Bank AG',
       timePeriod: "Jul '24 – Present",
       role: 'Associate Engineer',
@@ -51,7 +50,6 @@ export default function WorkExperienceView() {
       skills,
     },
     {
-      id: 1,
       company: 'Deutsche Bank AG',
       timePeriod: "Jul '24 – Present",
       role: 'Associate Engineer',
@@ -59,7 +57,6 @@ export default function WorkExperienceView() {
       skills,
     },
     {
-      id: 2,
       company: 'Deutsche Bank AG',
       timePeriod: "Jul '24 – Present",
       role: 'Associate Engineer',
@@ -67,7 +64,6 @@ export default function WorkExperienceView() {
       skills,
     },
     {
-      id: 3,
       company: 'Deutsche Bank AG',
       timePeriod: "Jul '24 – Present",
       role: 'Associate Engineer',
@@ -75,14 +71,13 @@ export default function WorkExperienceView() {
       skills,
     },
     {
-      id: 4,
       company: 'Deutsche Bank AG',
       timePeriod: "Jul '24 – Present",
       role: 'Associate Engineer',
       description: description1,
       skills,
     },
-  ]
+  ].map((entry, idx) => ({ ...entry, id: idx }))
 
   const selectedEntry = entries.find((e) => e.id === isSelected)
 
@@ -118,25 +113,10 @@ export default function WorkExperienceView() {
 
       {/* WorkExperienceModal */}
       {selectedEntry && (
-        <WorkExperienceModal onClose={() => setIsSelected(-1)}>
-          <h2 className="text-2xl text-[#4CF0E8] mb-4">{selectedEntry.company}</h2>
-          <p className="italic text-sm text-[#84EF12] mb-6">
-            {selectedEntry.timePeriod} | {selectedEntry.role}
-          </p>
-          <div className="prose prose-invert">
-            {selectedEntry.description.map((part, idx) =>
-              part.type === 'keyword' ? (
-                <strong key={idx} className="text-[#84EF12]">
-                  {part.content}
-                </strong>
-              ) : (
-                <span key={idx} key={idx}>
-                  {part.content}
-                </span>
-              )
-            )}
-          </div>
-        </WorkExperienceModal>
+        <WorkExperienceModal
+          entry={selectedEntry}
+          onClose={() => setIsSelected(-1)}
+        />
       )}
     </section>
   )
