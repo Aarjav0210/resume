@@ -18,6 +18,13 @@ const WorkExperienceCard: React.FC<WorkExperienceCardProps> = ({
   disabled = false,
   onSelect,
 }) => {
+
+  function toTitleCase(str: any) {
+    return str.toLowerCase().split(' ').map((word: any) => {
+      return (word.charAt(0).toUpperCase() + word.slice(1));
+    }).join(' ');
+  }
+
   return (
     <div
       onClick={() => !disabled && onSelect(id)}
@@ -35,7 +42,7 @@ const WorkExperienceCard: React.FC<WorkExperienceCardProps> = ({
       <div className="mt-4 text-[10px] whitespace-pre-wrap">
         {description
           .filter((p) => p.type === 'keyword')
-          .map((p) => p.content)
+          .map((p) => toTitleCase(p.content))
           .join('  |  ')}
       </div>
 
