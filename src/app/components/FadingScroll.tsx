@@ -65,7 +65,7 @@ const FadingScroll: React.FC<FadingScrollProps> = ({
                     pointer-events-none
                     absolute inset-x-0 bottom-0
                     transition-opacity duration-300
-                    ${showTop ? 'opacity-100' : 'opacity-0'}
+                    ${showBottom ? 'opacity-100' : 'opacity-0'}
                 `}
                 style={gradientStyle('to top')}
             />
