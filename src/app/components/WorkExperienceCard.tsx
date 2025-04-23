@@ -23,16 +23,16 @@ const WorkExperienceCard: React.FC<WorkExperienceCardProps> = ({ id, company, ti
     };
 
     return (
-        <div className="bg-[#1E1E1E] relative flex flex-col rounded-[20px] p-8 min-w-[400px]" onClick={disabled ? undefined : toggleExpanded}>
+        <div className="bg-[#1E1E1E] relative  flex flex-col rounded-[20px] py-6 px-8 min-w-[360px]" onClick={disabled ? undefined : toggleExpanded}>
             {disabled && (
                 <div className="absolute inset-0 bg-black opacity-50 z-10 rounded-[20px]"></div>
             )}
             <div id='card-header' className='flex flex-col items-start justify-start gap-1'>
-                <h2 className="text-2xl text-[#4CF0E8]">{company}</h2>
-                <h3 className="text-md text-[#84EF12] whitespace-pre-wrap">{timePeriod}  |  {role}</h3>
+                <h2 className="text-xl text-[#4CF0E8]">{company}</h2>
+                <h3 className="text-sm text-[#84EF12] whitespace-pre-wrap">{timePeriod}  |  {role}</h3>
             </div>
 
-            <div id='card-keywords' className='flex flex-col row-start-2 items-start justify-center text-sm mt-4 gap-2'>
+            <div id='card-keywords' className='flex flex-col row-start-2 items-start justify-center text-xs mt-4 gap-2'>
                 <h4>{isExpanded ? 'Description' : 'Keywords'}</h4>
                 {/* <p className='whitespace-pre-wrap text-[10px]'>{keywords.join('  |  ')}</p> */}
                 <p className='whitespace-pre-wrap text-[10px]'>

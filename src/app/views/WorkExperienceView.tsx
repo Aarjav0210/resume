@@ -3,6 +3,7 @@ import TerminalHeader from "@/app/components/TerminalHeader";
 import WorkExperienceCard from "@/app/components/WorkExperienceCard";
 import ScrollToContinue from "@/app/components/ScrollToContinue";
 import Description from "../types/Description";
+import FadingScroll from "../components/FadingScroll";
 
 
 // Onboarded current ML System use-cases with MLFlow to adopt MLOps principles in AI Advisor team
@@ -43,94 +44,123 @@ export default function WorkExperienceView() {
             <div className="flex flex-col row-start-1 gap-[32px] items-start justify-center p-8 sm:p-20 w-full">
                 <TerminalHeader username="aarjav_jain" text="ls work_experience" textSize={{ lg: 'text-4xl', md: 'text-3xl', sm: 'text-2xl' }} />
             </div>
-
-            <div className="grid grid-cols-3 gap-[32px] px-20 py-8 w-full h-full">
-                <WorkExperienceCard
-                    id={0}
-                    company="Deutsche Bank AG (2)"
-                    timePeriod="Jul 24' - Present"
-                    role="Associate Engineer"
-                    description={description1}
-                    disabled={isSelected !== -1 && isSelected !== 0}
-                    isSelected={isSelected}
-                    setIsSelected={setIsSelected}
-                    skills={[
-                        { bgColor: '#3A78A9', textColor: '#F89A16', text: 'java' }, 
-                        { bgColor: '#FFFFFF', textColor: '#0D1319', text: 'q/kdb+' },
-                        { bgColor: '#22262E', textColor: '#54BED5', text: 'react' },
-                        { bgColor: '#007ACD', textColor: '#FFFFFF', text: 'typescript' },
-                        { bgColor: '#F10001', textColor: '#FFFFFF', text: 'SQL' },
-                    ]}
-                    />
-                <WorkExperienceCard
-                    id={1}
-                    company="Deutsche Bank AG (2)"
-                    timePeriod="Jul 24' - Present"
-                    role="Associate Engineer"
-                    description={description1}
-                    disabled={isSelected !== -1 && isSelected !== 1}
-                    isSelected={isSelected}
-                    setIsSelected={setIsSelected}
-                    skills={[
-                        { bgColor: '#3A78A9', textColor: '#F89A16', text: 'java' }, 
-                        { bgColor: '#FFFFFF', textColor: '#0D1319', text: 'q/kdb+' },
-                        { bgColor: '#22262E', textColor: '#54BED5', text: 'react' },
-                        { bgColor: '#007ACD', textColor: '#FFFFFF', text: 'typescript' },
-                        { bgColor: '#F10001', textColor: '#FFFFFF', text: 'SQL' },
-                    ]}
-                    />
-                <WorkExperienceCard
-                    id={2}
-                    company="Deutsche Bank AG (2)"
-                    timePeriod="Jul 24' - Present"
-                    role="Associate Engineer"
-                    description={description1}
-                    disabled={isSelected !== -1 && isSelected !== 2}
-                    isSelected={isSelected}
-                    setIsSelected={setIsSelected}
-                    skills={[
-                        { bgColor: '#3A78A9', textColor: '#F89A16', text: 'java' }, 
-                        { bgColor: '#FFFFFF', textColor: '#0D1319', text: 'q/kdb+' },
-                        { bgColor: '#22262E', textColor: '#54BED5', text: 'react' },
-                        { bgColor: '#007ACD', textColor: '#FFFFFF', text: 'typescript' },
-                        { bgColor: '#F10001', textColor: '#FFFFFF', text: 'SQL' },
-                    ]}
-                    />
-                <WorkExperienceCard
-                    id={3}
-                    company="Deutsche Bank AG (2)"
-                    timePeriod="Jul 24' - Present"
-                    role="Associate Engineer"
-                    description={description1}
-                    disabled={isSelected !== -1 && isSelected !== 3}
-                    isSelected={isSelected}
-                    setIsSelected={setIsSelected}
-                    skills={[
-                        { bgColor: '#3A78A9', textColor: '#F89A16', text: 'java' }, 
-                        { bgColor: '#FFFFFF', textColor: '#0D1319', text: 'q/kdb+' },
-                        { bgColor: '#22262E', textColor: '#54BED5', text: 'react' },
-                        { bgColor: '#007ACD', textColor: '#FFFFFF', text: 'typescript' },
-                        { bgColor: '#F10001', textColor: '#FFFFFF', text: 'SQL' },
-                    ]}
-                    />
-                <WorkExperienceCard
-                    id={4}
-                    company="Deutsche Bank AG (2)"
-                    timePeriod="Jul 24' - Present"
-                    role="Associate Engineer"
-                    description={description1}
-                    disabled={isSelected !== -1 && isSelected !== 4}
-                    isSelected={isSelected}
-                    setIsSelected={setIsSelected}
-                    skills={[
-                        { bgColor: '#3A78A9', textColor: '#F89A16', text: 'java' }, 
-                        { bgColor: '#FFFFFF', textColor: '#0D1319', text: 'q/kdb+' },
-                        { bgColor: '#22262E', textColor: '#54BED5', text: 'react' },
-                        { bgColor: '#007ACD', textColor: '#FFFFFF', text: 'typescript' },
-                        { bgColor: '#F10001', textColor: '#FFFFFF', text: 'SQL' },
-                    ]}
-                    />
-            </div>
+            {/* <div className="px-20 py-2"> */}
+              <FadingScroll
+                className="rounded-[20px] mx-20 my-9"
+                fadeHeight={50}
+                backgroundColor="#171717"
+              >
+                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+                  
+                  <WorkExperienceCard
+                      id={0}
+                      company="Deutsche Bank AG (2)"
+                      timePeriod="Jul 24' - Present"
+                      role="Associate Engineer"
+                      description={description1}
+                      disabled={isSelected !== -1 && isSelected !== 0}
+                      isSelected={isSelected}
+                      setIsSelected={setIsSelected}
+                      skills={[
+                          { bgColor: '#3A78A9', textColor: '#F89A16', text: 'java' }, 
+                          { bgColor: '#FFFFFF', textColor: '#0D1319', text: 'q/kdb+' },
+                          { bgColor: '#22262E', textColor: '#54BED5', text: 'react' },
+                          { bgColor: '#007ACD', textColor: '#FFFFFF', text: 'typescript' },
+                          { bgColor: '#F10001', textColor: '#FFFFFF', text: 'SQL' },
+                      ]}
+                      />
+                  <WorkExperienceCard
+                      id={1}
+                      company="Deutsche Bank AG (2)"
+                      timePeriod="Jul 24' - Present"
+                      role="Associate Engineer"
+                      description={description1}
+                      disabled={isSelected !== -1 && isSelected !== 1}
+                      isSelected={isSelected}
+                      setIsSelected={setIsSelected}
+                      skills={[
+                          { bgColor: '#3A78A9', textColor: '#F89A16', text: 'java' }, 
+                          { bgColor: '#FFFFFF', textColor: '#0D1319', text: 'q/kdb+' },
+                          { bgColor: '#22262E', textColor: '#54BED5', text: 'react' },
+                          { bgColor: '#007ACD', textColor: '#FFFFFF', text: 'typescript' },
+                          { bgColor: '#F10001', textColor: '#FFFFFF', text: 'SQL' },
+                      ]}
+                      />
+                  <WorkExperienceCard
+                      id={2}
+                      company="Deutsche Bank AG (2)"
+                      timePeriod="Jul 24' - Present"
+                      role="Associate Engineer"
+                      description={description1}
+                      disabled={isSelected !== -1 && isSelected !== 2}
+                      isSelected={isSelected}
+                      setIsSelected={setIsSelected}
+                      skills={[
+                          { bgColor: '#3A78A9', textColor: '#F89A16', text: 'java' }, 
+                          { bgColor: '#FFFFFF', textColor: '#0D1319', text: 'q/kdb+' },
+                          { bgColor: '#22262E', textColor: '#54BED5', text: 'react' },
+                          { bgColor: '#007ACD', textColor: '#FFFFFF', text: 'typescript' },
+                          { bgColor: '#F10001', textColor: '#FFFFFF', text: 'SQL' },
+                      ]}
+                      />
+                  <WorkExperienceCard
+                      id={3}
+                      company="Deutsche Bank AG (2)"
+                      timePeriod="Jul 24' - Present"
+                      role="Associate Engineer"
+                      description={description1}
+                      disabled={isSelected !== -1 && isSelected !== 3}
+                      isSelected={isSelected}
+                      setIsSelected={setIsSelected}
+                      skills={[
+                          { bgColor: '#3A78A9', textColor: '#F89A16', text: 'java' }, 
+                          { bgColor: '#FFFFFF', textColor: '#0D1319', text: 'q/kdb+' },
+                          { bgColor: '#22262E', textColor: '#54BED5', text: 'react' },
+                          { bgColor: '#007ACD', textColor: '#FFFFFF', text: 'typescript' },
+                          { bgColor: '#F10001', textColor: '#FFFFFF', text: 'SQL' },
+                      ]}
+                      />
+                  <WorkExperienceCard
+                      id={4}
+                      company="Deutsche Bank AG (2)"
+                      timePeriod="Jul 24' - Present"
+                      role="Associate Engineer"
+                      description={description1}
+                      disabled={isSelected !== -1 && isSelected !== 4}
+                      isSelected={isSelected}
+                      setIsSelected={setIsSelected}
+                      skills={[
+                          { bgColor: '#3A78A9', textColor: '#F89A16', text: 'java' }, 
+                          { bgColor: '#FFFFFF', textColor: '#0D1319', text: 'q/kdb+' },
+                          { bgColor: '#22262E', textColor: '#54BED5', text: 'react' },
+                          { bgColor: '#007ACD', textColor: '#FFFFFF', text: 'typescript' },
+                          { bgColor: '#F10001', textColor: '#FFFFFF', text: 'SQL' },
+                      ]}
+                      />
+                  <WorkExperienceCard
+                      id={4}
+                      company="Deutsche Bank AG (2)"
+                      timePeriod="Jul 24' - Present"
+                      role="Associate Engineer"
+                      description={description1}
+                      disabled={isSelected !== -1 && isSelected !== 4}
+                      isSelected={isSelected}
+                      setIsSelected={setIsSelected}
+                      skills={[
+                          { bgColor: '#3A78A9', textColor: '#F89A16', text: 'java' }, 
+                          { bgColor: '#FFFFFF', textColor: '#0D1319', text: 'q/kdb+' },
+                          { bgColor: '#22262E', textColor: '#54BED5', text: 'react' },
+                          { bgColor: '#007ACD', textColor: '#FFFFFF', text: 'typescript' },
+                          { bgColor: '#F10001', textColor: '#FFFFFF', text: 'SQL' },
+                      ]}
+                      />
+                </div>
+              </FadingScroll>
+            {/* </div> */}
+            {/* <div className="overflow-x-auto">
+              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 px-20 py-2">
+              </div>
+            </div> */}
 
             <div className="row-start-3 justify-center mt-4">
                 <ScrollToContinue beforeText="Scroll or press " keyPressIconText="Enter" afterText=" to continue"/>
