@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import Landing from "@/app/views/landing";
-import WorkExperience from "@/app/views/work-experience";
+import WorkExperienceView from "@/app/views/WorkExperienceView";
 import Education from "@/app/views/education";
 import Sidebar from "@/app/components/sidebar";
 
@@ -44,7 +44,7 @@ export default function Home() {
     <div ref={scrollContainerRef} className="overflow-y-scroll snap-y snap-mandatory h-screen font-[family-name:var(--font-geist-sans)]" >
       <Sidebar currentSection={currentSection} setCurrentSection={setCurrentSection} onClose={() => {}} />
       <Landing currentSection={currentSection} setCurrentSection={setCurrentSection} />
-      <WorkExperience />
+      <WorkExperienceView />
       <Education />
     </div>
   );

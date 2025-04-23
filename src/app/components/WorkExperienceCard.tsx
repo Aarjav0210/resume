@@ -1,42 +1,62 @@
-import React from 'react';
-import SkillIcon from '@/app/components/SkillIcon';
-import { SkillIconProps } from '@/app/components/SkillIcon';
+// components/WorkExperienceCard.tsx
+import React from 'react'
+import SkillIcon from '@/app/components/SkillIcon'
+import Description from '../types/Description'
 
-interface WorkExperienceCardProps {
-    company: string;
-    timePeriod: string;
-    role: string;
-    keywords: string[];
-    skills?: SkillIconProps[];
+export interface WorkExperienceCardProps {
+  id: number
+  company: string
+  timePeriod: string
+  role: string
+  description: Description[]
+  skills?: { bgColor: string; textColor: string; text: string }[]
+  disabled?: boolean
+  onSelect: (id: number) => void
 }
 
-const WorkExperienceCard: React.FC<WorkExperienceCardProps> = ({ company, timePeriod, role, keywords, skills }) => {
-    return (
-        <div className="bg-[#1E1E1E] grid grid-rows-3 rounded-[20px] p-8 min-w-[400px]">
-            <div id='card-header' className='flex flex-col row-start-1 items-start justify-start gap-1'>
-                <h2 className="text-2xl text-[#4CF0E8]">{company}</h2>
-                <h3 className="text-md text-[#84EF12] whitespace-pre-wrap">{timePeriod}  |  {role}</h3>
-            </div>
+const WorkExperienceCard: React.FC<WorkExperienceCardProps> = ({
+  id,
+  company,
+  timePeriod,
+  role,
+  description,
+  skills = [],
+  disabled = false,
+  onSelect,
+}) => {
+  return (
+    <div
+      onClick={() => !disabled && onSelect(id)}
+      className={`
+        relative flex flex-col rounded-[20px] py-6 px-8
+        min-w-[360px] bg-[#1E1E1E] cursor-pointer
+        ${disabled ? 'opacity-50 pointer-events-none' : 'hover:scale-[0.98] transition-transform'}
+      `}
+    >
+      <h2 className="text-xl text-[#4CF0E8]">{company}</h2>
+      <h3 className="text-sm text-[#84EF12] mt-1">
+        {timePeriod} | {role}
+      </h3>
 
-            <div id='card-keywords' className='flex flex-col row-start-2 items-start justify-center text-sm mt-4 gap-2'>
-                <h4>Keywords</h4>
-                <p className='whitespace-pre-wrap text-[10px]'>{keywords.join('  |  ')}</p>
-            </div>
-            {skills && skills.length > 0 && (
-                <div id='card-skills' className='flex flex-col row-start-3 items-start justify-end text-sm mt-4 gap-2'>
-                    <h4>Skills</h4>
-                    <div className='flex flex-wrap gap-2'>
-                        {skills.map((skill, index) => (
-                            <SkillIcon 
-                                key={index}
-                                {...skill} // Spread the skill object to pass all props
-                            />
-                        ))}
-                    </div>
-                </div>
-            )}
+      <div className="mt-4 text-[10px] whitespace-pre-wrap">
+        {description
+          .filter((p) => p.type === 'keyword')
+          .map((p) => p.content)
+          .join('  |  ')}
+      </div>
+
+      {skills.length > 0 && (
+        <div className="mt-4 text-sm">
+          <h4>Skills</h4>
+          <div className="flex flex-wrap gap-2 mt-2">
+            {skills.map((skill, i) => (
+              <SkillIcon key={i} {...skill} />
+            ))}
+          </div>
         </div>
-    );
-};
+      )}
+    </div>
+  )
+}
 
-export default WorkExperienceCard;
+export default WorkExperienceCard
