@@ -11,7 +11,7 @@ export default function Education() {
             </div>
 
             <div className="row-start-2 h-full">
-                <div className="w-screen overflow-x-auto snap-x snap-mandatory scroll-pl-20">
+                <div className="w-screen overflow-x-auto snap-x snap-mandatory scroll-pl-20 scrollbar-hide">
                     <div className="flex py-8 gap-[32px] px-20">
                         <EducationCard
                             institution="King's College London"

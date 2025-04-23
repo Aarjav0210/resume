@@ -1,105 +1,22 @@
-// components/WorkExperienceView.tsx
-"use client";
-import React, { useEffect, useState } from 'react'
-import TerminalHeader from '@/app/components/TerminalHeader'
-import WorkExperienceCard from '@/app/components/WorkExperienceCard'
-import WorkExperienceModal, { WorkEntry } from '@/app/components/WorkExperienceModal'
-import ScrollToContinue from '@/app/components/ScrollToContinue'
-import FadingScroll from '@/app/components/FadingScroll'
-import Description from '../types/Description'
+'use client';
+import React, { useState, useEffect } from 'react';
+import { fetchWorkEntries } from '@/app/lib/workEntryParser';
+import TerminalHeader from '@/app/components/TerminalHeader';
+import WorkExperienceCard from '@/app/components/WorkExperienceCard';
+import WorkExperienceModal from '@/app/components/WorkExperienceModal';
+import ScrollToContinue from '@/app/components/ScrollToContinue';
+import FadingScroll from '@/app/components/FadingScroll';
+import type { WorkEntry } from '@/app/types/WorkEntry';
 
-export default function WorkExperienceView({ currentSection, setCurrentSection }: { currentSection: string; setCurrentSection: (section: string) => void }) {
-  const [isSelected, setIsSelected] = useState<number>(-1)
-
-  // Shared description for each entry
-  const description1: Description[] = [
-    { type: 'text', content: 'Onboarded current ML System use-cases with ' },
-    { type: 'keyword', content: 'MLFlow' },
-    { type: 'text', content: ' to adopt ' },
-    { type: 'keyword', content: 'MLOps' },
-    { type: 'text', content: ' principles in ' },
-    { type: 'keyword', content: 'AI Advisor team' },
-    { type: 'text', content: '\n\nLearned about and worked with the full ' },
-    { type: 'keyword', content: 'ML Application Lifecycle' },
-    { type: 'text', content: '\n\nDesigned an ' },
-    { type: 'keyword', content: 'end-to-end' },
-    { type: 'text', content: ' pilot app to migrate existing ML system use-cases onto ' },
-    { type: 'keyword', content: 'GCP' },
-    { type: 'text', content: '\n\nLead a team of interns to create an ESG Analytics Dashboard on GCP by ' },
-    { type: 'keyword', content: 'web-scraping' },
-    { type: 'text', content: ' news articles and applying several ' },
-    { type: 'keyword', content: 'NLP' },
-    { type: 'text', content: ' techniques' },
-  ]
-
-  // Shared skills for each entry
-  const skills = [
-    { bgColor: '#3A78A9', textColor: '#F89A16', text: 'java' },
-    { bgColor: '#FFFFFF', textColor: '#0D1319', text: 'q/kdb+' },
-    { bgColor: '#22262E', textColor: '#54BED5', text: 'react' },
-    { bgColor: '#007ACD', textColor: '#FFFFFF', text: 'typescript' },
-    { bgColor: '#F10001', textColor: '#FFFFFF', text: 'SQL' },
-  ]
-
-  // All work experience entries
-  const entries: WorkEntry[] = [
-    {
-      company: 'Deutsche Bank AG',
-      timePeriod: "Jul '24 – Present",
-      role: 'Associate Engineer',
-      description: description1,
-      skills,
-    },
-    {
-      company: 'Deutsche Bank AG',
-      timePeriod: "Jul '24 – Present",
-      role: 'Associate Engineer',
-      description: description1,
-      skills,
-    },
-    {
-      company: 'Deutsche Bank AG',
-      timePeriod: "Jul '24 – Present",
-      role: 'Associate Engineer',
-      description: description1,
-      skills,
-    },
-    {
-      company: 'Deutsche Bank AG',
-      timePeriod: "Jul '24 – Present",
-      role: 'Associate Engineer',
-      description: description1,
-      skills,
-    },
-    {
-      company: 'Deutsche Bank AG',
-      timePeriod: "Jul '24 – Present",
-      role: 'Associate Engineer',
-      description: description1,
-      skills,
-    },
-  ].map((entry, idx) => ({ ...entry, id: idx }))
-
-  const selectedEntry = entries.find((e) => e.id === isSelected)
-
+export default function WorkExperienceView() {
+  const [entries, setEntries] = useState<WorkEntry[]>([]);
+  const [isSelected, setIsSelected] = useState<number>(-1);
 
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Enter" && currentSection === 'work-experience') {
-        // Update the current section to 'work-experience'
-        setCurrentSection('education'); // Set the next section directly
+    fetchWorkEntries().then(setEntries);
+  }, []);
 
-        // Scroll to the next section
-        const nextSection = document.getElementById('education');
-        if (nextSection) {
-          nextSection.scrollIntoView({ behavior: "smooth" });
-        }
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [currentSection, setCurrentSection]);
+  const selectedEntry = entries.find((e) => e.id === isSelected);
 
   return (
     <section id="work-experience" className="snap-start h-screen grid grid-rows-[120px_1fr_120px]">
@@ -140,4 +57,4 @@ export default function WorkExperienceView({ currentSection, setCurrentSection }
       )}
     </section>
   )
-}
+};
