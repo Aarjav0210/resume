@@ -1,5 +1,6 @@
 // components/WorkExperienceView.tsx
-import React, { useState } from 'react'
+"use client";
+import React, { useEffect, useState } from 'react'
 import TerminalHeader from '@/app/components/TerminalHeader'
 import WorkExperienceCard from '@/app/components/WorkExperienceCard'
 import WorkExperienceModal, { WorkEntry } from '@/app/components/WorkExperienceModal'
@@ -7,7 +8,7 @@ import ScrollToContinue from '@/app/components/ScrollToContinue'
 import FadingScroll from '@/app/components/FadingScroll'
 import Description from '../types/Description'
 
-export default function WorkExperienceView() {
+export default function WorkExperienceView({ currentSection, setCurrentSection }: { currentSection: string; setCurrentSection: (section: string) => void }) {
   const [isSelected, setIsSelected] = useState<number>(-1)
 
   // Shared description for each entry
@@ -80,6 +81,25 @@ export default function WorkExperienceView() {
   ].map((entry, idx) => ({ ...entry, id: idx }))
 
   const selectedEntry = entries.find((e) => e.id === isSelected)
+
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Enter" && currentSection === 'work-experience') {
+        // Update the current section to 'work-experience'
+        setCurrentSection('education'); // Set the next section directly
+
+        // Scroll to the next section
+        const nextSection = document.getElementById('education');
+        if (nextSection) {
+          nextSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [currentSection, setCurrentSection]);
 
   return (
     <section id="work-experience" className="snap-start h-screen grid grid-rows-[120px_1fr_120px]">

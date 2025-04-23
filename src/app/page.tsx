@@ -44,7 +44,7 @@ export default function Home() {
     <div ref={scrollContainerRef} className="overflow-y-scroll snap-y snap-mandatory h-screen font-[family-name:var(--font-geist-sans)]" >
       <Sidebar currentSection={currentSection} setCurrentSection={setCurrentSection} onClose={() => {}} />
       <Landing currentSection={currentSection} setCurrentSection={setCurrentSection} />
-      <WorkExperienceView />
+      <WorkExperienceView currentSection={currentSection} setCurrentSection={setCurrentSection}/>
       <Education />
     </div>
   );
