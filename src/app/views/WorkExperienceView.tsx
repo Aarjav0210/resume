@@ -8,7 +8,7 @@ import ScrollToContinue from '@/app/components/ScrollToContinue';
 import FadingScroll from '@/app/components/FadingScroll';
 import type { WorkEntry } from '@/app/types/WorkEntry';
 
-export default function WorkExperienceView() {
+export default function WorkExperienceView({ currentSection, setCurrentSection }: { currentSection: string; setCurrentSection: (section: string) => void }) {
   const [entries, setEntries] = useState<WorkEntry[]>([]);
   const [isSelected, setIsSelected] = useState<number>(-1);
 
@@ -17,6 +17,27 @@ export default function WorkExperienceView() {
   }, []);
 
   const selectedEntry = entries.find((e) => e.id === isSelected);
+
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Enter" && currentSection === 'work-experience') {
+        // Update the current section to 'education'
+        setCurrentSection('education'); // Set the next section directly
+
+        // Scroll to the next section
+        const nextSection = document.getElementById('education');
+        if (nextSection) {
+          nextSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [currentSection, setCurrentSection]);
+
+
 
   return (
     <section id="work-experience" className="snap-start h-screen grid grid-rows-[120px_1fr_120px]">
