@@ -1,9 +1,30 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import TerminalHeader from "@/app/components/TerminalHeader";
 import ScrollToContinue from "@/app/components/ScrollToContinue";
 import EducationCard from "@/app/components/EducationCard";
 
-export default function Education() {
+export default function Education({ currentSection, setCurrentSection }: { currentSection: string; setCurrentSection: (section: string) => void }) {
+    
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Enter" && currentSection === 'education') {
+        // Update the current section to 'education'
+        setCurrentSection('projects'); // Set the next section directly
+        
+        // Scroll to the next section
+        const nextSection = document.getElementById('projects');
+        if (nextSection) {
+          nextSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [currentSection, setCurrentSection]);
+    
     return (
         <section id="education" className="snap-start h-screen grid grid-rows-[120px_1fr_120px]">
             <div className="flex flex-col row-start-1 gap-[32px] items-start justify-center p-8 sm:p-20 w-full">
@@ -39,7 +60,7 @@ export default function Education() {
             </div>
 
             <div className="row-start-3 justify-center mt-4">
-                {/* <ScrollToContinue beforeText="Scroll or press " keyPressIconText="Enter" afterText=" to continue"/> */}
+                <ScrollToContinue beforeText="Scroll or press " keyPressIconText="Enter" afterText=" to continue"/>
             </div>
         </section>
     );
