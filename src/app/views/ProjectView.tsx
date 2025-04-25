@@ -7,7 +7,7 @@ import ProjectModal from '@/app/components/ProjectModal';
 import { fetchProjectEntries } from '@/app/lib/projectEntryParser';
 import type { ProjectEntry } from '@/app/types/ProjectEntry';
 
-export default function ProjectView({ currentSection, setCurrentSection }: { currentSection: string; setCurrentSection: (section: string) => void }) {
+export default function ProjectView() {
   const [entries, setEntries] = useState<ProjectEntry[]>([]);
   const [selectedId, setSelectedId] = useState<number>(-1);
 
