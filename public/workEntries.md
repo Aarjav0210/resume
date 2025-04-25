@@ -84,9 +84,6 @@ entries:
       - text: javascript
         bgColor: '#E8D44E'
         textColor: '#30312E'
-      - text: mariaDB
-        bgColor: '#0E2C60'
-        textColor: '#D37957'
     description: |
       • Explored the benefits of moving data to the **cloud** and completed introductory **GCP** training
       

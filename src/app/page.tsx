@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Landing from "@/app/views/landing";
 import WorkExperienceView from "@/app/views/WorkExperienceView";
 import Education from "@/app/views/education";
+import ProjectsView from "@/app/views/ProjectView";
 import Sidebar from "@/app/components/sidebar";
 
 export default function Home() {
@@ -45,7 +46,9 @@ export default function Home() {
       <Sidebar currentSection={currentSection} setCurrentSection={setCurrentSection} onClose={() => {}} />
       <Landing currentSection={currentSection} setCurrentSection={setCurrentSection} />
       <WorkExperienceView currentSection={currentSection} setCurrentSection={setCurrentSection}/>
-      <Education />
+      <Education currentSection={currentSection} setCurrentSection={setCurrentSection}/>
+      <ProjectsView currentSection={currentSection} setCurrentSection={setCurrentSection}/>
+      
     </div>
   );
 }
