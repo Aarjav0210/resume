@@ -1,7 +1,17 @@
 // lib/workEntryParser.ts
 import matter from 'gray-matter';
-import type WorkEntry from '@/app/types/WorkEntry';
+import type { WorkEntry } from '@/app/types/WorkEntry';
 import type Description from '@/app/types/Description';
+
+interface FrontMatter<T> {
+  entries: T[]
+}
+
+
+type RawWorkEntry = Omit<WorkEntry, 'description'> & {
+  description: string
+}
+
 
 const BOLD_REGEX = /\*\*(.*?)\*\*/g;
 
@@ -37,16 +47,18 @@ export function parseDescription(md: string): Description[] {
  * @param rawMd full text of workEntries.md
  */
 export function parseWorkEntries(rawMd: string): WorkEntry[] {
-  const { data } = matter(rawMd) as { data: { entries: any[] } };
-  return (data.entries as any[]).map((e) => ({
+  const parsed = matter(rawMd)
+  const fm = parsed.data as FrontMatter<RawWorkEntry>;
+  const entries = Array.isArray(fm.entries) ? fm.entries : []
+  return entries.map((e) => ({
     id: e.id,
     company: e.company,
     timePeriod: e.timePeriod,
     role: e.role,
-    skills: e.skills,
+    skills: Array.isArray(e.skills) ? e.skills : [],
     description: parseDescription(e.description as string),
-  }));
-};
+  }))
+}
 
 /**
  * Fetch the markdown file from public and parse it into WorkEntry[]

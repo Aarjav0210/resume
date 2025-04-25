@@ -2,6 +2,14 @@ import matter from 'gray-matter'
 import type { ProjectEntry } from '@/app/types/ProjectEntry'
 import type Description from '@/app/types/Description'
 
+interface FrontMatter<T> {
+  entries: T[]
+};
+
+type RawProjectEntry = Omit<ProjectEntry, 'description'> & {
+  description: string
+}
+
 const BOLD_REGEX = /\*\*(.*?)\*\*/g
 
 export function parseDescription(md: string): Description[] {
@@ -25,8 +33,10 @@ export function parseDescription(md: string): Description[] {
 }
 
 export function parseProjectEntries(rawMd: string): ProjectEntry[] {
-  const { data } = matter(rawMd) as { data: { entries: any[] } }
-  return (data.entries as any[]).map((e) => ({
+  const parsed = matter(rawMd);
+  const fm = parsed.data as FrontMatter<RawProjectEntry>;
+  const entries = Array.isArray(fm.entries) ? fm.entries : []
+  return entries.map((e) => ({
     id: e.id,
     title: e.title,
     skills: Array.isArray(e.skills) ? e.skills : [],
