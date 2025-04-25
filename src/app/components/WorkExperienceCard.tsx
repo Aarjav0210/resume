@@ -1,7 +1,7 @@
 // components/WorkExperienceCard.tsx
 import React from 'react'
 import SkillIcon from '@/app/components/SkillIcon'
-import type { WorkEntry } from '@/app/types/WorkEntry'
+import type WorkEntry from '@/app/types/WorkEntry'
 
 export interface WorkExperienceCardProps extends WorkEntry {
   disabled?: boolean

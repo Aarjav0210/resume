@@ -1,6 +1,6 @@
 // lib/workEntryParser.ts
 import matter from 'gray-matter';
-import type { WorkEntry } from '@/app/types/WorkEntry';
+import type WorkEntry from '@/app/types/WorkEntry';
 import type Description from '@/app/types/Description';
 
 const BOLD_REGEX = /\*\*(.*?)\*\*/g;
