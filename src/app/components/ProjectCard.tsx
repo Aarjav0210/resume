@@ -1,6 +1,7 @@
 import React from 'react';
 import SkillIcon from '@/app/components/SkillIcon';
 import type { ProjectEntry } from '@/app/types/ProjectEntry';
+import Skill from '../types/Skill';
 
 export interface ProjectCardProps extends ProjectEntry {
   disabled?: boolean
@@ -33,7 +34,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     </p>
     {skills.length > 0 && (
       <div className="mt-4 flex flex-wrap gap-2">
-        {skills.map((s, i) => <SkillIcon key={i} {...s} />)}
+        {skills.map((skill: Skill, idx: number) => <SkillIcon key={idx} {...skill} />)}
       </div>
     )}
   </div>

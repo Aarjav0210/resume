@@ -1,20 +1,19 @@
-'use client'
-import React, { useState, useEffect } from 'react'
-import TerminalHeader from '@/app/components/TerminalHeader'
-import FadingScroll from '@/app/components/FadingScroll'
-import ScrollToContinue from '@/app/components/ScrollToContinue'
-import ProjectCard from '@/app/components/ProjectCard'
-import ProjectModal from '@/app/components/ProjectModal'
-import { fetchProjectEntries } from '@/app/lib/projectEntryParser'
-import type { ProjectEntry } from '@/app/types/ProjectEntry'
+'use client';
+import React, { useState, useEffect } from 'react';
+import TerminalHeader from '@/app/components/TerminalHeader';
+import FadingScroll from '@/app/components/FadingScroll';
+import ProjectCard from '@/app/components/ProjectCard';
+import ProjectModal from '@/app/components/ProjectModal';
+import { fetchProjectEntries } from '@/app/lib/projectEntryParser';
+import type { ProjectEntry } from '@/app/types/ProjectEntry';
 
 export default function ProjectView({ currentSection, setCurrentSection }: { currentSection: string; setCurrentSection: (section: string) => void }) {
-  const [entries, setEntries] = useState<ProjectEntry[]>([])
-  const [selectedId, setSelectedId] = useState<number>(-1)
+  const [entries, setEntries] = useState<ProjectEntry[]>([]);
+  const [selectedId, setSelectedId] = useState<number>(-1);
 
-  useEffect(() => { fetchProjectEntries().then(setEntries) }, [])
+  useEffect(() => { fetchProjectEntries().then(setEntries) }, []);
 
-  const selected = entries.find((e) => e.id === selectedId)
+  const selected = entries.find((e) => e.id === selectedId);
 
   return (
     <section id="projects" className="snap-start h-screen grid grid-rows-[120px_1fr_120px]">

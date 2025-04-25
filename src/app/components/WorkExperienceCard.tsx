@@ -1,7 +1,8 @@
 // components/WorkExperienceCard.tsx
 import React from 'react'
 import SkillIcon from '@/app/components/SkillIcon'
-import type WorkEntry from '@/app/types/WorkEntry'
+import type { WorkEntry } from '@/app/types/WorkEntry'
+import Skill from '../types/Skill'
 
 export interface WorkExperienceCardProps extends WorkEntry {
   disabled?: boolean
@@ -50,9 +51,7 @@ const WorkExperienceCard: React.FC<WorkExperienceCardProps> = ({
         <div className="mt-4 text-sm">
           <h4>Skills</h4>
           <div className="flex flex-wrap gap-2 mt-2">
-            {skills.map((skill, i) => (
-              <SkillIcon key={i} {...skill} />
-            ))}
+            {skills.map((skill: Skill, idx: number) => <SkillIcon key={idx} {...skill} />)}
           </div>
         </div>
       )}
