@@ -37,22 +37,22 @@ export default function Typewriter({
 
   // 👁️ Intersection Observer to trigger when in view
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    const node = ref.current;
+    if (!node) return;
+
+    const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !hasStarted) {
-          setHasStarted(true); // Prevent retrigger
+          setHasStarted(true);
           setTimeout(() => setIsTyping(true), startDelay);
         }
       },
       { threshold: 0.5 }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
+    obs.observe(node);
     return () => {
-      if (ref.current) observer.unobserve(ref.current);
+      obs.unobserve(node);
     };
   }, [startDelay, hasStarted]);
 

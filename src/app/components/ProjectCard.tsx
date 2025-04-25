@@ -8,8 +8,8 @@ export interface ProjectCardProps extends ProjectEntry {
   onSelect: (id: number) => void
 };
 
-function toTitleCase(str: any) {
-  return str.split(' ').map((word: any) => {
+function toTitleCase(str: string) {
+  return str.split(' ').map((word: string) => {
     return (word.charAt(0).toUpperCase() + word.slice(1));
   }).join(' ');
 };
