@@ -31,7 +31,7 @@ const WorkExperienceCard: React.FC<WorkExperienceCardProps> = ({
       onClick={() => !disabled && onSelect(id)}
       className={`
         relative flex flex-col rounded-[20px] py-6 px-8
-        min-w-[360px] bg-[#1E1E1E] cursor-pointer
+        md:min-w-[360px] bg-[#1E1E1E] cursor-pointer
         ${disabled ? 'opacity-50 pointer-events-none' : 'hover:scale-[0.98] transition-transform'}
       `}
     >
