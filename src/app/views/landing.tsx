@@ -28,7 +28,7 @@ export default function Landing({ currentSection, setCurrentSection }: { current
     <>
       <section id="landing" className="snap-start h-screen grid grid-rows-[20px_1fr_120px] gap-[32px]">
         <div className="flex flex-col row-start-2 gap-[32px] items-start justify-center p-8 sm:p-20 w-full">
-          <TerminalHeader username="aarjav_jain" text="whoami" />
+          <TerminalHeader username="aarjav_jain" text="whoami" className="text-4xl"/>
           <Typewriter
             text={"Computer Science (Artificial Intelligence) w/ Management @ King's College London"}
             speed={50}
