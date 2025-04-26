@@ -39,7 +39,9 @@ const Sidebar: React.FC<{ onClose: () => void; currentSection: string; setCurren
                 style={{ position: 'absolute', top: '50px', right: '50px' }}
             >
                 <div className='text-base'>
-                    <span>navigate </span>
+                    {/* <span className='opacity-0 pointer-events-none md:opacity-100 md:pointer-events-auto' aria-hidden="true" tabIndex={-1}>navigate </span> */}
+                    <span className='hidden md:inline'>navigate </span>
+                    
                     <span className={`text-[#84EF12] rotate-icon ${isOpen ? 'open' : ''}`}>&lt;</span>
                 </div>
             </button>

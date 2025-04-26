@@ -20,7 +20,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   <div
     onClick={() => !disabled && onSelect(id)}
     className={
-      `relative flex flex-col rounded-[20px] p-6 bg-[#1E1E1E] min-w-[300px] cursor-pointer
+      `relative flex flex-col rounded-[20px] p-6 bg-[#1E1E1E] md:min-w-[300px] cursor-pointer
        ${disabled ? 'opacity-50 pointer-events-none' : 'hover:scale-[0.98] transition-transform'}`
     }
   >
