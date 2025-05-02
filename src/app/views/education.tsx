@@ -28,7 +28,7 @@ export default function Education({ currentSection, setCurrentSection }: { curre
     return (
         <section id="education" className="snap-start h-screen grid grid-rows-[120px_1fr_120px]">
             <div className="flex flex-col row-start-1 gap-[32px] items-start justify-center p-8 sm:p-20 w-full">
-                <TerminalHeader username="aarjav_jain" text="ls education" textSize={{ lg: 'text-4xl', md: 'text-3xl', sm: 'text-2xl' }} />
+                <TerminalHeader username="aarjav_jain" text="ls education" />
             </div>
 
             <div className="row-start-2 h-full">

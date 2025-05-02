@@ -4,16 +4,21 @@ import Typewriter from '@/app/components/Typewriter';
 interface TerminalHeaderProps {
     username: string;
     text: string;
-    textSize?: {
-        lg: string;
-        md: string;
-        sm: string;
-    };
+    // textSize?: {
+    //     lg: string;
+    //     md: string;
+    //     sm: string;
+    // };
 	className?: string;
 }
 
 export default function TerminalHeader(props: TerminalHeaderProps) {
-const { username, text, textSize, className } = props;
+const { 
+	username,
+	text,
+	// textSize,
+	className 
+} = props;
 
 	// Set default text sizes if not provided
 	// const defaultTextSize = {

@@ -18,7 +18,7 @@ export default function ProjectView() {
   return (
     <section id="projects" className="snap-start h-screen grid grid-rows-[120px_1fr_120px]">
       <div className="flex row-start-1 items-center p-8">
-        <TerminalHeader username="aarjav_jain" text="ls projects" textSize={{ lg: 'text-4xl', md: 'text-3xl', sm: 'text-2xl' }} />
+        <TerminalHeader username="aarjav_jain" text="ls projects"/>
       </div>
       <FadingScroll className="row-start-2 mx-20 my-9 rounded-[20px]" fadeHeight={50} backgroundColor="#171717">
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
