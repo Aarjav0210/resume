@@ -46,7 +46,6 @@ export default function WorkExperienceView({ currentSection, setCurrentSection }
         <TerminalHeader
           username="aarjav_jain"
           text="ls work_experience"
-          textSize={{ lg: 'text-4xl', md: 'text-3xl', sm: 'text-2xl' }}
         />
       </div>
 
