@@ -1,5 +1,15 @@
 import {useRef, useState, useEffect, ReactNode} from 'react';
 
+// Helper to convert hex to rgba
+const hexToRgba = (hex: string, alpha: number = 1) => {
+    hex = hex.replace('#', '');
+    const bigint = parseInt(hex, 16);
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+};
+
 interface FadingScrollProps {
     children: ReactNode;
     className?: string;
@@ -57,7 +67,8 @@ const FadingScroll: React.FC<FadingScrollProps> = ({
     }, []); // Keep dependencies empty as ResizeObserver handles changes
 
     const gradientStyle = (direction: 'to bottom' | 'to top') => ({
-        background: `linear-gradient(${direction}, ${backgroundColor}, rgba(255, 255, 255, 0))`,
+        // Fade from the background color to a transparent version of the same background color
+        background: `linear-gradient(${direction}, ${backgroundColor}, ${hexToRgba(backgroundColor, 0)})`,
         height: `${fadeHeight}px`,
     });
 

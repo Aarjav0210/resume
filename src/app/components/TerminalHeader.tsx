@@ -31,8 +31,8 @@ const {
 	
 	return (
 		// <h1 className={`lg:${appliedTextSize.lg} md:${appliedTextSize.md} sm:${appliedTextSize.sm} font-normal`}>
-		<h1 className={`text-3xl md:text-5xl lg:text-6xl font-normal ${className}`}>
-			({username}) <span className="text-[#84EF12]">~</span> <span className="text-[#4CF0E8]">-&gt;</span>{" "}
+		<h1 className={`text-2xl md:text-3xl lg:text-4xl font-normal ${className}`}>
+			({username}) <span className="text-[#4CF0E8]">-&gt;</span> <span className="text-[#84EF12]">~</span>{" "}
 			<span className='md:hidden'><br/>  </span>
 			<Typewriter 
 				text={text} 
