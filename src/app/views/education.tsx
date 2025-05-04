@@ -88,7 +88,7 @@ export default function Education({ currentSection, setCurrentSection }: { curre
                 fadeHeight={50} 
                 backgroundColor="#1E1E1E" // Match card background
             >
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {educationData.map((entry) => {
                         const layoutToPass = screenSize === 'md' ? 'horizontal' : 'vertical';
                         return (

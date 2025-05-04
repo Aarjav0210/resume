@@ -26,6 +26,7 @@ const FadingScroll: React.FC<FadingScrollProps> = ({
     const containerRef = useRef<HTMLDivElement>(null);
     const [showTop, setShowTop] = useState(false);
     const [showBottom, setShowBottom] = useState(false);
+    const [effectiveFadeHeight, setEffectiveFadeHeight] = useState(fadeHeight);
 
     useEffect(() => {
         const el = containerRef.current;
@@ -66,10 +67,29 @@ const FadingScroll: React.FC<FadingScrollProps> = ({
         }
     }, []); // Keep dependencies empty as ResizeObserver handles changes
 
+    useEffect(() => {
+        const handleResize = () => {
+            const isPhone = window.innerWidth < 768;
+            const isLandscape = window.innerWidth > window.innerHeight;
+
+            if (isPhone && isLandscape) {
+                setEffectiveFadeHeight(fadeHeight / 2);
+            } else {
+                setEffectiveFadeHeight(fadeHeight);
+            }
+        };
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [fadeHeight]);
+
     const gradientStyle = (direction: 'to bottom' | 'to top') => ({
-        // Fade from the background color to a transparent version of the same background color
         background: `linear-gradient(${direction}, ${backgroundColor}, ${hexToRgba(backgroundColor, 0)})`,
-        height: `${fadeHeight}px`,
+        height: `${effectiveFadeHeight}px`,
     });
 
     return (
