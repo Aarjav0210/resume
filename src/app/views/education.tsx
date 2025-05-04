@@ -74,7 +74,10 @@ export default function Education({ currentSection, setCurrentSection }: { curre
   }, [currentSection, setCurrentSection]);
     
     return (
-        <section id="education" className="snap-start h-screen grid grid-rows-[120px_1fr_120px]">
+        <section 
+            id="education" 
+            className="snap-start h-screen grid grid-rows-[120px_1fr_60px] sm:grid-rows-[120px_1fr_120px] [@media(max-height:500px)]:grid-rows-[120px_1fr_60px]"
+        >
             <div className="flex flex-col row-start-1 gap-[32px] items-start justify-center px-12 py-20 sm:p-20 w-full">
                 <TerminalHeader username="aarjav_jain" text="ls education" />
             </div>
