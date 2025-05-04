@@ -18,7 +18,7 @@ export default function ProjectView() {
   return (
     <section 
         id="projects" 
-        className="snap-start h-screen grid grid-rows-[120px_1fr_60px] sm:grid-rows-[120px_1fr_120px] [@media(max-height:500px)]:grid-rows-[120px_1fr_60px]"
+        className="snap-start h-screen grid grid-rows-[120px_1fr] sm:grid-rows-[120px_1fr] [@media(max-height:500px)]:grid-rows-[120px_1fr]"
     >
       <div className="flex row-start-1 items-center px-12 py-20 sm:p-20">
         <TerminalHeader username="aarjav_jain" text="ls projects"/>

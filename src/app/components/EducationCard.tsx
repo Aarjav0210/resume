@@ -28,7 +28,7 @@ const EducationCard: React.FC<EducationEntry> = ({
     const verticalTextContainerClasses = "flex flex-col p-6 flex-grow";
 
     // Define classes for horizontal layout (for tablet)
-    const horizontalContainerClasses = "relative flex flex-row rounded-[20px] bg-[#1E1E1E] overflow-hidden shadow-md w-full h-[250px]";
+    const horizontalContainerClasses = "relative flex flex-row rounded-[20px] bg-[#1E1E1E] overflow-hidden shadow-md w-full h-[200px]";
     const horizontalImageClasses = "w-[250px] h-full object-cover flex-none";
     const horizontalTextContainerClasses = "flex flex-col p-6 flex-grow gap-1"; // Added gap-1
 
@@ -39,7 +39,7 @@ const EducationCard: React.FC<EducationEntry> = ({
                 alt={`${institution} logo`} 
                 className={isHorizontal ? horizontalImageClasses : verticalImageClasses} 
                 width={isHorizontal ? 250 : 383} // Adjust width hint based on layout
-                height={isHorizontal ? 250 : 280} // Adjust height hint based on layout
+                height={isHorizontal ? 200 : 280} // Adjust height hint based on layout
                 priority // Prioritize loading images in view? Optional.
             />
             <div className={isHorizontal ? horizontalTextContainerClasses : verticalTextContainerClasses}>
