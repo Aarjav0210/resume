@@ -11,7 +11,7 @@ interface ScrollToContinueProps {
 const ScrollToContinue: React.FC<ScrollToContinueProps> = ({beforeText, keyPressIconText, afterText}:{beforeText: string; keyPressIconText: string; afterText: string}) => {
     return (
         <div className="flex flex-col items-center justify-center gap-4 w-full opacity-50">
-            <p className="text-center">
+            <p className="text-center hidden sm:block [@media(max-height:500px)]:hidden">
                 {beforeText}
                 <KeyPressIcon text={keyPressIconText} />
                 {afterText}
