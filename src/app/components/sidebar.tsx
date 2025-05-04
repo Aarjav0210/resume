@@ -36,7 +36,7 @@ const Sidebar: React.FC<{ onClose: () => void; currentSection: string; setCurren
             <button 
                 className={`toggle-button ${isOpen ? 'open' : ''}`} 
                 onClick={toggleSidebar}
-                style={{ position: 'absolute', top: '50px', right: '50px' }}
+                style={{ position: 'absolute', top: '70px', right: '50px' }}
             >
                 <div className='text-base'>
                     {/* <span className='opacity-0 pointer-events-none md:opacity-100 md:pointer-events-auto' aria-hidden="true" tabIndex={-1}>navigate </span> */}
