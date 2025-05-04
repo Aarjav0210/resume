@@ -40,9 +40,12 @@ export default function WorkExperienceView({ currentSection, setCurrentSection }
 
 
   return (
-    <section id="work-experience" className="snap-start h-screen grid grid-rows-[120px_1fr_120px]">
+    <section 
+        id="work-experience" 
+        className="snap-start h-screen grid grid-rows-[120px_1fr_60px] sm:grid-rows-[120px_1fr_120px] [@media(max-height:500px)]:grid-rows-[120px_1fr_60px]"
+    >
       {/* Header */}
-      <div className="flex flex-col row-start-1 gap-8 items-start justify-center p-8 sm:p-20 w-full">
+      <div className="flex flex-col row-start-1 gap-8 items-start justify-center px-12 py-20 sm:p-20 w-full">
         <TerminalHeader
           username="aarjav_jain"
           text="ls work_experience"
@@ -50,7 +53,7 @@ export default function WorkExperienceView({ currentSection, setCurrentSection }
       </div>
 
       {/* Scrollable cards with fades */}
-      <FadingScroll className="row-start-2 rounded-[20px] mx-20 my-9" fadeHeight={50} backgroundColor="#171717">
+      <FadingScroll className="row-start-2 rounded-[20px] mx-12 sm:mx-20 my-4" fadeHeight={50} backgroundColor="#171717">
         <div className="grid grid-cols-1 mdlg:grid-cols-2 xl:grid-cols-3 gap-4">
           {entries.map((entry) => (
             <WorkExperienceCard
@@ -70,10 +73,12 @@ export default function WorkExperienceView({ currentSection, setCurrentSection }
 
       {/* WorkExperienceModal */}
       {selectedEntry && (
-        <WorkExperienceModal
-          entry={selectedEntry}
-          onClose={() => setIsSelected(-1)}
-        />
+        <div>
+          <WorkExperienceModal
+            entry={selectedEntry}
+            onClose={() => setIsSelected(-1)}
+          />
+        </div>
       )}
     </section>
   )
