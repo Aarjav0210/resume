@@ -78,12 +78,9 @@ entries:
     timePeriod: "May '21 – Aug '21"
     role: "Spring Intern"
     skills:
-      - text: php
-        bgColor: '#4C588F'
-        textColor: '#FFFFFF'
-      - text: javascript
-        bgColor: '#E8D44E'
-        textColor: '#30312E'
+      - text: python
+        bgColor: '#3A78A9'
+        textColor: '#FEDE57'
     description: |
       • Explored the benefits of moving data to the **cloud** and completed introductory **GCP** training
       
