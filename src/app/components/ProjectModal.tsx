@@ -14,7 +14,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ entry, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center z-50"
+      className="fixed inset-0 flex items-center justify-center z-50 mx-8 sm:mx-20"
       onClick={onClose}
     >
       <div
