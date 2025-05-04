@@ -84,7 +84,7 @@ export default function Education({ currentSection, setCurrentSection }: { curre
 
             {/* Unconditionally use FadingScroll with Grid layout inside (like WorkExperienceView) */}
             <FadingScroll 
-                className="row-start-2 rounded-[20px] mx-12 sm:mx-20 my-9" 
+                className="row-start-2 rounded-[20px] mx-12 sm:mx-20 my-4 lg:my-15" 
                 fadeHeight={50} 
                 backgroundColor="#1E1E1E" // Match card background
             >
