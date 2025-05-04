@@ -22,18 +22,39 @@ const FadingScroll: React.FC<FadingScrollProps> = ({
         if (!el) return;
 
         const updateFade = () => {
+            // Add a small buffer to prevent flickering when scrollHeight is very close to clientHeight
+            const buffer = 1; 
             const { scrollTop, scrollHeight, clientHeight } = el;
-            setShowTop(scrollTop > 0);
-            setShowBottom(scrollTop + clientHeight < scrollHeight);
+            setShowTop(scrollTop > buffer);
+            setShowBottom(scrollTop + clientHeight < scrollHeight - buffer);
         };
-        
+
+        // Use ResizeObserver to detect size changes in the container or its content
+        const observer = new ResizeObserver(() => {
+            updateFade();
+        });
+
+        // Observe the scroll container itself
+        observer.observe(el);
+
+        // Observe the direct child element containing the scrollable content
+        // Assumes children are wrapped in a single element. If not, this might need adjustment.
+        if (el.firstElementChild) {
+            observer.observe(el.firstElementChild);
+        }
+
+        // Initial check
+        updateFade(); 
+
+        // Also listen for scroll events as before
         el.addEventListener('scroll', updateFade);
-        updateFade();
 
         return () => {
+            // Clean up observer and event listener
+            observer.disconnect();
             el.removeEventListener('scroll', updateFade);
         }
-    }, []);
+    }, []); // Keep dependencies empty as ResizeObserver handles changes
 
     const gradientStyle = (direction: 'to bottom' | 'to top') => ({
         background: `linear-gradient(${direction}, ${backgroundColor}, rgba(255, 255, 255, 0))`,
