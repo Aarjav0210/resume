@@ -11,7 +11,8 @@ const NavLinks: React.FC<NavLinksProps> = ({ currentSection, onNavigate }) => {
         { id: 'landing', displayText: 'home' }, 
         { id: 'work-experience', displayText: 'work_experience' }, 
         { id: 'education', displayText: 'education' },
-        { id: 'projects', displayText: 'projects'}
+        { id: 'projects', displayText: 'projects'},
+        { id: 'contact', displayText: 'contact' }
     ]; // Define sections with optional display text
 
     return (
