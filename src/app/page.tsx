@@ -48,7 +48,7 @@ export default function Home() {
       <Landing currentSection={currentSection} setCurrentSection={setCurrentSection} />
       <WorkExperienceView currentSection={currentSection} setCurrentSection={setCurrentSection}/>
       <Education currentSection={currentSection} setCurrentSection={setCurrentSection}/>
-      <ProjectsView/>
+      <ProjectsView currentSection={currentSection} setCurrentSection={setCurrentSection}/>
       <ContactView currentSection={currentSection} setCurrentSection={setCurrentSection} />
       
     </div>

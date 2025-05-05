@@ -4,10 +4,11 @@ import TerminalHeader from '@/app/components/TerminalHeader';
 import FadingScroll from '@/app/components/FadingScroll';
 import ProjectCard from '@/app/components/ProjectCard';
 import ProjectModal from '@/app/components/ProjectModal';
+import ScrollToContinue from '@/app/components/ScrollToContinue';
 import { fetchProjectEntries } from '@/app/lib/projectEntryParser';
 import type { ProjectEntry } from '@/app/types/ProjectEntry';
 
-export default function ProjectView() {
+export default function ProjectView({ currentSection, setCurrentSection }: { currentSection: string; setCurrentSection: (section: string) => void }) {
   const [entries, setEntries] = useState<ProjectEntry[]>([]);
   const [selectedId, setSelectedId] = useState<number>(-1);
 
@@ -15,10 +16,26 @@ export default function ProjectView() {
 
   const selected = entries.find((e) => e.id === selectedId);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Enter" && currentSection === 'projects') {
+        setCurrentSection('contact');
+
+        const nextSection = document.getElementById('contact');
+        if (nextSection) {
+          nextSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [currentSection, setCurrentSection]);
+
   return (
     <section 
         id="projects" 
-        className="snap-start h-screen grid grid-rows-[120px_1fr] sm:grid-rows-[120px_1fr] [@media(max-height:500px)]:grid-rows-[120px_1fr]"
+        className="snap-start h-screen grid grid-rows-[120px_1fr_60px] sm:grid-rows-[120px_1fr_120px] [@media(max-height:500px)]:grid-rows-[120px_1fr_60px]"
     >
       <div className="flex row-start-1 items-center px-12 py-20 sm:p-20">
         <TerminalHeader username="aarjav_jain" text="ls projects"/>
@@ -30,8 +47,8 @@ export default function ProjectView() {
           ))}
         </div>
       </FadingScroll>
-      <div className="row-start-3 flex justify-center mt-4">
-        {/* <ScrollToContinue beforeText="Scroll or press " keyPressIconText="Enter" afterText=" to continue" /> */}
+      <div className="row-start-3 flex justify-center items-center mt-4">
+        <ScrollToContinue beforeText="Scroll or press " keyPressIconText="Enter" afterText=" to continue" />
       </div>
       {selected && <ProjectModal entry={selected} onClose={() => setSelectedId(-1)} />}
     </section>
