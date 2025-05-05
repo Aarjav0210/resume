@@ -1,16 +1,16 @@
 "use client";
-import React, { useRef, Suspense, useLayoutEffect } from 'react';
+import React, { useRef, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Bounds } from '@react-three/drei';
 import * as THREE from 'three';
 
-// Model component - simplified, removing centering logic
-function Model(props: any) {
+// Removed props type and parameter as it's not used
+function Model() {
   const { scene } = useGLTF('/assets/logo.glb');
   const groupRef = useRef<THREE.Group>(null!); // Keep ref if needed for other things, otherwise remove
 
   return (
-    <group ref={groupRef} {...props}>
+    <group ref={groupRef}>
       <primitive 
         object={scene} 
         // Scale might need adjustment now that Bounds is controlling zoom
@@ -24,8 +24,8 @@ function Model(props: any) {
 // Preload the model for better performance
 useGLTF.preload('/assets/logo.glb');
 
-// Main component rendering the Canvas
-const LogoModel: React.FC = () => {
+// Main component rendering the Canvas - removed React.FC type annotation
+const LogoModel = () => {
   return (
     <div style={{ width: '100%', height: '100%' }}> 
       <Canvas camera={{ position: [0, 0, 5] }}> { /* Set a default camera position */ }

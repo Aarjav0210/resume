@@ -49,7 +49,7 @@ export default function Home() {
       <WorkExperienceView currentSection={currentSection} setCurrentSection={setCurrentSection}/>
       <Education currentSection={currentSection} setCurrentSection={setCurrentSection}/>
       <ProjectsView currentSection={currentSection} setCurrentSection={setCurrentSection}/>
-      <ContactView currentSection={currentSection} setCurrentSection={setCurrentSection} />
+      <ContactView />
       
     </div>
   );
