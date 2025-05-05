@@ -4,6 +4,7 @@ import Landing from "@/app/views/landing";
 import WorkExperienceView from "@/app/views/WorkExperienceView";
 import Education from "@/app/views/education";
 import ProjectsView from "@/app/views/ProjectView";
+import ContactView from "@/app/views/ContactView";
 import Sidebar from "@/app/components/sidebar";
 
 export default function Home() {
@@ -47,7 +48,8 @@ export default function Home() {
       <Landing currentSection={currentSection} setCurrentSection={setCurrentSection} />
       <WorkExperienceView currentSection={currentSection} setCurrentSection={setCurrentSection}/>
       <Education currentSection={currentSection} setCurrentSection={setCurrentSection}/>
-      <ProjectsView/>
+      <ProjectsView currentSection={currentSection} setCurrentSection={setCurrentSection}/>
+      <ContactView currentSection={currentSection} setCurrentSection={setCurrentSection} />
       
     </div>
   );
