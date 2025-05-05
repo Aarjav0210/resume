@@ -4,12 +4,10 @@ import { FaLinkedin, FaEnvelope } from 'react-icons/fa'; // Using react-icons fo
 import TerminalHeader from "@/app/components/TerminalHeader"; // Import TerminalHeader
 import LogoModel from "@/app/components/LogoModel"; // Import the new 3D model component
 
-interface ContactViewProps {
-  currentSection?: string; // Optional props if needed for scroll snapping/sidebar interaction
-  setCurrentSection?: (section: string) => void;
-}
+// Removed empty interface
 
-const ContactView: React.FC<ContactViewProps> = ({ currentSection, setCurrentSection }) => {
+// Removed type annotation and unused props
+const ContactView = () => {
   const email = "aarjav02@gmail.com";
   const linkedinUrl = "https://www.linkedin.com/in/aarjav-jain/"; // Ensure protocol is included for external link
   
