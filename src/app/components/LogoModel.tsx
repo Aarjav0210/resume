@@ -46,7 +46,7 @@ const LogoModel = () => {
           minPolarAngle={Math.PI / 2} 
           maxPolarAngle={Math.PI / 2} 
           autoRotate 
-          autoRotateSpeed={1.0} 
+          autoRotateSpeed={3.0} 
         /> 
       </Canvas>
     </div>
