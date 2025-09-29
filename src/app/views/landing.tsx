@@ -30,7 +30,7 @@ export default function Landing({ currentSection, setCurrentSection }: { current
         <div className="flex flex-col row-start-2 gap-[32px] items-start justify-center p-8 sm:p-20 w-full">
           <TerminalHeader username="aarjav_jain" text="whoami" className="text-4xl md:text-5xl lg:text-6xl"/>
           <Typewriter
-            text={"Computer Science (Artificial Intelligence) w/ Management @ King's College London"}
+            text={"M.S. Computer Science @ Brown University"}
             speed={50}
             mode="loop"
             startDelay={2500}
