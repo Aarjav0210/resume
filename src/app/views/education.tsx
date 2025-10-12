@@ -12,11 +12,13 @@ const educationData = [
     {
         id: 1,
         institution: "Brown University",
-        timePeriod: "August 2025 - Expected May 2027",
+        timePeriod: "August 2025 - Present",
         degree: "M.S. Computer Science",
         notes: "Research Assistant @ Singh Lab (Deep Learning in Genomics)",
         imageSrc: "/assets/brown-logo.jpeg",
-        style: { padding: '40px', backgroundColor: 'white' },
+        // Primary color shadow all around to highlight card #84EF12
+        cardStyle: { boxShadow: '10px 10px 10px 0px rgba(132, 239, 18, 0.5)' },
+        imageStyle: { padding: '40px', backgroundColor: 'white' },
     },
     {
         id: 2,
@@ -92,7 +94,7 @@ export default function Education({ currentSection, setCurrentSection }: { curre
             </div>
 
             {/* Unconditionally use FadingScroll with Grid layout inside (like WorkExperienceView) */}
-            <FadingScroll 
+            <FadingScroll // Add padding to the FadingScroll component to fully display the cards
                 className="row-start-2 rounded-[20px] mx-12 sm:mx-20 my-4 lg:my-15" 
                 fadeHeight={50} 
                 backgroundColor="#1E1E1E" // Match card background
