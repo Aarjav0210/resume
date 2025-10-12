@@ -10,6 +10,7 @@ interface EducationEntry {
     notes: string;
     imageSrc: string;
     layout?: 'vertical' | 'horizontal'; // Add layout prop
+    style?: React.CSSProperties;
 }
 
 const EducationCard: React.FC<EducationEntry> = ({ 
@@ -18,7 +19,8 @@ const EducationCard: React.FC<EducationEntry> = ({
     degree, 
     notes, 
     imageSrc, 
-    layout = 'vertical' // Default to vertical
+    layout = 'vertical', // Default to vertical
+    style
 }) => {
     const isHorizontal = layout === 'horizontal';
 
@@ -41,6 +43,7 @@ const EducationCard: React.FC<EducationEntry> = ({
                 width={isHorizontal ? 250 : 383} // Adjust width hint based on layout
                 height={isHorizontal ? 200 : 280} // Adjust height hint based on layout
                 priority // Prioritize loading images in view? Optional.
+                style={style}
             />
             <div className={isHorizontal ? horizontalTextContainerClasses : verticalTextContainerClasses}>
                 <div className='flex flex-col gap-1 flex-grow'> {/* Allow text to grow */} 

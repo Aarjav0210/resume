@@ -11,6 +11,15 @@ type ScreenSize = 'sm' | 'md' | 'lg';
 const educationData = [
     {
         id: 1,
+        institution: "Brown University",
+        timePeriod: "August 2025 - Expected May 2027",
+        degree: "M.S. Computer Science",
+        notes: "Research Assistant @ Singh Lab (Deep Learning in Genomics)",
+        imageSrc: "/assets/brown-logo.jpeg",
+        style: { padding: '40px', backgroundColor: 'white' },
+    },
+    {
+        id: 2,
         institution: "King's College London",
         timePeriod: "Sep 2020 - May 2024",
         degree: "BSc Computer Science (Artificial Intelligence) with Management and a Year Abroad",
@@ -18,7 +27,7 @@ const educationData = [
         imageSrc: "/assets/kcl-logo.jpeg",
     },
     {
-        id: 2,
+        id: 3,
         institution: "University of Toronto",
         timePeriod: "Sep 2022 - Apr 2023",
         degree: "Visiting Exchange Student",
@@ -26,7 +35,7 @@ const educationData = [
         imageSrc: "/assets/uoft-logo.jpeg",
     },
     {
-        id: 3,
+        id: 4,
         institution: "Antwerp International School",
         timePeriod: "Sep 2018 - Jul 2020",
         degree: "International Baccalaureate",
