@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import '@/app/components/Sidebar.css'; // Assuming you have some CSS for styling
 import NavLinks from '@/app/components/NavLinks'; // Import the new NavLinks component
+import Image from 'next/image';
+import profilePhoto from '/public/assets/aarjav-profile-photo.jpg';
 
 const Sidebar: React.FC<{ onClose: () => void; currentSection: string; setCurrentSection: (section: string) => void }> = ({ onClose, currentSection, setCurrentSection }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -47,6 +49,11 @@ const Sidebar: React.FC<{ onClose: () => void; currentSection: string; setCurren
             </button>
             {isOpen && <div className={`mask ${isOpen ? 'show' : ''}`} onClick={toggleSidebar} />}
             <div className={`sidebar ${isOpen ? 'open' : ''}`}>
+                <div className='profile-photo'>
+                  <div className='profile-photo-frame'>
+                    <Image src={profilePhoto} alt='Profile' width={1000} height={600} quality={100} className='circular-photo zoom-head' />
+                  </div>
+                </div>
                 <NavLinks currentSection={currentSection} onNavigate={handleNavigation} /> {/* Use NavLinks component */}
             </div>
         </div>

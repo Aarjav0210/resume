@@ -16,7 +16,7 @@ const NavLinks: React.FC<NavLinksProps> = ({ currentSection, onNavigate }) => {
     ]; // Define sections with optional display text
 
     return (
-        <div className="flex flex-col gap-1 mt-[85px] mr-[40px]">
+        <div className="flex flex-col gap-1 mt-[30px] mr-[30px]">
             {sections.map(({ id, displayText }) => (
                 <NavLink 
                     key={id} 
