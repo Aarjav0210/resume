@@ -34,14 +34,14 @@ const educationData = [
         notes: "AI & Biotechnology",
         imageSrc: "/assets/uoft-logo.jpeg",
     },
-    {
-        id: 4,
-        institution: "Antwerp International School",
-        timePeriod: "Sep 2018 - Jul 2020",
-        degree: "International Baccalaureate",
-        notes: "High School Valedictorian",
-        imageSrc: "/assets/ais-logo.jpeg",
-    },
+    // {
+    //     id: 4,
+    //     institution: "Antwerp International School",
+    //     timePeriod: "Sep 2018 - Jul 2020",
+    //     degree: "International Baccalaureate",
+    //     notes: "High School Valedictorian",
+    //     imageSrc: "/assets/ais-logo.jpeg",
+    // },
 ];
 
 export default function Education({ currentSection, setCurrentSection }: { currentSection: string; setCurrentSection: (section: string) => void }) {
