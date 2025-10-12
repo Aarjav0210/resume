@@ -2,8 +2,8 @@
 entries:
   - id: 0
     company: "Deutsche Bank AG (2)"
-    timePeriod: "Jul '24 – Present"
-    role: "Associate SWE"
+    timePeriod: "Jul '24 – Aug '25"
+    role: "Graduate Software Engineer"
     skills:
       - text: java
         bgColor: '#3A78A9'
@@ -11,6 +11,9 @@ entries:
       - text: q/kdb+
         bgColor: '#FFFFFF'
         textColor: '#0D1319'
+      - text: python
+        bgColor: '#3A78A9'
+        textColor: '#FEDE57'
       - text: react
         bgColor: '#22262E'
         textColor: '#54BED5'
@@ -21,16 +24,44 @@ entries:
         bgColor: '#F10001'
         textColor: '#FFFFFF'
     description: |
-      Rotation 1: **Market Data Technology**
+      • Built a **real-time** risk monitoring system ingesting thousands of trades per second with nanosecond-level latency
       
-      • Developed a dashboard to analyse all applications’ market data usage and identify **noisy usage** to reduce costs and traffic with Q/KDB+
+      • Architected **multi-partition data retrieval** stacks in **KDB+/Q** for 100× faster high-volume queries
       
-      • Introduced stack **routing logic** that streamlines data throughput
+      • Implemented a **cross-stack de-duplication layer** to prevent redundant data retrieval
       
-      • Built a **multi-partition stack** **architecture** for efficient and tailored retrieval
+      • Developed a dashboard to **identify noisy usage** of our market data, resulting in ~$400,000 cost savings annually
 
-
-      Rotation 2: **FX Listed Derivatives** (Currently ongoing)
+  - id: 6
+    company: "Upsizzle AI"
+    timePeriod: "Apr '25 – Jun '25"
+    role: "Co-Founder + CTO"
+    skills:
+      - text: python
+        bgColor: '#3A78A9'
+        textColor: '#FEDE57'
+      - text: AWS
+        bgColor: '#FF9900'
+        textColor: '#FFFFFF'
+      - text: LLM
+        bgColor: '#333333'
+        textColor: '#FFFFFF'
+      - text: next.js
+        bgColor: '#000000'
+        textColor: '#FFFFFF'
+      - text: typescript
+        bgColor: '#007ACD'
+        textColor: '#FFFFFF'
+      - text: react
+        bgColor: '#22262E'
+        textColor: '#54BED5'
+      - text: redis
+        bgColor: '#D92E29'
+        textColor: '#FFFFFF'
+    description: |
+      • Built a **Generative Engine Optimization** platform offering share-of-voice insights, affiliate-link recommendations, competitive analytics, and more to help publishers surface high-value content
+      
+      • Onboarded **pilot customers** in San Francisco and iterated on the product with real-world feedback to improve retention, leading to a 4x increase in conversions through **AI-Powered Search recommendations**
   - id: 1
     company: "Deutsche Bank AG (1)"
     timePeriod: "Jun '23 - Aug '23"
