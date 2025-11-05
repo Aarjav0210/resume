@@ -55,6 +55,17 @@ const Sidebar: React.FC<{ onClose: () => void; currentSection: string; setCurren
                   </div>
                 </div>
                 <NavLinks currentSection={currentSection} onNavigate={handleNavigation} /> {/* Use NavLinks component */}
+                
+                {/* Download CV Link */}
+                <div className="absolute bottom-8 right-8">
+                    <a 
+                        href="/assets/Aarjav_Jain_CV.pdf" 
+                        download
+                        className="text-white hover:text-[#84EF12] transition-colors duration-300 text-base cursor-pointer"
+                    >
+                        download_cv
+                    </a>
+                </div>
             </div>
         </div>
     );
