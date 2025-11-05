@@ -2,6 +2,7 @@
 import React, { useRef, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Bounds } from '@react-three/drei';
+import { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 import * as THREE from 'three';
 
 // Removed props type and parameter as it's not used
@@ -26,7 +27,7 @@ useGLTF.preload('/assets/logo.glb');
 
 // Main component rendering the Canvas - removed React.FC type annotation
 const LogoModel = () => {
-  const controlsRef = useRef<any>(null);
+  const controlsRef = useRef<OrbitControlsImpl>(null!);
 
   React.useEffect(() => {
     if (controlsRef.current) {
