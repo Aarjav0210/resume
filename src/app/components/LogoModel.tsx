@@ -26,6 +26,15 @@ useGLTF.preload('/assets/logo.glb');
 
 // Main component rendering the Canvas - removed React.FC type annotation
 const LogoModel = () => {
+  const controlsRef = useRef<any>(null);
+
+  React.useEffect(() => {
+    if (controlsRef.current) {
+      // Set initial azimuth angle to start facing forward (adjust Math.PI value as needed)
+      controlsRef.current.setAzimuthalAngle(0);
+    }
+  }, []);
+
   return (
     <div style={{ width: '100%', height: '100%' }}> 
       <Canvas camera={{ position: [0, 0, 5] }}> { /* Set a default camera position */ }
@@ -40,6 +49,7 @@ const LogoModel = () => {
         </Suspense>
 
         <OrbitControls 
+          ref={controlsRef}
           makeDefault // Important when using Bounds
           enableZoom={false} 
           enablePan={false} 
