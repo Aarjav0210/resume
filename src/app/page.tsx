@@ -44,7 +44,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div ref={scrollContainerRef} className="overflow-y-scroll snap-y snap-mandatory h-screen font-[family-name:var(--font-geist-sans)]" >
+    <div ref={scrollContainerRef} className="overflow-y-scroll overflow-x-hidden snap-y snap-mandatory h-screen font-[family-name:var(--font-geist-sans)] scrollbar-hide" >
       <Sidebar currentSection={currentSection} setCurrentSection={setCurrentSection} onClose={() => {}} />
       <Landing currentSection={currentSection} setCurrentSection={setCurrentSection} />
       <WorkExperienceView currentSection={currentSection} setCurrentSection={setCurrentSection}/>

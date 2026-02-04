@@ -47,8 +47,7 @@ export default function ResearchView({ currentSection, setCurrentSection }: { cu
         />
       </div>
 
-      {/* Scrollable cards with fades */}
-      <FadingScroll className="row-start-2 rounded-[20px] mx-12 sm:mx-20 my-4" fadeHeight={50} backgroundColor="#171717">
+      <FadingScroll className="row-start-2 mx-12 sm:mx-20 my-4 min-h-0" contentClassName="px-4 sm:px-6 py-8">
         <div className="grid grid-cols-1 mdlg:grid-cols-2 xl:grid-cols-3 gap-4">
           {entries.map((entry) => (
             <ResearchCard
