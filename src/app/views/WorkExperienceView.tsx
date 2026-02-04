@@ -11,6 +11,18 @@ import type { WorkEntry } from '@/app/types/WorkEntry';
 export default function WorkExperienceView({ currentSection, setCurrentSection }: { currentSection: string; setCurrentSection: (section: string) => void }) {
   const [entries, setEntries] = useState<WorkEntry[]>([]);
   const [isSelected, setIsSelected] = useState<number>(-1);
+  const cardRefs = React.useRef<Record<number, HTMLDivElement | null>>({});
+  const timelineEntries = [
+    {
+      id: -999,
+      timePeriod: "Present",
+      company: "Plotting the next big thing",
+      role: "",
+      description: [],
+      skills: [],
+    } as WorkEntry,
+    ...entries,
+  ];
 
   useEffect(() => {
     fetchWorkEntries().then(setEntries);
@@ -39,6 +51,16 @@ export default function WorkExperienceView({ currentSection, setCurrentSection }
 
 
 
+  const handleTimelineSelect = (id: number) => {
+    const target = cardRefs.current[id];
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      window.setTimeout(() => setIsSelected(id), 200);
+      return;
+    }
+    setIsSelected(id);
+  };
+
   return (
     <section 
         id="work-experience" 
@@ -52,19 +74,65 @@ export default function WorkExperienceView({ currentSection, setCurrentSection }
         />
       </div>
 
-      {/* Scrollable cards with fades */}
-      <FadingScroll className="row-start-2 rounded-[20px] mx-12 sm:mx-20 my-4" fadeHeight={50} backgroundColor="#171717">
-        <div className="grid grid-cols-1 mdlg:grid-cols-2 xl:grid-cols-3 gap-4">
-          {entries.map((entry) => (
-            <WorkExperienceCard
-              key={entry.id}
-              {...entry}
-              disabled={isSelected !== -1}
-              onSelect={setIsSelected}
-            />
-          ))}
+      {/* Timeline + cards */}
+      <div className="row-start-2 mx-12 sm:mx-20 my-4 grid gap-8 lg:grid-cols-[220px_1fr] xl:grid-cols-[260px_1fr] min-h-0">
+        {/* Desktop timeline */}
+        <div className="relative hidden lg:block py-6">
+          <div className="absolute left-3 top-8 bottom-8 w-px bg-gradient-to-b from-[#4CF0E8]/30 via-white/10 to-[#84EF12]/30" />
+          <div className="space-y-6">
+            {timelineEntries.map((entry) => {
+              const isCurrent = entry.id === -999;
+              return (
+              <button
+                key={entry.id}
+                type="button"
+                onClick={() => !isCurrent && handleTimelineSelect(entry.id)}
+                className={`group relative pl-8 text-left transition cursor-pointer rounded-md px-1 py-1 -ml-1 transform-gpu ${
+                  isCurrent
+                    ? "cursor-default"
+                    : "hover:opacity-100 hover:bg-white/5 hover:-translate-y-0.5 hover:rotate-[0.4deg]"
+                }`}
+                aria-disabled={isCurrent}
+              >
+                <div className={`absolute left-[5px] top-3 h-3 w-3 rounded-full shadow-[0_0_12px_rgba(76,240,232,0.6)] transition-transform ${
+                  isCurrent
+                    ? "bg-[#84EF12] shadow-[0_0_12px_rgba(132,239,18,0.8)]"
+                    : "bg-[#4CF0E8] group-hover:scale-110"
+                }`} />
+                <p className={`text-xs transition-colors ${
+                  isCurrent ? "text-[#84EF12]" : "text-[#84EF12] group-hover:text-[#4CF0E8]"
+                }`}>{entry.timePeriod}</p>
+                <p className={`text-sm transition-colors ${
+                  isCurrent ? "text-white" : "text-white/90 group-hover:text-white"
+                }`}>{entry.company}</p>
+                {entry.role ? (
+                  <p className="text-[11px] text-gray-400 transition-colors group-hover:text-gray-300">{entry.role}</p>
+                ) : (
+                  <p className="text-[11px] text-gray-500"> </p>
+                )}
+              </button>
+              );
+            })}
+          </div>
         </div>
-      </FadingScroll>
+
+        {/* Mobile timeline (dots only) */}
+
+        {/* Experience cards (scroll only this column) */}
+        <FadingScroll className="min-h-0">
+          <div className="grid grid-cols-1 mdlg:grid-cols-2 xl:grid-cols-3 gap-4 min-w-0 px-4 sm:px-6 py-8">
+            {entries.map((entry) => (
+              <div key={entry.id} ref={(el) => { cardRefs.current[entry.id] = el; }}>
+                <WorkExperienceCard
+                  {...entry}
+                  disabled={isSelected !== -1}
+                  onSelect={setIsSelected}
+                />
+              </div>
+            ))}
+          </div>
+        </FadingScroll>
+      </div>
 
       {/* Continue prompt */}
       <div className="row-start-3 justify-center mt-4">

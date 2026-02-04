@@ -21,7 +21,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ entry, onClose }) => {
         onMouseDown={(e) => { e.stopPropagation(); downRef.current = Date.now() }}
         onMouseUp={(e) => { e.stopPropagation(); if (downRef.current && Date.now() - downRef.current < CLICK_THRESHOLD) onClose() }}
         onClick={(e) => e.stopPropagation()}
-        className="bg-[#1E1E1E] rounded-[20px] p-8 max-w-md w-full text-white select-text"
+        className="bg-[#141414]/90 backdrop-blur-xl border border-white/10 rounded-[20px] p-8 max-w-md w-full text-white select-text shadow-[0_20px_60px_rgba(0,0,0,0.6)]"
       >
         <h3 className="text-2xl text-[#4CF0E8] mb-3">{entry.title}</h3>
         {entry.skills && (

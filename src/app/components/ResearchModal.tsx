@@ -40,7 +40,7 @@ const ResearchModal: React.FC<ResearchModalProps> = ({ entry, onClose }) => {
       onClick={handleBackdropClick}
     >
       <div
-        className="bg-[#1E1E1E] rounded-[20px] shadow-xl p-10 max-w-lg w-full text-white select-text cursor-text"
+        className="bg-[#141414]/90 backdrop-blur-xl border border-white/10 rounded-[20px] shadow-[0_20px_60px_rgba(0,0,0,0.6)] p-10 max-w-lg w-full text-white select-text cursor-text"
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
         onClick={stopClick}
