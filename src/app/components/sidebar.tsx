@@ -36,13 +36,13 @@ const Sidebar: React.FC<{ onClose: () => void; currentSection: string; setCurren
     return (
         <div>
             <button 
-                className={`toggle-button ${isOpen ? 'open' : ''}`} 
+                className={`toggle-button ${isOpen ? 'open' : ''} group`} 
                 onClick={toggleSidebar}
                 style={{ position: 'absolute', top: '70px', right: '50px' }}
             >
-                <div className='text-base'>
+                <div className='text-base flex items-center gap-1'>
                     {/* <span className='opacity-0 pointer-events-none md:opacity-100 md:pointer-events-auto' aria-hidden="true" tabIndex={-1}>navigate </span> */}
-                    <span className='hidden md:inline'>navigate </span>
+                    <span className='hidden md:inline text-white group-hover:text-[#84EF12] transition-colors duration-300'>navigate </span>
                     
                     <span className={`text-[#84EF12] rotate-icon ${isOpen ? 'open' : ''}`}>&lt;</span>
                 </div>

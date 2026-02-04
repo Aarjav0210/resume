@@ -24,48 +24,93 @@ const FadingScroll: React.FC<FadingScrollProps> = ({
     backgroundColor = 'white',
 }) => {
     const containerRef = useRef<HTMLDivElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
     const [showTop, setShowTop] = useState(false);
     const [showBottom, setShowBottom] = useState(false);
     const [effectiveFadeHeight, setEffectiveFadeHeight] = useState(fadeHeight);
+    const [topFadeOverlays, setTopFadeOverlays] = useState<Array<{left: number; width: number; top: number}>>([]);
+    const [bottomFadeOverlays, setBottomFadeOverlays] = useState<Array<{left: number; width: number; bottom: number}>>([]);
 
     useEffect(() => {
         const el = containerRef.current;
-        if (!el) return;
+        const contentEl = contentRef.current;
+        if (!el || !contentEl) return;
 
         const updateFade = () => {
-            // Add a small buffer to prevent flickering when scrollHeight is very close to clientHeight
             const buffer = 1; 
             const { scrollTop, scrollHeight, clientHeight } = el;
-            setShowTop(scrollTop > buffer);
-            setShowBottom(scrollTop + clientHeight < scrollHeight - buffer);
+            const needsTopFade = scrollTop > buffer;
+            const needsBottomFade = scrollTop + clientHeight < scrollHeight - buffer;
+            setShowTop(needsTopFade);
+            setShowBottom(needsBottomFade);
+
+            const containerRect = el.getBoundingClientRect();
+            const topEdge = containerRect.top;
+            const bottomEdge = containerRect.top + clientHeight;
+            
+            // Find all card elements - look for elements with rounded corners and dark background
+            const cards = contentEl.querySelectorAll('div[class*="rounded"], div[class*="bg-\\[#1E1E1E\\]"]');
+            const topOverlays: Array<{left: number; width: number; top: number}> = [];
+            const bottomOverlays: Array<{left: number; width: number; bottom: number}> = [];
+            
+            cards.forEach((card) => {
+                const cardRect = card.getBoundingClientRect();
+                const cardTop = cardRect.top;
+                const cardBottom = cardRect.bottom;
+                const left = cardRect.left - containerRect.left;
+                const width = cardRect.width;
+                
+                // Check if card is being cut off at the top
+                if (needsTopFade && cardTop < topEdge && cardBottom > topEdge) {
+                    // Card is being cut off at the top - fade should appear at the container's top edge (0)
+                    topOverlays.push({ left, width, top: 0 });
+                }
+                
+                // Check if card is being cut off at the bottom
+                if (needsBottomFade && cardBottom > bottomEdge && cardTop < bottomEdge) {
+                    // Card is being cut off at the bottom - fade should appear at the container's bottom edge (0)
+                    bottomOverlays.push({ left, width, bottom: 0 });
+                }
+            });
+
+            setTopFadeOverlays(topOverlays);
+            setBottomFadeOverlays(bottomOverlays);
         };
 
-        // Use ResizeObserver to detect size changes in the container or its content
+        // Use ResizeObserver to detect size changes
         const observer = new ResizeObserver(() => {
             updateFade();
         });
 
-        // Observe the scroll container itself
         observer.observe(el);
-
-        // Observe the direct child element containing the scrollable content
-        // Assumes children are wrapped in a single element. If not, this might need adjustment.
         if (el.firstElementChild) {
             observer.observe(el.firstElementChild);
+        }
+
+        // Use MutationObserver to detect when cards are added/removed
+        const mutationObserver = new MutationObserver(() => {
+            updateFade();
+        });
+
+        if (contentEl) {
+            mutationObserver.observe(contentEl, {
+                childList: true,
+                subtree: true,
+            });
         }
 
         // Initial check
         updateFade(); 
 
-        // Also listen for scroll events as before
+        // Listen for scroll events
         el.addEventListener('scroll', updateFade);
 
         return () => {
-            // Clean up observer and event listener
             observer.disconnect();
+            mutationObserver.disconnect();
             el.removeEventListener('scroll', updateFade);
         }
-    }, []); // Keep dependencies empty as ResizeObserver handles changes
+    }, [effectiveFadeHeight]);
 
     useEffect(() => {
         const handleResize = () => {
@@ -94,33 +139,39 @@ const FadingScroll: React.FC<FadingScrollProps> = ({
 
     return (
         <div className={`relative overflow-hidden ${className}`}>
-            <div ref={containerRef} className='overflow-x-auto h-full w-full scrollbar-hide'>
-                {children}
+            <div ref={containerRef} className='overflow-y-auto h-full w-full scrollbar-hide'>
+                <div ref={contentRef}>
+                    {children}
+                </div>
             </div>
-            {/* {showTop && (
-                <div className='pointer-events-none absolute inset-x-0 top-0' style={gradientStyle('to bottom')}/>
-            )}
-            {showBottom && (
-                <div className='pointer-events-none absolute inset-x-0 bottom-0' style={gradientStyle('to top')}/>
-            )} */}
-            <div 
-                className={`
-                    pointer-events-none
-                    absolute inset-x-0 top-0
-                    transition-opacity duration-100
-                    ${showTop ? 'opacity-100' : 'opacity-0'}
-                `}
-                style={gradientStyle('to bottom')}
-            />
-            <div 
-                className={`
-                    pointer-events-none
-                    absolute inset-x-0 bottom-0
-                    transition-opacity duration-300
-                    ${showBottom ? 'opacity-100' : 'opacity-0'}
-                `}
-                style={gradientStyle('to top')}
-            />
+            
+            {/* Top fade overlays - one for each card being cut off at the top */}
+            {showTop && topFadeOverlays.map((overlay, index) => (
+                <div
+                    key={`top-${index}`}
+                    className="pointer-events-none absolute transition-opacity duration-100"
+                    style={{
+                        left: `${overlay.left}px`,
+                        width: `${overlay.width}px`,
+                        top: `${overlay.top}px`,
+                        ...gradientStyle('to bottom'),
+                    }}
+                />
+            ))}
+            
+            {/* Bottom fade overlays - one for each card being cut off at the bottom */}
+            {showBottom && bottomFadeOverlays.map((overlay, index) => (
+                <div
+                    key={`bottom-${index}`}
+                    className="pointer-events-none absolute transition-opacity duration-300"
+                    style={{
+                        left: `${overlay.left}px`,
+                        width: `${overlay.width}px`,
+                        bottom: `${overlay.bottom}px`,
+                        ...gradientStyle('to top'),
+                    }}
+                />
+            ))}
         </div>
     );
 };

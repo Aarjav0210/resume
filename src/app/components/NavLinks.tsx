@@ -10,6 +10,7 @@ const NavLinks: React.FC<NavLinksProps> = ({ currentSection, onNavigate }) => {
     const sections = [
         { id: 'landing', displayText: 'home' }, 
         { id: 'work-experience', displayText: 'work_experience' }, 
+        { id: 'research', displayText: 'research' },
         { id: 'education', displayText: 'education' },
         { id: 'projects', displayText: 'projects'},
         { id: 'contact', displayText: 'contact' }
