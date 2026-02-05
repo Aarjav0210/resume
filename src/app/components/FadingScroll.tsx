@@ -6,6 +6,8 @@ interface FadingScrollProps {
     className?: string;
     contentClassName?: string;
     bottomInset?: string;
+    fadeHeight?: number;
+    backgroundColor?: string;
 }
 
 const FadingScroll: React.FC<FadingScrollProps> = ({
@@ -13,9 +15,15 @@ const FadingScroll: React.FC<FadingScrollProps> = ({
     className = '',
     contentClassName = '',
     bottomInset = '1.5rem',
+    fadeHeight = 112,
+    backgroundColor,
 }) => {
+    const heightRem = `${fadeHeight / 16}rem`;
     return (
-        <div className={`relative overflow-hidden ${className}`} style={{ marginBottom: bottomInset }}>
+        <div
+            className={`relative overflow-hidden ${className}`}
+            style={{ marginBottom: bottomInset, backgroundColor }}
+        >
             <div className='overflow-y-auto h-full w-full scrollbar-hide'>
                 <div className={contentClassName}>
                     {children}
@@ -24,7 +32,7 @@ const FadingScroll: React.FC<FadingScrollProps> = ({
             <GradualBlur
                 target="parent"
                 position="bottom"
-                height="7rem"
+                height={heightRem}
                 strength={2}
                 divCount={5}
                 curve="bezier"
