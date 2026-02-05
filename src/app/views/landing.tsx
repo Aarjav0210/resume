@@ -4,9 +4,9 @@ import TerminalHeader from "@/app/components/TerminalHeader";
 import Typewriter from "@/app/components/Typewriter";
 import ScrollToContinue from "@/app/components/ScrollToContinue";
 import { MdOutlineFileDownload } from 'react-icons/md';
+import DarkVeil from "@/components/DarkVeil";
 
 export default function Landing({ currentSection, setCurrentSection }: { currentSection: string; setCurrentSection: (section: string) => void }) {
-
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Enter" && currentSection === 'landing') {
@@ -27,8 +27,18 @@ export default function Landing({ currentSection, setCurrentSection }: { current
 
   return (
     <>
-      <section id="landing" className="snap-start h-screen grid grid-rows-[20px_1fr_120px] gap-[32px] relative">
-        <div className="flex flex-col row-start-2 gap-[32px] items-start justify-center p-8 sm:p-20 w-full">
+      <section id="landing" className="snap-start h-screen grid grid-rows-[20px_1fr_120px] gap-[32px] relative isolate">
+        <div className="landing-darkveil" aria-hidden="true">
+          <DarkVeil
+            hueShift={50}
+            noiseIntensity={0}
+            scanlineIntensity={0}
+            speed={0.85}
+            scanlineFrequency={0}
+            warpAmount={0}
+          />
+        </div>
+        <div className="flex flex-col row-start-2 gap-[32px] items-start justify-center p-8 sm:p-20 w-full relative z-10">
           <TerminalHeader username="aarjav_jain" text="whoami" className="text-4xl md:text-5xl lg:text-6xl"/>
           <Typewriter
             text={["M.S. Computer Science @ Brown University", "Research Assistant @ Singh Lab", "Ex-SWE @ Deutsche Bank AG"]}
@@ -39,7 +49,7 @@ export default function Landing({ currentSection, setCurrentSection }: { current
             eraseSpeed={10} 
           />
         </div>
-        <div className="row-start-3 flex justify-center items-center relative">
+        <div className="row-start-3 flex justify-center items-center relative z-10">
           <ScrollToContinue beforeText="Scroll or press " keyPressIconText="Enter" afterText=" to continue" />
           
           {/* CV Download Link - Bottom Right */}

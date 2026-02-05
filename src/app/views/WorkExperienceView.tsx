@@ -77,9 +77,9 @@ export default function WorkExperienceView({ currentSection, setCurrentSection }
       {/* Timeline + cards */}
       <div className="row-start-2 mx-12 sm:mx-20 my-4 grid gap-8 lg:grid-cols-[220px_1fr] xl:grid-cols-[260px_1fr] min-h-0">
         {/* Desktop timeline */}
-        <div className="relative hidden lg:block py-6">
+        <div className="relative hidden lg:block py-4 max-h-full overflow-hidden">
           <div className="absolute left-3 top-8 bottom-8 w-px bg-gradient-to-b from-[#4CF0E8]/30 via-white/10 to-[#84EF12]/30" />
-          <div className="space-y-6">
+          <div className="flex h-full flex-col justify-between max-h-full overflow-hidden pr-1">
             {timelineEntries.map((entry) => {
               const isCurrent = entry.id === -999;
               return (
@@ -87,28 +87,28 @@ export default function WorkExperienceView({ currentSection, setCurrentSection }
                 key={entry.id}
                 type="button"
                 onClick={() => !isCurrent && handleTimelineSelect(entry.id)}
-                className={`group relative pl-8 text-left transition cursor-pointer rounded-md px-1 py-1 -ml-1 transform-gpu ${
+                className={`group relative block w-full pl-7 text-left transition cursor-pointer rounded-md px-1 py-0.5 -ml-1 transform-gpu ${
                   isCurrent
                     ? "cursor-default"
                     : "hover:opacity-100 hover:bg-white/5 hover:-translate-y-0.5 hover:rotate-[0.4deg]"
                 }`}
                 aria-disabled={isCurrent}
               >
-                <div className={`absolute left-[5px] top-3 h-3 w-3 rounded-full shadow-[0_0_12px_rgba(76,240,232,0.6)] transition-transform ${
+                <div className={`absolute left-[11px] top-2.5 h-2.5 w-2.5 rounded-full shadow-[0_0_10px_rgba(76,240,232,0.6)] transition-transform ${
                   isCurrent
                     ? "bg-[#84EF12] shadow-[0_0_12px_rgba(132,239,18,0.8)]"
                     : "bg-[#4CF0E8] group-hover:scale-110"
                 }`} />
-                <p className={`text-xs transition-colors ${
+                <p className={`text-[10px] transition-colors ${
                   isCurrent ? "text-[#84EF12]" : "text-[#84EF12] group-hover:text-[#4CF0E8]"
                 }`}>{entry.timePeriod}</p>
-                <p className={`text-sm transition-colors ${
+                <p className={`text-xs transition-colors ${
                   isCurrent ? "text-white" : "text-white/90 group-hover:text-white"
                 }`}>{entry.company}</p>
                 {entry.role ? (
-                  <p className="text-[11px] text-gray-400 transition-colors group-hover:text-gray-300">{entry.role}</p>
+                  <p className="text-[10px] text-gray-400 transition-colors group-hover:text-gray-300">{entry.role}</p>
                 ) : (
-                  <p className="text-[11px] text-gray-500"> </p>
+                  <p className="text-[10px] text-gray-500"> </p>
                 )}
               </button>
               );
@@ -119,7 +119,7 @@ export default function WorkExperienceView({ currentSection, setCurrentSection }
         {/* Mobile timeline (dots only) */}
 
         {/* Experience cards (scroll only this column) */}
-        <FadingScroll className="min-h-0">
+        <FadingScroll className="min-h-0 rounded-[20px]" bottomInset="3rem">
           <div className="grid grid-cols-1 mdlg:grid-cols-2 xl:grid-cols-3 gap-4 min-w-0 px-4 sm:px-6 py-8">
             {entries.map((entry) => (
               <div key={entry.id} ref={(el) => { cardRefs.current[entry.id] = el; }}>
