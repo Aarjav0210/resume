@@ -54,16 +54,17 @@ const Sidebar: React.FC<{ onClose: () => void; currentSection: string; setCurren
                     <Image src={profilePhoto} alt='Profile' width={1000} height={600} quality={100} className='circular-photo zoom-head' />
                   </div>
                 </div>
-                <NavLinks currentSection={currentSection} onNavigate={handleNavigation} /> {/* Use NavLinks component */}
-                
+                <div className="sidebar-nav-glow">
+                  <NavLinks currentSection={currentSection} onNavigate={handleNavigation} />
+                </div>
                 {/* Download CV Link */}
                 <div className="absolute bottom-8 right-8">
                     <a 
                         href="/assets/Aarjav_Jain_CV.pdf" 
                         download
-                        className="text-white hover:text-[#84EF12] transition-colors duration-300 text-base cursor-pointer"
+                        className="sidebar-download-link text-base cursor-pointer"
                     >
-                        download_cv
+                        download_cv <span className="sidebar-download-chevron text-[#84EF12]">&lt;</span>
                     </a>
                 </div>
             </div>
