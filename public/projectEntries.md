@@ -1,6 +1,31 @@
 ---
 entries:
   - id: 0
+    title: "Action-Aware Video Decomposition for Embodied Learning"
+    description: |
+      Transformed **egocentric videos** into dynamic, **growing DAG representations** of activity, where nodes correspond to **atomic subtasks** and edges encode temporal and causal structure.
+      
+      Combined LLMs, VLMs, motion signals, and change-point detection to segment unstructured video into semantically meaningful action units without manual annotation.
+      
+      Enabled scalable generation of **task-level training data** for **Vision-Language-Action (VLA)** models, supporting **weak supervision** and robust decomposition across heterogeneous real-world demonstrations.
+    skills:
+      - text: python
+        bgColor: '#3A78A9'
+        textColor: '#FEDE57'
+      - text: computer vision
+        bgColor: '#8B5CF6'
+        textColor: '#FFFFFF'
+      - text: VLMs
+        bgColor: '#6366F1'
+        textColor: '#FFFFFF'
+      - text: LLMs
+        bgColor: '#333333'
+        textColor: '#FFFFFF'
+      - text: VLA
+        bgColor: '#10B981'
+        textColor: '#FFFFFF'
+
+  - id: 1
     title: "Riddlr – KG-RAG for Instruction Manuals"
     description: |
       Engineered a **KG-RAG pipeline** to parse any instruction manual and extract entities and relations into **Neo4j**, enabling structured retrieval for **LLM grounding**.
@@ -21,28 +46,6 @@ entries:
         textColor: '#FFFFFF'
       - text: knowledge graphs
         bgColor: '#10B981'
-        textColor: '#FFFFFF'
-
-  - id: 1
-    title: "Action-Aware Video Segmentation"
-    description: |
-      Segmented long **egocentric videos** into coherent action regimes using **change point detection**, motion cues, and **VLM-derived semantic signals**.
-      
-      Identified scene shifts and interaction boundaries to enable task-specific downstream modeling without dense annotations.
-      
-      Designed to operate under **weak supervision** and **distribution shift**, enabling adaptive processing of heterogeneous sequences.
-    skills:
-      - text: python
-        bgColor: '#3A78A9'
-        textColor: '#FEDE57'
-      - text: computer vision
-        bgColor: '#8B5CF6'
-        textColor: '#FFFFFF'
-      - text: video processing
-        bgColor: '#EC4899'
-        textColor: '#FFFFFF'
-      - text: VLMs
-        bgColor: '#6366F1'
         textColor: '#FFFFFF'
 
   - id: 2
