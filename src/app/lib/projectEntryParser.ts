@@ -45,7 +45,7 @@ export function parseProjectEntries(rawMd: string): ProjectEntry[] {
 }
 
 export async function fetchProjectEntries(): Promise<ProjectEntry[]> {
-  const res = await fetch('/projectEntries.md')
+  const res = await fetch('/projectEntries.md', { cache: 'no-store' })
   if (!res.ok) {
     console.error('Failed to load projectEntries.md', res.status)
     return []
