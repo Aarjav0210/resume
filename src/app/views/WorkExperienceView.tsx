@@ -33,14 +33,22 @@ export default function WorkExperienceView({ currentSection, setCurrentSection }
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Enter" && currentSection === 'work-experience') {
-        // Update the current section to 'research'
-        setCurrentSection('research'); // Set the next section directly
+      if ((e.key === "Enter" || e.key === " ") && !e.shiftKey && currentSection === 'work-experience') {
+        setCurrentSection('research');
 
-        // Scroll to the next section
         const nextSection = document.getElementById('research');
         if (nextSection) {
           nextSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+      // Easter egg: Shift+Enter or Shift+Space to go back
+      if ((e.key === "Enter" || e.key === " ") && e.shiftKey && currentSection === 'work-experience') {
+        e.preventDefault();
+        setCurrentSection('landing');
+
+        const prevSection = document.getElementById('landing');
+        if (prevSection) {
+          prevSection.scrollIntoView({ behavior: "smooth" });
         }
       }
     };

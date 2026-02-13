@@ -9,11 +9,9 @@ import DarkVeil from "@/components/DarkVeil";
 export default function Landing({ currentSection, setCurrentSection }: { currentSection: string; setCurrentSection: (section: string) => void }) {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Enter" && currentSection === 'landing') {
-        // Update the current section to 'work-experience'
-        setCurrentSection('work-experience'); // Set the next section directly
+      if ((e.key === "Enter" || e.key === " ") && !e.shiftKey && currentSection === 'landing') {
+        setCurrentSection('work-experience');
 
-        // Scroll to the next section
         const nextSection = document.getElementById('work-experience');
         if (nextSection) {
           nextSection.scrollIntoView({ behavior: "smooth" });

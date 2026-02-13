@@ -51,7 +51,7 @@ export default function Home() {
       <ResearchView currentSection={currentSection} setCurrentSection={setCurrentSection}/>
       <Education currentSection={currentSection} setCurrentSection={setCurrentSection}/>
       <ProjectsView currentSection={currentSection} setCurrentSection={setCurrentSection}/>
-      <ContactView />
+      <ContactView currentSection={currentSection} setCurrentSection={setCurrentSection} />
       
     </div>
   );
