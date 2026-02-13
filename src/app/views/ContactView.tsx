@@ -1,12 +1,30 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { MdOutlineFileDownload } from "react-icons/md";
 import TerminalHeader from "@/app/components/TerminalHeader";
 
-const ContactView = () => {
+const ContactView = ({ currentSection, setCurrentSection }: { currentSection: string; setCurrentSection: (section: string) => void }) => {
   const email = "aarjav02@gmail.com";
   const linkedinUrl = "https://www.linkedin.com/in/aarjav-jain/";
+
+  // Easter egg: Shift+Enter or Shift+Space to go back
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.key === "Enter" || e.key === " ") && e.shiftKey && currentSection === 'contact') {
+        e.preventDefault();
+        setCurrentSection('projects');
+
+        const prevSection = document.getElementById('projects');
+        if (prevSection) {
+          prevSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [currentSection, setCurrentSection]);
 
   return (
     <section

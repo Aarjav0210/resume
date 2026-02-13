@@ -1,6 +1,29 @@
 ---
 entries:
   - id: 0
+    title: "ShardCompute - Distributed Inference Network"
+    description: |
+      Built a **distributed model-sharding inference system** that enables large models to run across **heterogeneous devices** beyond single-machine memory limits using PyTorch distributed primitives and WebSocket networking.
+      
+      Designed a coordinator–worker execution runtime for **synchronized tensor computation** across laptops and consumer GPUs over the internet, exploring **compute partitioning** and latency–bandwidth tradeoffs in distributed ML systems.
+    skills:
+      - text: pytorch
+        bgColor: '#F1F3F4'
+        textColor: '#F55130'
+      - text: distributed systems
+        bgColor: '#333333'
+        textColor: '#FFFFFF'
+      - text: WebSocket
+        bgColor: '#333333'
+        textColor: '#FFFFFF'
+      - text: model parallelism
+        bgColor: '#333333'
+        textColor: '#FFFFFF'
+      - text: multi-GPU inference
+        bgColor: '#333333'
+        textColor: '#FFFFFF'
+
+  - id: 1
     title: "Action-Aware Video Decomposition for Embodied Learning"
     description: |
       Transformed **egocentric videos** into dynamic, **growing DAG representations** of activity, where nodes correspond to **atomic subtasks** and edges encode temporal and causal structure.
@@ -13,19 +36,22 @@ entries:
         bgColor: '#3A78A9'
         textColor: '#FEDE57'
       - text: computer vision
-        bgColor: '#8B5CF6'
+        bgColor: '#333333'
         textColor: '#FFFFFF'
       - text: VLMs
-        bgColor: '#6366F1'
+        bgColor: '#333333'
         textColor: '#FFFFFF'
       - text: LLMs
         bgColor: '#333333'
         textColor: '#FFFFFF'
       - text: VLA
-        bgColor: '#10B981'
+        bgColor: '#333333'
+        textColor: '#FFFFFF'
+      - text: change-point detection
+        bgColor: '#333333'
         textColor: '#FFFFFF'
 
-  - id: 1
+  - id: 2
     title: "Riddlr – KG-RAG for Instruction Manuals"
     description: |
       Engineered a **KG-RAG pipeline** to parse any instruction manual and extract entities and relations into **Neo4j**, enabling structured retrieval for **LLM grounding**.
@@ -42,13 +68,16 @@ entries:
         bgColor: '#333333'
         textColor: '#FFFFFF'
       - text: RAG
-        bgColor: '#6366F1'
+        bgColor: '#333333'
         textColor: '#FFFFFF'
       - text: knowledge graphs
-        bgColor: '#10B981'
+        bgColor: '#333333'
+        textColor: '#FFFFFF'
+      - text: entity extraction
+        bgColor: '#333333'
         textColor: '#FFFFFF'
 
-  - id: 2
+  - id: 3
     title: "GaitMed - Real-Time Diagnosis"
     description: |
       Voted **Best Project** at **NHS Hack Day 2023**.
@@ -60,20 +89,26 @@ entries:
       - text: python
         bgColor: '#3A78A9'
         textColor: '#FEDE57'
+      - text: pytorch
+        bgColor: '#F1F3F4'
+        textColor: '#F55130'
       - text: svm
-        bgColor: '#FBBF24'
-        textColor: '#000000'
-      - text: lstm
-        bgColor: '#3B82F6'
+        bgColor: '#333333'
         textColor: '#FFFFFF'
-      - text: time-series analysis
-        bgColor: '#8B5CF6'
+      - text: lstm
+        bgColor: '#333333'
+        textColor: '#FFFFFF'
+      - text: time-series
+        bgColor: '#333333'
         textColor: '#FFFFFF'
       - text: sensor fusion
-        bgColor: '#10B981'
+        bgColor: '#333333'
+        textColor: '#FFFFFF'
+      - text: wearable ML
+        bgColor: '#333333'
         textColor: '#FFFFFF'
 
-  - id: 3
+  - id: 4
     title: "Bike-Share Navigation System"
     description: |
       Led a team of **10** to build a **Flutter (Dart)** app integrating the **Santander Cycle API** and **Firebase**, implementing **route-optimization** to recommend the most cost-efficient journeys across London's bike-share network.
@@ -87,11 +122,14 @@ entries:
       - text: firebase
         bgColor: '#FFCA28'
         textColor: '#000000'
-      - text: API integration
-        bgColor: '#10B981'
+      - text: REST API
+        bgColor: '#333333'
+        textColor: '#FFFFFF'
+      - text: route optimization
+        bgColor: '#333333'
         textColor: '#FFFFFF'
 
-  - id: 4
+  - id: 5
     title: "Burn Assistant - Medical Image Classification"
     description: |
       Built a mobile **clinical-decision support app** using **YOLOv5** to classify burn wounds (**1st - 3rd degree**) for variable skin types.
@@ -107,48 +145,37 @@ entries:
       - text: pytorch
         bgColor: '#F1F3F4'
         textColor: '#F55130'
-      - text: mobile app
+      - text: react-native
         bgColor: '#61DAFB'
         textColor: '#000000'
       - text: medical imaging
-        bgColor: '#F59E0B'
-        textColor: '#FFFFFF'
-
-  - id: 5
-    title: "Genome-Wide Association Studies API"
-    description: |
-      Built an API that mapped diseases to **genetic variants** and identified **drug-discovery sites** that are now being actively used and researched.
-    skills:
-      - text: q/kdb+
-        bgColor: '#FFFFFF'
-        textColor: '#0D1319'
-      - text: python
-        bgColor: '#3A78A9'
-        textColor: '#FEDE57'
-      - text: API development
-        bgColor: '#10B981'
-        textColor: '#FFFFFF'
-
-  - id: 6
-    title: "A Convolutional Neural Network Comparison for GeoGuesser"
-    description: |
-      Researched **classification techniques** on a custom University of Toronto building dataset.
-      Benchmarked architectures including ResNet18, ResNet34, and VGG16 for geolocation accuracy.
-    skills:
-      - text: cnn
-        bgColor: '#FF69B4'
-        textColor: '#FFFFFF'
-      - text: resnet18
-        bgColor: '#551A8B'
-        textColor: '#FFFFFF'
-      - text: resnet34
-        bgColor: '#4B0082'
-        textColor: '#FFFFFF'
-      - text: vgg16
-        bgColor: '#800080'
+        bgColor: '#333333'
         textColor: '#FFFFFF'
 
   - id: 7
+    title: "A Convolutional Neural Network Comparison for GeoGuesser"
+    description: |
+      Built a **visual geolocation** model that pinpoints buildings and their locations on the U of T campus from street-level imagery, using a large **custom dataset** we collected ourselves.
+      
+      Compared CNN architectures (ResNet18, ResNet34, VGG16) for **image classification** performance, **benchmarking** tradeoffs between model complexity and prediction quality.
+    skills:
+      - text: pytorch
+        bgColor: '#F1F3F4'
+        textColor: '#F55130'
+      - text: cnn
+        bgColor: '#333333'
+        textColor: '#FFFFFF'
+      - text: resnet18
+        bgColor: '#333333'
+        textColor: '#FFFFFF'
+      - text: resnet34
+        bgColor: '#333333'
+        textColor: '#FFFFFF'
+      - text: vgg16
+        bgColor: '#333333'
+        textColor: '#FFFFFF'
+
+  - id: 8
     title: "CuraVue - Breast Cancer Detection"
     description: |
       Won 1st place at **MLH AIHacks4Good** for a mammogram diagnostic tool.
@@ -164,11 +191,26 @@ entries:
         bgColor: '#F7931E'
         textColor: '#000000'
       - text: knn
-        bgColor: '#FF0000'
+        bgColor: '#333333'
         textColor: '#FFFFFF'
 
 # Archived Projects (not displayed)
 archived:
+  - id: 9
+    title: "Genome-Wide Association Studies API"
+    description: |
+      Built an API that mapped diseases to **genetic variants** and identified **drug-discovery sites** that are now being actively used and researched.
+    skills:
+      - text: q/kdb+
+        bgColor: '#FFFFFF'
+        textColor: '#0D1319'
+      - text: python
+        bgColor: '#3A78A9'
+        textColor: '#FEDE57'
+      - text: API development
+        bgColor: '#333333'
+        textColor: '#FFFFFF'
+
   - id: 10
     title: "Loan Approval Prediction"
     description: |
@@ -185,7 +227,7 @@ archived:
         bgColor: '#623CE4'
         textColor: '#FFFFFF'
       - text: random forest
-        bgColor: '#228B22'
+        bgColor: '#333333'
         textColor: '#FFFFFF'
 
   - id: 11
@@ -221,7 +263,7 @@ archived:
         bgColor: '#00979D'
         textColor: '#FFFFFF'
       - text: cad design
-        bgColor: '#A52A2A'
+        bgColor: '#333333'
         textColor: '#FFFFFF'
 
 ---

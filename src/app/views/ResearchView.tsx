@@ -20,12 +20,22 @@ export default function ResearchView({ currentSection, setCurrentSection }: { cu
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Enter" && currentSection === 'research') {
+      if ((e.key === "Enter" || e.key === " ") && !e.shiftKey && currentSection === 'research') {
         setCurrentSection('education');
 
         const nextSection = document.getElementById('education');
         if (nextSection) {
           nextSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+      // Easter egg: Shift+Enter or Shift+Space to go back
+      if ((e.key === "Enter" || e.key === " ") && e.shiftKey && currentSection === 'research') {
+        e.preventDefault();
+        setCurrentSection('work-experience');
+
+        const prevSection = document.getElementById('work-experience');
+        if (prevSection) {
+          prevSection.scrollIntoView({ behavior: "smooth" });
         }
       }
     };
