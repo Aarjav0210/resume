@@ -41,6 +41,7 @@ export function parseProjectEntries(rawMd: string): ProjectEntry[] {
     title: e.title,
     skills: Array.isArray(e.skills) ? e.skills : [],
     description: parseDescription(e.description as string),
+    ...(e.demoVideo ? { demoVideo: e.demoVideo } : {}),
   }))
 }
 

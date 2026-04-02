@@ -1,4 +1,5 @@
 import React from 'react';
+import { FiPlayCircle } from 'react-icons/fi';
 import SkillIcon from '@/app/components/SkillIcon';
 import type { ProjectEntry } from '@/app/types/ProjectEntry';
 import Skill from '../types/Skill';
@@ -15,7 +16,7 @@ function toTitleCase(str: string) {
 };
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
-  id, title, description, skills = [], disabled = false, onSelect,
+  id, title, description, skills = [], demoVideo, disabled = false, onSelect,
 }) => (
   <div
     onClick={() => !disabled && onSelect(id)}
@@ -31,7 +32,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       <div className="absolute -bottom-24 -left-24 h-48 w-48 rounded-full bg-[#84EF12]/10 blur-2xl transition duration-500 group-hover:bg-[#84EF12]/20" />
       <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] opacity-60" />
     </div>
-    <h3 className="text-xl text-[#4CF0E8] mb-2">{title}</h3>
+    <div className="flex items-start justify-between gap-2">
+      <h3 className="text-xl text-[#4CF0E8] mb-2">{title}</h3>
+      {demoVideo && (
+        <span className="shrink-0 mt-1 text-[#84EF12] opacity-70 group-hover:opacity-100 transition-opacity" title="Demo video available">
+          <FiPlayCircle size={20} />
+        </span>
+      )}
+    </div>
     <p className="text-[10px] whitespace-pre-wrap flex-1">
       {description
         .filter((p) => p.type === 'keyword')

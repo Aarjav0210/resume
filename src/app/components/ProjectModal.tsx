@@ -1,4 +1,5 @@
 import React, { useRef } from 'react'
+import { FiPlayCircle } from 'react-icons/fi'
 import SkillIcon from '@/app/components/SkillIcon'
 import type { ProjectEntry } from '@/app/types/ProjectEntry'
 
@@ -21,7 +22,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ entry, onClose }) => {
         onMouseDown={(e) => { e.stopPropagation(); downRef.current = Date.now() }}
         onMouseUp={(e) => { e.stopPropagation(); if (downRef.current && Date.now() - downRef.current < CLICK_THRESHOLD) onClose() }}
         onClick={(e) => e.stopPropagation()}
-        className="bg-[#141414]/90 backdrop-blur-xl border border-white/10 rounded-[20px] p-8 max-w-md w-full text-white select-text shadow-[0_20px_60px_rgba(0,0,0,0.6)]"
+        className={`bg-[#141414]/90 backdrop-blur-xl border border-white/10 rounded-[20px] p-8 w-full text-white select-text shadow-[0_20px_60px_rgba(0,0,0,0.6)] ${entry.demoVideo ? 'max-w-2xl' : 'max-w-md'}`}
       >
         <h3 className="text-2xl text-[#4CF0E8] mb-3">{entry.title}</h3>
         {entry.skills && (
@@ -36,6 +37,21 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ entry, onClose }) => {
               : <span key={i}>{p.content}</span>
           )}
         </div>
+        {entry.demoVideo && (
+          <div className="mt-5">
+            <div className="flex items-center gap-2 text-xs text-[#84EF12] mb-2">
+              <FiPlayCircle size={14} />
+              <span>Demo</span>
+            </div>
+            <video
+              src={entry.demoVideo}
+              controls
+              playsInline
+              preload="metadata"
+              className="w-full rounded-xl border border-white/10"
+            />
+          </div>
+        )}
       </div>
     </div>
   )

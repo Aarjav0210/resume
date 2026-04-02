@@ -6,4 +6,5 @@ export interface ProjectEntry {
   title: string
   description: Description[]
   skills?: Skill[]
+  demoVideo?: string
 }
