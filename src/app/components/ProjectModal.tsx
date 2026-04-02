@@ -61,7 +61,7 @@ const ImageSlideshow: React.FC<{ images: string[] }> = ({ images }) => {
               <button
                 key={i}
                 onClick={(e) => { e.stopPropagation(); setCurrent(i) }}
-                className={`w-1.5 h-1.5 rounded-full transition-all ${i === current ? 'bg-[#84EF12] w-4' : 'bg-white/40 hover:bg-white/60'}`}
+                className={`w-1.5 h-1.5 rounded-full transition-all ${i === current ? 'bg-[var(--color-green)] w-4' : 'bg-white/40 hover:bg-white/60'}`}
               />
             ))}
           </div>
@@ -86,7 +86,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ entry, onClose }) => {
         onClick={(e) => e.stopPropagation()}
         className={`bg-[#141414]/90 backdrop-blur-xl border border-white/10 rounded-[20px] p-8 w-full text-white select-text shadow-[0_20px_60px_rgba(0,0,0,0.6)] ${hasMedia ? 'max-w-2xl' : 'max-w-md'}`}
       >
-        <h3 className="text-2xl text-[#4CF0E8] mb-3">{entry.title}</h3>
+        <h3 className="text-2xl text-[var(--color-cyan)] mb-3">{entry.title}</h3>
         {entry.skills && (
           <div className="flex flex-wrap gap-2 mb-4">
             {entry.skills.map((s, i) => <SkillIcon key={i} {...s} />)}
@@ -95,13 +95,13 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ entry, onClose }) => {
         <div className="prose prose-invert text-sm whitespace-pre-wrap">
           {entry.description.map((p, i) =>
             p.type === 'keyword'
-              ? <strong key={i} className="text-[#84EF12]">{p.content}</strong>
+              ? <strong key={i} className="text-[var(--color-green)]">{p.content}</strong>
               : <span key={i}>{p.content}</span>
           )}
         </div>
         {entry.demoVideo && (
           <div className="mt-5">
-            <div className="flex items-center gap-2 text-xs text-[#84EF12] mb-2">
+            <div className="flex items-center gap-2 text-xs text-[var(--color-green)] mb-2">
               <FiPlayCircle size={14} />
               <span>Demo</span>
             </div>
@@ -116,7 +116,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ entry, onClose }) => {
         )}
         {entry.demoImages && entry.demoImages.length > 0 && (
           <div className="mt-5">
-            <div className="flex items-center gap-2 text-xs text-[#84EF12] mb-2">
+            <div className="flex items-center gap-2 text-xs text-[var(--color-green)] mb-2">
               <FiImage size={14} />
               <span>Screenshots</span>
             </div>

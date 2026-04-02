@@ -22,7 +22,7 @@ const {
 
 	return (
 		<h1 className={`text-2xl md:text-3xl lg:text-4xl font-normal ${className}`}>
-			({username}) <span className="text-[#4CF0E8]">-&gt;</span> <span className="text-[#84EF12]">~</span>{" "}
+			({username}) <span className="text-[var(--color-cyan)]">-&gt;</span> <span className="text-[var(--color-green)]">~</span>{" "}
 			<span className='md:hidden'><br/>  </span>
 			<Typewriter 
 				text={text} 

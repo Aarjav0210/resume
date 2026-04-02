@@ -7,7 +7,7 @@ import { MdOutlineFileDownload } from 'react-icons/md';
 import DarkVeil from "@/components/DarkVeil";
 import { type Persona, personaTypewriterText, personaOptions } from "@/app/types/Persona";
 
-export default function Landing({ persona, onResetPersona, onToggleMinimal }: { persona: Persona; onResetPersona: () => void; onToggleMinimal: () => void }) {
+export default function Landing({ persona, onResetPersona, onToggleMinimal, onToggleTheme, theme }: { persona: Persona; onResetPersona: () => void; onToggleMinimal: () => void; onToggleTheme: () => void; theme: "dark" | "light" }) {
   const personaLabel = personaOptions.find((p) => p.id === persona)?.label ?? persona;
   return (
     <>
@@ -29,14 +29,20 @@ export default function Landing({ persona, onResetPersona, onToggleMinimal }: { 
             className="font-mono text-xs text-white/30 hover:text-white/60 transition-colors duration-300 cursor-pointer group flex items-center gap-1.5"
           >
             <span>viewing as:</span>
-            <span className="text-[#4CF0E8]/50 group-hover:text-[#4CF0E8] transition-colors duration-300">{personaLabel}</span>
-            <span className="text-white/20 group-hover:text-[#84EF12] transition-colors duration-300">[switch]</span>
+            <span className="text-[var(--color-cyan)]/50 group-hover:text-[var(--color-cyan)] transition-colors duration-300">{personaLabel}</span>
+            <span className="text-white/20 group-hover:text-[var(--color-green)] transition-colors duration-300">[switch]</span>
           </button>
           <button
             onClick={onToggleMinimal}
             className="font-mono text-xs text-white/20 hover:text-white/60 transition-colors duration-300 cursor-pointer group"
           >
-            <span className="group-hover:text-[#84EF12]">[minimal]</span>
+            <span className="group-hover:text-[var(--color-green)]">[minimal]</span>
+          </button>
+          <button
+            onClick={onToggleTheme}
+            className="font-mono text-xs text-white/20 hover:text-white/60 transition-colors duration-300 cursor-pointer group"
+          >
+            <span className="group-hover:text-[var(--color-green)]">[{theme === "dark" ? "☀ light" : "🌙 dark"}]</span>
           </button>
           <Typewriter
             text={personaTypewriterText[persona]}
@@ -57,9 +63,9 @@ export default function Landing({ persona, onResetPersona, onToggleMinimal }: { 
               className="text-base font-mono cursor-pointer flex items-center gap-1 group"
               aria-label="Download CV"
             >
-              <MdOutlineFileDownload className="md:hidden text-[#4CF0E8] group-hover:text-[#84EF12] transition-colors duration-300 text-xl" />
-              <span className="hidden md:inline text-white group-hover:text-[#84EF12] transition-colors duration-300">download_cv </span>
-              <span className="hidden md:inline text-[#84EF12]">&lt;</span>
+              <MdOutlineFileDownload className="md:hidden text-[var(--color-cyan)] group-hover:text-[var(--color-green)] transition-colors duration-300 text-xl" />
+              <span className="hidden md:inline text-white group-hover:text-[var(--color-green)] transition-colors duration-300">download_cv </span>
+              <span className="hidden md:inline text-[var(--color-green)]">&lt;</span>
             </a>
           </div>
         </div>

@@ -78,11 +78,11 @@ export default function WorkExperienceView() {
               >
                 <div className={`absolute left-[11px] top-2.5 h-2.5 w-2.5 rounded-full shadow-[0_0_10px_rgba(76,240,232,0.6)] transition-transform ${
                   isCurrent
-                    ? "bg-[#84EF12] shadow-[0_0_12px_rgba(132,239,18,0.8)]"
-                    : "bg-[#4CF0E8] group-hover:scale-110"
+                    ? "bg-[var(--color-green)] shadow-[0_0_12px_rgba(132,239,18,0.8)]"
+                    : "bg-[var(--color-cyan)] group-hover:scale-110"
                 }`} />
                 <p className={`text-[10px] transition-colors ${
-                  isCurrent ? "text-[#84EF12]" : "text-[#84EF12] group-hover:text-[#4CF0E8]"
+                  isCurrent ? "text-[var(--color-green)]" : "text-[var(--color-green)] group-hover:text-[var(--color-cyan)]"
                 }`}>{entry.timePeriod}</p>
                 <p className={`text-xs transition-colors ${
                   isCurrent ? "text-white" : "text-white/90 group-hover:text-white"

@@ -29,10 +29,10 @@ const ContactView = () => {
             I&apos;d love to hear about it. Email is the easiest way to reach me.
           </p>
           <div className="flex flex-wrap gap-3 text-xs">
-            <span className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-[#4CF0E8] backdrop-blur-sm shadow-[0_0_20px_rgba(76,240,232,0.08)]">
+            <span className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-[var(--color-cyan)] backdrop-blur-sm shadow-[0_0_20px_var(--color-cyan-shadow,0.08)]">
               collaboration
             </span>
-            <span className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-[#84EF12] backdrop-blur-sm shadow-[0_0_20px_rgba(132,239,18,0.08)]">
+            <span className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-[var(--color-green)] backdrop-blur-sm shadow-[0_0_20px_rgba(132,239,18,0.08)]">
               research &amp; engineering
             </span>
             <span className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-white/80 backdrop-blur-sm shadow-[0_0_20px_rgba(255,255,255,0.06)]">
@@ -41,10 +41,10 @@ const ContactView = () => {
           </div>
         </div>
 
-        <div className="relative overflow-hidden rounded-[24px] border border-white/10 bg-white/[0.04] backdrop-blur-xl shadow-[0_0_40px_rgba(76,240,232,0.08)] p-8">
+        <div className="relative overflow-hidden rounded-[24px] border border-white/10 bg-white/[0.04] backdrop-blur-xl shadow-[0_0_40px_var(--color-cyan-shadow,0.08)] p-8">
           <div className="pointer-events-none absolute inset-0">
-            <div className="absolute -top-20 -right-16 h-40 w-40 rounded-full bg-[#4CF0E8]/10 blur-2xl" />
-            <div className="absolute -bottom-20 -left-16 h-40 w-40 rounded-full bg-[#84EF12]/10 blur-2xl" />
+            <div className="absolute -top-20 -right-16 h-40 w-40 rounded-full bg-[var(--color-cyan)]/10 blur-2xl" />
+            <div className="absolute -bottom-20 -left-16 h-40 w-40 rounded-full bg-[var(--color-green)]/10 blur-2xl" />
             <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] opacity-60" />
           </div>
           <div className="relative z-10 space-y-4">
@@ -59,14 +59,14 @@ const ContactView = () => {
                 className="group flex items-center gap-4 rounded-xl border border-white/10 bg-white/[0.04] px-5 py-4 transition duration-300 hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/[0.07]"
                 aria-label="Email Aarjav Jain"
               >
-                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#4CF0E8]/15 text-[#4CF0E8]">
+                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-cyan)]/15 text-[var(--color-cyan)]">
                   <FaEnvelope className="text-lg" />
                 </span>
                 <span className="min-w-0">
                   <span className="block text-xs text-gray-400">Email</span>
                   <span className="block text-base text-white truncate">{email}</span>
                 </span>
-                <span className="ml-auto text-xs text-[#84EF12]">open</span>
+                <span className="ml-auto text-xs text-[var(--color-green)]">open</span>
               </a>
 
               <a
@@ -83,7 +83,7 @@ const ContactView = () => {
                   <span className="block text-xs text-gray-400">LinkedIn</span>
                   <span className="block text-base text-white truncate">linkedin.com/in/aarjav-jain</span>
                 </span>
-                <span className="ml-auto text-xs text-[#84EF12]">connect</span>
+                <span className="ml-auto text-xs text-[var(--color-green)]">connect</span>
               </a>
 
               <a
@@ -99,7 +99,7 @@ const ContactView = () => {
                   <span className="block text-xs text-gray-400">Resume</span>
                   <span className="block text-base text-white truncate">Download CV</span>
                 </span>
-                <span className="ml-auto text-xs text-[#84EF12]">download</span>
+                <span className="ml-auto text-xs text-[var(--color-green)]">download</span>
               </a>
             </div>
           </div>

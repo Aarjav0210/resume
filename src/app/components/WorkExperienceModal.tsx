@@ -47,8 +47,8 @@ const WorkExperienceModal: React.FC<WorkExperienceModalProps> = ({ entry, onClos
       >
         {/* Header */}
         <div className="flex flex-col items-start gap-1 mb-4">
-          <h2 className="text-3xl text-[#4CF0E8]">{entry.company}</h2>
-          <p className="text-base text-[#84EF12]">
+          <h2 className="text-3xl text-[var(--color-cyan)]">{entry.company}</h2>
+          <p className="text-base text-[var(--color-green)]">
             {entry.timePeriod} | {entry.role}
           </p>
         </div>
@@ -59,7 +59,7 @@ const WorkExperienceModal: React.FC<WorkExperienceModalProps> = ({ entry, onClos
           <div className="prose prose-invert text-sm whitespace-pre-wrap">
             {entry.description.map((part, idx) =>
               part.type === 'keyword' ? (
-                <span key={idx} className="text-[#84EF12]">
+                <span key={idx} className="text-[var(--color-green)]">
                   {part.content}
                 </span>
               ) : (

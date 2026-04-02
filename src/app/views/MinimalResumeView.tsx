@@ -93,7 +93,7 @@ function renderWithKeywords(text: string, allParts: Description[]) {
 
   return segments.map((seg, i) =>
     keywords.includes(seg) ? (
-      <span key={i} className="text-[#4CF0E8]">
+      <span key={i} className="text-[var(--color-cyan)]">
         {seg}
       </span>
     ) : (
@@ -121,10 +121,10 @@ function SkillTags({ skills }: { skills?: Skill[] }) {
 
 function SectionHeading({ text, id }: { text: string; id: string }) {
   return (
-    <h2 id={id} className="font-mono text-lg text-white mb-6 scroll-mt-12">
-      <span className="text-white/50">(aarjav_jain)</span>{" "}
-      <span className="text-[#4CF0E8]">-&gt;</span>{" "}
-      <span className="text-[#84EF12]">~</span> {text}
+    <h2 id={id} className="font-mono text-lg theme-fg mb-6 scroll-mt-12">
+      <span className="opacity-50">(aarjav_jain)</span>{" "}
+      <span style={{ color: "var(--color-cyan)" }}>-&gt;</span>{" "}
+      <span style={{ color: "var(--color-green)" }}>~</span> {text}
     </h2>
   );
 }
@@ -243,11 +243,11 @@ function MinimalSidebar({
               onClick={() => handleClick(s.id)}
               className={`block w-full text-left font-mono text-xs py-1.5 transition-all duration-200 cursor-pointer ${
                 isActive
-                  ? "text-[#4CF0E8] translate-x-1"
+                  ? "text-[var(--color-cyan)] translate-x-1"
                   : "text-white/25 hover:text-white/50"
               }`}
             >
-              {isActive && <span className="text-[#84EF12] mr-1">&gt;</span>}
+              {isActive && <span className="text-[var(--color-green)] mr-1">&gt;</span>}
               {s.label}
             </button>
           );
@@ -263,9 +263,11 @@ interface MinimalResumeViewProps {
   persona: Persona;
   onToggleMinimal: () => void;
   onResetPersona: () => void;
+  theme: "dark" | "light";
+  onToggleTheme: () => void;
 }
 
-export default function MinimalResumeView({ persona, onToggleMinimal, onResetPersona }: MinimalResumeViewProps) {
+export default function MinimalResumeView({ persona, onToggleMinimal, onResetPersona, theme, onToggleTheme }: MinimalResumeViewProps) {
   const [workEntries, setWorkEntries] = useState<WorkEntry[]>([]);
   const [researchEntries, setResearchEntries] = useState<ResearchEntry[]>([]);
   const [projectEntries, setProjectEntries] = useState<ProjectEntry[]>([]);
@@ -323,7 +325,7 @@ export default function MinimalResumeView({ persona, onToggleMinimal, onResetPer
                 <div key={entry.id} className="border-l border-white/10 pl-5">
                   <div className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
                     <h3 className="text-sm font-semibold text-white">{entry.company}</h3>
-                    <span className="text-xs text-[#84EF12]">{entry.role}</span>
+                    <span className="text-xs text-[var(--color-green)]">{entry.role}</span>
                   </div>
                   <p className="text-xs text-gray-500 mt-0.5">{entry.timePeriod}</p>
                   {entry.description.length > 0 && (
@@ -347,7 +349,7 @@ export default function MinimalResumeView({ persona, onToggleMinimal, onResetPer
                 <div key={entry.id} className="border-l border-white/10 pl-5">
                   <div className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
                     <h3 className="text-sm font-semibold text-white">{entry.lab}</h3>
-                    <span className="text-xs text-[#84EF12]">{entry.role}</span>
+                    <span className="text-xs text-[var(--color-green)]">{entry.role}</span>
                   </div>
                   <p className="text-xs text-gray-500 mt-0.5">
                     {entry.timePeriod} &middot; {entry.location}
@@ -407,7 +409,7 @@ export default function MinimalResumeView({ persona, onToggleMinimal, onResetPer
                     {entry.demoVideo && (
                       <button
                         onClick={() => setDemo({ type: "video", url: entry.demoVideo!, title: entry.title, onClose: () => setDemo(null) })}
-                        className="text-[10px] font-mono text-[#84EF12]/70 hover:text-[#84EF12] transition-colors cursor-pointer"
+                        className="text-[10px] font-mono text-[var(--color-green)]/70 hover:text-[var(--color-green)] transition-colors cursor-pointer"
                       >
                         [watch demo]
                       </button>
@@ -415,7 +417,7 @@ export default function MinimalResumeView({ persona, onToggleMinimal, onResetPer
                     {entry.demoImages && entry.demoImages.length > 0 && !entry.demoVideo && (
                       <button
                         onClick={() => setDemo({ type: "images", urls: entry.demoImages!, title: entry.title, onClose: () => setDemo(null) })}
-                        className="text-[10px] font-mono text-[#84EF12]/70 hover:text-[#84EF12] transition-colors cursor-pointer"
+                        className="text-[10px] font-mono text-[var(--color-green)]/70 hover:text-[var(--color-green)] transition-colors cursor-pointer"
                       >
                         [view demo]
                       </button>
@@ -438,18 +440,18 @@ export default function MinimalResumeView({ persona, onToggleMinimal, onResetPer
           <div key="contact" id="minimal-contact">
             <SectionHeading text="cat contact" id="minimal-contact-heading" />
             <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
-              <a href="mailto:aarjav02@gmail.com" className="text-[#4CF0E8] hover:underline">
+              <a href="mailto:aarjav02@gmail.com" className="text-[var(--color-cyan)] hover:underline">
                 aarjav02@gmail.com
               </a>
               <a
                 href="https://www.linkedin.com/in/aarjav-jain/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#4CF0E8] hover:underline"
+                className="text-[var(--color-cyan)] hover:underline"
               >
                 linkedin.com/in/aarjav-jain
               </a>
-              <a href="/assets/Aarjav_Jain_CV.pdf" download className="text-[#84EF12] hover:underline">
+              <a href="/assets/Aarjav_Jain_CV.pdf" download className="text-[var(--color-green)] hover:underline">
                 download_cv
               </a>
             </div>
@@ -461,7 +463,7 @@ export default function MinimalResumeView({ persona, onToggleMinimal, onResetPer
   }
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-[#0a0a0a] text-white font-[family-name:var(--font-geist-sans)]">
+    <div ref={containerRef} className="min-h-screen theme-bg theme-fg font-[family-name:var(--font-geist-sans)]">
       <MinimalSidebar sections={sidebarSections} activeSection={activeSection} />
 
       <div className="max-w-4xl mx-auto px-8 py-16 lg:ml-48">
@@ -471,18 +473,21 @@ export default function MinimalResumeView({ persona, onToggleMinimal, onResetPer
             <div>
               <h1 className="font-mono text-2xl md:text-3xl text-white mb-4">
                 <span className="text-white/50">(aarjav_jain)</span>{" "}
-                <span className="text-[#4CF0E8]">-&gt;</span>{" "}
-                <span className="text-[#84EF12]">~</span> whoami
+                <span className="text-[var(--color-cyan)]">-&gt;</span>{" "}
+                <span className="text-[var(--color-green)]">~</span> whoami
               </h1>
 
               <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mb-2 font-mono text-xs text-white/40">
                 <button onClick={onResetPersona} className="hover:text-white/70 transition-colors cursor-pointer group">
                   <span>viewing as: </span>
-                  <span className="text-[#4CF0E8]/60 group-hover:text-[#4CF0E8]">{personaLabel}</span>
-                  <span className="text-white/20 group-hover:text-[#84EF12]"> [switch]</span>
+                  <span className="text-[var(--color-cyan)]/60 group-hover:text-[var(--color-cyan)]">{personaLabel}</span>
+                  <span className="text-white/20 group-hover:text-[var(--color-green)]"> [switch]</span>
                 </button>
                 <button onClick={onToggleMinimal} className="hover:text-white/70 transition-colors cursor-pointer group">
-                  <span className="text-white/20 group-hover:text-[#84EF12]">[animated]</span>
+                  <span className="text-white/20 group-hover:text-[var(--color-green)]">[animated]</span>
+                </button>
+                <button onClick={onToggleTheme} className="hover:text-white/70 transition-colors cursor-pointer group">
+                  <span className="text-white/20 group-hover:text-[var(--color-green)]">[{theme === "dark" ? "☀ light" : "🌙 dark"}]</span>
                 </button>
               </div>
 

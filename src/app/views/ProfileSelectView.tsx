@@ -7,9 +7,11 @@ import { personaOptions, type Persona } from "@/app/types/Persona";
 interface ProfileSelectViewProps {
   onSelect: (persona: Persona, minimal: boolean) => void;
   isTransitioning: boolean;
+  theme: "dark" | "light";
+  onToggleTheme: () => void;
 }
 
-export default function ProfileSelectView({ onSelect, isTransitioning }: ProfileSelectViewProps) {
+export default function ProfileSelectView({ onSelect, isTransitioning, theme, onToggleTheme }: ProfileSelectViewProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number>(-1);
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
   const [minimal, setMinimal] = useState(false);
@@ -51,7 +53,7 @@ export default function ProfileSelectView({ onSelect, isTransitioning }: Profile
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex items-center justify-center bg-black transition-opacity duration-500 ${
+      className={`fixed inset-0 z-50 flex items-center justify-center theme-bg transition-opacity duration-500 ${
         isTransitioning ? "opacity-0" : "opacity-100"
       }`}
     >
@@ -99,10 +101,10 @@ export default function ProfileSelectView({ onSelect, isTransitioning }: Profile
                 transition-all duration-300
                 ${
                   selectedIndex === i
-                    ? "border-[#84EF12] bg-[#84EF12]/10 scale-[1.02] shadow-[0_0_24px_rgba(132,239,18,0.15)]"
+                    ? "border-[var(--color-green)] bg-[var(--color-green)]/10 scale-[1.02] shadow-[0_0_24px_var(--color-green-shadow,0.15)]"
                     : selectedIndex !== -1
                       ? "border-white/5 bg-white/[0.02] opacity-30 scale-[0.98]"
-                      : "border-white/10 bg-white/[0.04] hover:border-[#4CF0E8]/40 hover:bg-[#4CF0E8]/[0.06] hover:-translate-y-1 hover:scale-[1.015] hover:shadow-[0_0_20px_rgba(76,240,232,0.12),0_4px_16px_rgba(0,0,0,0.3)]"
+                      : "border-white/10 bg-white/[0.04] hover:border-[var(--color-cyan)]/40 hover:bg-[var(--color-cyan)]/[0.06] hover:-translate-y-1 hover:scale-[1.015] hover:shadow-[0_0_20px_var(--color-cyan-shadow,0.12),0_4px_16px_rgba(0,0,0,0.3)]"
                 }
                 ${showContent ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"}
               `}
@@ -113,9 +115,9 @@ export default function ProfileSelectView({ onSelect, isTransitioning }: Profile
               <span
                 className={`text-xs transition-colors duration-300 ${
                   selectedIndex === i
-                    ? "text-[#84EF12]"
+                    ? "text-[var(--color-green)]"
                     : hoveredIndex === i
-                      ? "text-[#4CF0E8]"
+                      ? "text-[var(--color-cyan)]"
                       : "text-white/40"
                 }`}
               >
@@ -125,9 +127,9 @@ export default function ProfileSelectView({ onSelect, isTransitioning }: Profile
               <p
                 className={`text-base mt-1 transition-colors duration-300 ${
                   selectedIndex === i
-                    ? "text-[#84EF12]"
+                    ? "text-[var(--color-green)]"
                     : hoveredIndex === i
-                      ? "text-[#4CF0E8]"
+                      ? "text-[var(--color-cyan)]"
                       : "text-white"
                 }`}
               >
@@ -137,7 +139,7 @@ export default function ProfileSelectView({ onSelect, isTransitioning }: Profile
               <p className="text-xs text-gray-500 mt-0.5">{option.description}</p>
 
               {selectedIndex === i && (
-                <span className="absolute top-3 right-4 text-[#84EF12] text-xs animate-pulse">
+                <span className="absolute top-3 right-4 text-[var(--color-green)] text-xs animate-pulse">
                   ✓
                 </span>
               )}
@@ -158,7 +160,7 @@ export default function ProfileSelectView({ onSelect, isTransitioning }: Profile
             disabled={selectedIndex !== -1}
             className={`px-3 py-1.5 rounded border text-xs cursor-pointer transition-all duration-200 ${
               !minimal
-                ? "border-[#4CF0E8]/40 bg-[#4CF0E8]/10 text-[#4CF0E8]"
+                ? "border-[var(--color-cyan)]/40 bg-[var(--color-cyan)]/10 text-[var(--color-cyan)]"
                 : "border-white/10 bg-white/[0.03] text-white/40 hover:text-white/70 hover:border-white/20"
             }`}
           >
@@ -169,13 +171,30 @@ export default function ProfileSelectView({ onSelect, isTransitioning }: Profile
             disabled={selectedIndex !== -1}
             className={`px-3 py-1.5 rounded border text-xs cursor-pointer transition-all duration-200 ${
               minimal
-                ? "border-[#4CF0E8]/40 bg-[#4CF0E8]/10 text-[#4CF0E8]"
+                ? "border-[var(--color-cyan)]/40 bg-[var(--color-cyan)]/10 text-[var(--color-cyan)]"
                 : "border-white/10 bg-white/[0.03] text-white/40 hover:text-white/70 hover:border-white/20"
             }`}
           >
             minimal
           </button>
           <span className="text-gray-600 text-[10px] hidden sm:inline ml-1">press [m] to toggle</span>
+        </div>
+
+        {/* Theme toggle */}
+        <div
+          className={`mt-4 flex items-center gap-3 font-mono text-sm transition-all duration-500 ${
+            showContent ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
+          }`}
+          style={{ transitionDelay: showContent ? "360ms" : "0ms" }}
+        >
+          <span className="text-gray-500 text-xs">theme:</span>
+          <button
+            onClick={() => onToggleTheme()}
+            disabled={selectedIndex !== -1}
+            className="px-3 py-1.5 rounded border text-xs cursor-pointer transition-all duration-200 border-white/10 bg-white/[0.03] text-white/40 hover:text-white/70 hover:border-white/20"
+          >
+            {theme === "dark" ? "☀ light" : "🌙 dark"}
+          </button>
         </div>
 
         {/* Terminal prompt */}
@@ -186,7 +205,7 @@ export default function ProfileSelectView({ onSelect, isTransitioning }: Profile
           style={{ transitionDelay: showContent ? "400ms" : "0ms" }}
         >
           <span className="text-white/50">&gt; </span>
-          <span className="text-[#84EF12]">{inputText}</span>
+          <span className="text-[var(--color-green)]">{inputText}</span>
           <span className="animate-pulse text-white/60">▋</span>
         </div>
       </div>

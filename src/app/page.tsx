@@ -18,11 +18,13 @@ import {
 
 const STORAGE_KEY = "resume_persona";
 const NOBS_KEY = "resume_nobs";
+const THEME_KEY = "resume_theme";
 
 export default function Home() {
   const [currentSection, setCurrentSection] = useState("landing");
   const [persona, setPersona] = useState<Persona | null>(null);
   const [noBs, setNoBs] = useState(false);
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [isReady, setIsReady] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -30,12 +32,19 @@ export default function Home() {
   useEffect(() => {
     const storedPersona = localStorage.getItem(STORAGE_KEY);
     const storedNoBs = localStorage.getItem(NOBS_KEY);
+    const storedTheme = localStorage.getItem(THEME_KEY);
+    
     if (storedPersona && isValidPersona(storedPersona)) {
       setPersona(storedPersona as Persona);
     }
     if (storedNoBs === "true") {
       setNoBs(true);
     }
+    if (storedTheme === "light" || storedTheme === "dark") {
+      setTheme(storedTheme);
+      document.documentElement.classList.toggle("light", storedTheme === "light");
+    }
+    
     requestAnimationFrame(() => setIsReady(true));
   }, []);
 
@@ -123,6 +132,13 @@ export default function Home() {
     setNoBs(next);
   }, [noBs]);
 
+  const handleToggleTheme = useCallback(() => {
+    const next = theme === "dark" ? "light" : "dark";
+    localStorage.setItem(THEME_KEY, next);
+    setTheme(next);
+    document.documentElement.classList.toggle("light", next === "light");
+  }, [theme]);
+
   const handleResetPersona = useCallback(() => {
     localStorage.removeItem(STORAGE_KEY);
     localStorage.removeItem(NOBS_KEY);
@@ -134,7 +150,7 @@ export default function Home() {
   function renderSection(id: string) {
     switch (id) {
       case "landing":
-        return <Landing key="landing" persona={persona || "general"} onResetPersona={handleResetPersona} onToggleMinimal={handleToggleMinimal} />;
+        return <Landing key="landing" persona={persona || "general"} onResetPersona={handleResetPersona} onToggleMinimal={handleToggleMinimal} onToggleTheme={handleToggleTheme} theme={theme} />;
       case "work-experience":
         return <WorkExperienceView key="work-experience" />;
       case "research":
@@ -155,7 +171,7 @@ export default function Home() {
   return (
     <>
       <div
-        className={`fixed inset-0 z-[200] bg-[#0a0a0a] pointer-events-none transition-opacity duration-500 ${
+        className={`fixed inset-0 z-[200] theme-bg pointer-events-none transition-opacity duration-500 ${
           isReady ? "opacity-0" : "opacity-100"
         }`}
       />
@@ -164,12 +180,16 @@ export default function Home() {
         <ProfileSelectView
           onSelect={handlePersonaSelect}
           isTransitioning={isTransitioning}
+          theme={theme}
+          onToggleTheme={handleToggleTheme}
         />
       ) : noBs ? (
         <MinimalResumeView
           persona={persona || "general"}
           onToggleMinimal={handleToggleMinimal}
           onResetPersona={handleResetPersona}
+          theme={theme}
+          onToggleTheme={handleToggleTheme}
         />
       ) : (
         <div
@@ -184,6 +204,8 @@ export default function Home() {
             onToggleMinimal={handleToggleMinimal}
             noBs={noBs}
             onClose={() => {}}
+            theme={theme}
+            onToggleTheme={handleToggleTheme}
           />
           {sectionOrder.map((id) => renderSection(id))}
         </div>

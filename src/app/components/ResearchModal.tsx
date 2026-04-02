@@ -47,8 +47,8 @@ const ResearchModal: React.FC<ResearchModalProps> = ({ entry, onClose }) => {
       >
         {/* Header */}
         <div className="flex flex-col items-start gap-1 mb-4">
-          <h2 className="text-3xl text-[#4CF0E8]">{entry.lab}</h2>
-          <p className="text-base text-[#84EF12]">
+          <h2 className="text-3xl text-[var(--color-cyan)]">{entry.lab}</h2>
+          <p className="text-base text-[var(--color-green)]">
             {entry.timePeriod} | {entry.role}
           </p>
           <p className="text-sm text-gray-400">{entry.location}</p>
@@ -60,7 +60,7 @@ const ResearchModal: React.FC<ResearchModalProps> = ({ entry, onClose }) => {
           <div className="prose prose-invert text-sm whitespace-pre-wrap">
             {entry.description.map((part, idx) =>
               part.type === 'keyword' ? (
-                <span key={idx} className="text-[#84EF12]">
+                <span key={idx} className="text-[var(--color-green)]">
                   {part.content}
                 </span>
               ) : (

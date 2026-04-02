@@ -32,17 +32,17 @@ const WorkExperienceCard: React.FC<WorkExperienceCardProps> = ({
       className={`
         group relative flex flex-col overflow-hidden rounded-[20px] py-5 px-6
         w-full cursor-pointer border border-white/10 bg-white/[0.04]
-        backdrop-blur-xl shadow-[0_0_40px_rgba(76,240,232,0.08)] transition duration-300
-        ${disabled ? 'opacity-50 pointer-events-none' : 'hover:-translate-y-1 hover:rotate-[0.6deg] hover:border-white/20 hover:shadow-[0_0_60px_rgba(76,240,232,0.18)]'}
+        backdrop-blur-xl shadow-[0_0_40px_var(--color-cyan-shadow,0.08)] transition duration-300
+        ${disabled ? 'opacity-50 pointer-events-none' : 'hover:-translate-y-1 hover:rotate-[0.6deg] hover:border-white/20 hover:shadow-[0_0_60px_var(--color-cyan-shadow,0.18)]'}
       `}
     >
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-24 -right-24 h-48 w-48 rounded-full bg-[#4CF0E8]/10 blur-2xl transition duration-500 group-hover:bg-[#4CF0E8]/20" />
-        <div className="absolute -bottom-24 -left-24 h-48 w-48 rounded-full bg-[#84EF12]/10 blur-2xl transition duration-500 group-hover:bg-[#84EF12]/20" />
+        <div className="absolute -top-24 -right-24 h-48 w-48 rounded-full bg-[var(--color-cyan)]/10 blur-2xl transition duration-500 group-hover:bg-[var(--color-cyan)]/20" />
+        <div className="absolute -bottom-24 -left-24 h-48 w-48 rounded-full bg-[var(--color-green)]/10 blur-2xl transition duration-500 group-hover:bg-[var(--color-green)]/20" />
         <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] opacity-60" />
       </div>
-      <h2 className="text-lg text-[#4CF0E8]">{company}</h2>
-      <h3 className="text-xs text-[#84EF12] mt-1">
+      <h2 className="text-lg text-[var(--color-cyan)]">{company}</h2>
+      <h3 className="text-xs text-[var(--color-green)] mt-1">
         {timePeriod} | {role}
       </h3>
 

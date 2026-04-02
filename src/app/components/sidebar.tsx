@@ -12,9 +12,11 @@ interface SidebarProps {
     onResetPersona: () => void;
     onToggleMinimal: () => void;
     noBs: boolean;
+    theme: "dark" | "light";
+    onToggleTheme: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ onClose, currentSection, setCurrentSection, sections, onResetPersona, onToggleMinimal, noBs }) => {
+const Sidebar: React.FC<SidebarProps> = ({ onClose, currentSection, setCurrentSection, sections, onResetPersona, onToggleMinimal, noBs, theme, onToggleTheme }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleSidebar = () => {
@@ -52,8 +54,8 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose, currentSection, setCurrentSe
                 style={{ position: 'absolute', top: '70px', right: '50px' }}
             >
                 <div className='text-base flex items-center gap-1'>
-                    <span className='hidden md:inline text-white group-hover:text-[#84EF12] transition-colors duration-300'>navigate </span>
-                    <span className={`text-[#84EF12] rotate-icon ${isOpen ? 'open' : ''}`}>&lt;</span>
+                    <span className='hidden md:inline text-white group-hover:text-[var(--color-green)] transition-colors duration-300'>navigate </span>
+                    <span className={`text-[var(--color-green)] rotate-icon ${isOpen ? 'open' : ''}`}>&lt;</span>
                 </div>
             </button>
             {isOpen && <div className={`mask ${isOpen ? 'show' : ''}`} onClick={toggleSidebar} />}
@@ -72,20 +74,26 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose, currentSection, setCurrentSe
                         onClick={() => { setIsOpen(false); onToggleMinimal(); }}
                         className="sidebar-download-link text-xs cursor-pointer opacity-60 hover:opacity-100 transition-opacity duration-300"
                     >
-                        {noBs ? "animated" : "minimal"} <span className="text-[#84EF12]">&lt;</span>
+                        {noBs ? "animated" : "minimal"} <span className="text-[var(--color-green)]">&lt;</span>
+                    </button>
+                    <button
+                        onClick={() => { setIsOpen(false); onToggleTheme(); }}
+                        className="sidebar-download-link text-xs cursor-pointer opacity-60 hover:opacity-100 transition-opacity duration-300"
+                    >
+                        {theme === "dark" ? "☀ light" : "🌙 dark"} <span className="text-[var(--color-green)]">&lt;</span>
                     </button>
                     <button
                         onClick={handleSwitchProfile}
                         className="sidebar-download-link text-xs cursor-pointer opacity-60 hover:opacity-100 transition-opacity duration-300"
                     >
-                        switch_profile <span className="text-[#84EF12]">&lt;</span>
+                        switch_profile <span className="text-[var(--color-green)]">&lt;</span>
                     </button>
                     <a 
                         href="/assets/Aarjav_Jain_CV.pdf" 
                         download
                         className="sidebar-download-link text-base cursor-pointer"
                     >
-                        download_cv <span className="sidebar-download-chevron text-[#84EF12]">&lt;</span>
+                        download_cv <span className="sidebar-download-chevron text-[var(--color-green)]">&lt;</span>
                     </a>
                 </div>
             </div>
