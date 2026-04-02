@@ -16,6 +16,13 @@
     box-shadow: -4px 0 24px rgba(0, 0, 0, 0.4);
 }
 
+/* Light mode sidebar */
+.light .sidebar {
+    background: rgba(250, 250, 248, 0.95);
+    border-left: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
+}
+
 /* Thin accent edge — color only, no glow */
 .sidebar::before {
     content: '';
@@ -30,6 +37,18 @@
         rgba(76, 240, 232, 0.35) 20%,
         rgba(132, 239, 18, 0.35) 50%,
         rgba(76, 240, 232, 0.35) 80%,
+        transparent 100%
+    );
+}
+
+/* Light mode accent edge - using orange and sky blue */
+.light .sidebar::before {
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(135, 206, 235, 0.5) 20%,
+        rgba(255, 140, 0, 0.5) 50%,
+        rgba(135, 206, 235, 0.5) 80%,
         transparent 100%
     );
 }
@@ -79,6 +98,11 @@
     opacity: 1;
 }
 
+/* Light mode mask */
+.light .mask {
+    background: rgba(0, 0, 0, 0.3);
+}
+
 .profile-photo img {
     width: 60px;
     height: 60px;
@@ -117,6 +141,11 @@
     border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
+/* Light mode profile photo frame */
+.light .profile-photo-frame {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
 .circular-photo {
     width: 100%;
     height: 100%;
@@ -138,6 +167,11 @@
     background: rgba(255, 255, 255, 0.06);
 }
 
+/* Light mode nav separator */
+.light .sidebar .sidebar-nav-glow::before {
+    background: rgba(0, 0, 0, 0.1);
+}
+
 .sidebar-download-link {
     color: rgba(255, 255, 255, 0.85);
     transition: color 0.25s ease;
@@ -145,6 +179,15 @@
 
 .sidebar-download-link:hover {
     color: #4CF0E8;
+}
+
+/* Light mode sidebar links */
+.light .sidebar-download-link {
+    color: rgba(26, 26, 26, 0.85);
+}
+
+.light .sidebar-download-link:hover {
+    color: #ff8c00;
 }
 
 /* Sidebar nav link hover — background to right edge of sidebar */
@@ -178,4 +221,26 @@
 
 .sidebar .sidebar-nav-glow button:hover::before {
     opacity: 1;
+}
+
+/* Light mode sidebar nav buttons */
+.light .sidebar .sidebar-nav-glow button::before {
+    background: rgba(135, 206, 235, 0.6);
+}
+
+.light .sidebar .sidebar-nav-glow button:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+/* Light mode sidebar nav link colors - override the CSS variables for better contrast */
+.light .sidebar .sidebar-nav-glow button span {
+    color: rgba(26, 26, 26, 0.85) !important;
+}
+
+.light .sidebar .sidebar-nav-glow button:hover span {
+    color: #ff6b35 !important;
+}
+
+.light .sidebar .sidebar-nav-glow button span:last-child {
+    color: #ff6b35 !important;
 }

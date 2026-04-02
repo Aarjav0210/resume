@@ -24,26 +24,28 @@ export default function Landing({ persona, onResetPersona, onToggleMinimal, onTo
         </div>
         <div className="flex flex-col row-start-2 gap-[32px] items-start justify-center p-8 sm:p-20 w-full relative z-10">
           <TerminalHeader username="aarjav_jain" text="whoami" className="text-4xl md:text-5xl lg:text-6xl"/>
-          <button
-            onClick={onResetPersona}
-            className="font-mono text-xs text-white/30 hover:text-white/60 transition-colors duration-300 cursor-pointer group flex items-center gap-1.5"
-          >
-            <span>viewing as:</span>
-            <span className="text-[var(--color-cyan)]/50 group-hover:text-[var(--color-cyan)] transition-colors duration-300">{personaLabel}</span>
-            <span className="text-white/20 group-hover:text-[var(--color-green)] transition-colors duration-300">[switch]</span>
-          </button>
-          <button
-            onClick={onToggleMinimal}
-            className="font-mono text-xs text-white/20 hover:text-white/60 transition-colors duration-300 cursor-pointer group"
-          >
-            <span className="group-hover:text-[var(--color-green)]">[minimal]</span>
-          </button>
-          <button
-            onClick={onToggleTheme}
-            className="font-mono text-xs text-white/20 hover:text-white/60 transition-colors duration-300 cursor-pointer group"
-          >
-            <span className="group-hover:text-[var(--color-green)]">[{theme === "dark" ? "☀ light" : "🌙 dark"}]</span>
-          </button>
+          <div className="flex items-center gap-4 flex-wrap">
+            <button
+              onClick={onResetPersona}
+              className="font-mono text-xs text-white/30 hover:text-white/60 transition-colors duration-300 cursor-pointer group flex items-center gap-1.5"
+            >
+              <span>viewing as:</span>
+              <span className="text-[var(--color-cyan)]/50 group-hover:text-[var(--color-cyan)] transition-colors duration-300">{personaLabel}</span>
+              <span className="text-white/20 group-hover:text-[var(--color-green)] transition-colors duration-300">[switch]</span>
+            </button>
+            <button
+              onClick={onToggleMinimal}
+              className="font-mono text-xs text-white/20 hover:text-white/60 transition-colors duration-300 cursor-pointer group"
+            >
+              <span className="group-hover:text-[var(--color-green)]">[minimal]</span>
+            </button>
+            <button
+              onClick={onToggleTheme}
+              className="font-mono text-xs text-white/20 hover:text-white/60 transition-colors duration-300 cursor-pointer group"
+            >
+              <span className="group-hover:text-[var(--color-green)]">[{theme === "dark" ? "☀ light" : "🌙 dark"}]</span>
+            </button>
+          </div>
           <Typewriter
             text={personaTypewriterText[persona]}
             speed={50}
