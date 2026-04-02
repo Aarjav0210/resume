@@ -11,12 +11,13 @@ entries:
       - python
       - ESMFold
       - Foldseek
-      - LLMs
+      - LLM
       - biosecurity
       - protein structure
 
   - id: 0
     title: "ShardCompute - Distributed Inference Network"
+    demoVideo: "/demos/shardcompute.mp4"
     description: |
       Built a **distributed model-sharding inference system** using **MLX** to run large models across heterogeneous **M1 MacBooks** beyond single-machine memory limits.
       
@@ -40,7 +41,7 @@ entries:
       - python
       - computer vision
       - VLMs
-      - LLMs
+      - LLM
       - VLA
       - change-point detection
 
@@ -53,7 +54,7 @@ entries:
     skills:
       - python
       - neo4j
-      - LLMs
+      - LLM
       - RAG
       - knowledge graphs
       - entity extraction
@@ -77,6 +78,7 @@ entries:
 
   - id: 4
     title: "Bike-Share Navigation System"
+    demoVideo: "/demos/Bike-share.mp4"
     description: |
       Led a team of **10** to build a **Flutter (Dart)** app integrating the **Santander Cycle API** and **Firebase**, implementing **route-optimization** to recommend the most cost-efficient journeys across London's bike-share network.
     skills:
@@ -114,6 +116,11 @@ entries:
 
   - id: 8
     title: "CuraVue - Breast Cancer Detection"
+    demoImages:
+      - /demos/curavue/curavue-1.jpg
+      - /demos/curavue/curavue-2.jpg
+      - /demos/curavue/curavue-3.jpg
+      - /demos/curavue/curavue-4.jpg
     description: |
       Won 1st place at **MLH AIHacks4Good** for a mammogram diagnostic tool.
       Automated **tumour-severity analysis** using a KNN-based pipeline in Python and Flask.

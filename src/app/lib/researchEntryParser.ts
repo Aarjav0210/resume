@@ -2,13 +2,16 @@
 import matter from 'gray-matter';
 import type { ResearchEntry } from '@/app/types/ResearchEntry';
 import type Description from '@/app/types/Description';
+import type Skill from '@/app/types/Skill';
+import { resolveSkill } from '@/app/lib/skillRegistry';
 
 interface FrontMatter<T> {
   entries: T[]
 }
 
-type RawResearchEntry = Omit<ResearchEntry, 'description'> & {
+type RawResearchEntry = Omit<ResearchEntry, 'description' | 'skills'> & {
   description: string
+  skills?: (string | Skill)[]
 }
 
 const BOLD_REGEX = /\*\*(.*?)\*\*/g;
@@ -54,7 +57,9 @@ export function parseResearchEntries(rawMd: string): ResearchEntry[] {
     location: e.location,
     timePeriod: e.timePeriod,
     role: e.role,
-    skills: Array.isArray(e.skills) ? e.skills : [],
+    skills: Array.isArray(e.skills)
+      ? e.skills.map((s) => (typeof s === 'string' ? resolveSkill(s) : s))
+      : [],
     description: parseDescription(e.description as string),
   }))
 }

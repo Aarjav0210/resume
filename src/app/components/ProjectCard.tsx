@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiPlayCircle } from 'react-icons/fi';
+import { FiPlayCircle, FiImage } from 'react-icons/fi';
 import SkillIcon from '@/app/components/SkillIcon';
 import type { ProjectEntry } from '@/app/types/ProjectEntry';
 import Skill from '../types/Skill';
@@ -16,7 +16,7 @@ function toTitleCase(str: string) {
 };
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
-  id, title, description, skills = [], demoVideo, disabled = false, onSelect,
+  id, title, description, skills = [], demoVideo, demoImages, disabled = false, onSelect,
 }) => (
   <div
     onClick={() => !disabled && onSelect(id)}
@@ -34,9 +34,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     </div>
     <div className="flex items-start justify-between gap-2">
       <h3 className="text-xl text-[#4CF0E8] mb-2">{title}</h3>
-      {demoVideo && (
-        <span className="shrink-0 mt-1 text-[#84EF12] opacity-70 group-hover:opacity-100 transition-opacity" title="Demo video available">
-          <FiPlayCircle size={20} />
+      {(demoVideo || demoImages) && (
+        <span className="shrink-0 mt-1 text-[#84EF12] opacity-70 group-hover:opacity-100 transition-opacity" title={demoVideo ? "Demo video available" : "Demo screenshots available"}>
+          {demoVideo ? <FiPlayCircle size={20} /> : <FiImage size={20} />}
         </span>
       )}
     </div>
