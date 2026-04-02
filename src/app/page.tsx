@@ -1,16 +1,50 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Landing from "@/app/views/landing";
 import WorkExperienceView from "@/app/views/WorkExperienceView";
 import ResearchView from "@/app/views/ResearchView";
 import Education from "@/app/views/education";
 import ProjectsView from "@/app/views/ProjectView";
 import ContactView from "@/app/views/ContactView";
+import ProfileSelectView from "@/app/views/ProfileSelectView";
+import MinimalResumeView from "@/app/views/MinimalResumeView";
 import Sidebar from "@/app/components/sidebar";
+import {
+  type Persona,
+  personaSectionOrder,
+  sectionDisplayNames,
+  isValidPersona,
+} from "@/app/types/Persona";
+
+const STORAGE_KEY = "resume_persona";
+const NOBS_KEY = "resume_nobs";
 
 export default function Home() {
-  const [currentSection, setCurrentSection] = useState("landing"); // Initial section
+  const [currentSection, setCurrentSection] = useState("landing");
+  const [persona, setPersona] = useState<Persona | null>(null);
+  const [noBs, setNoBs] = useState(false);
+  const [isReady, setIsReady] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const storedPersona = localStorage.getItem(STORAGE_KEY);
+    const storedNoBs = localStorage.getItem(NOBS_KEY);
+    if (storedPersona && isValidPersona(storedPersona)) {
+      setPersona(storedPersona as Persona);
+    }
+    if (storedNoBs === "true") {
+      setNoBs(true);
+    }
+    requestAnimationFrame(() => setIsReady(true));
+  }, []);
+
+  const sectionOrder = personaSectionOrder[persona || "general"];
+
+  const navSections = sectionOrder.map((id) => ({
+    id,
+    displayText: sectionDisplayNames[id],
+  }));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,7 +57,7 @@ export default function Home() {
         const distance = Math.abs(rect.top);
         if (distance < closestDistance) {
           closestDistance = distance;
-          closestSection = section.id; // Get the ID of the closest section
+          closestSection = section.id;
         }
       });
 
@@ -41,18 +75,119 @@ export default function Home() {
         scrollEl.removeEventListener("scroll", handleScroll);
       }
     };
+  }, [persona]);
+
+  useEffect(() => {
+    if (!persona || noBs) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+
+      const idx = sectionOrder.indexOf(currentSection);
+      if (idx === -1) return;
+
+      if (e.shiftKey) {
+        e.preventDefault();
+        if (idx > 0) {
+          const prevId = sectionOrder[idx - 1];
+          setCurrentSection(prevId);
+          document.getElementById(prevId)?.scrollIntoView({ behavior: "smooth" });
+        }
+      } else {
+        if (idx < sectionOrder.length - 1) {
+          const nextId = sectionOrder[idx + 1];
+          setCurrentSection(nextId);
+          document.getElementById(nextId)?.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [persona, noBs, currentSection, sectionOrder]);
+
+  const handlePersonaSelect = useCallback((p: Persona, minimal: boolean) => {
+    localStorage.setItem(STORAGE_KEY, p);
+    localStorage.setItem(NOBS_KEY, String(minimal));
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setPersona(p);
+      setNoBs(minimal);
+      setIsTransitioning(false);
+    }, 500);
   }, []);
 
+  const handleToggleMinimal = useCallback(() => {
+    const next = !noBs;
+    localStorage.setItem(NOBS_KEY, String(next));
+    setNoBs(next);
+  }, [noBs]);
+
+  const handleResetPersona = useCallback(() => {
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(NOBS_KEY);
+    setPersona(null);
+    setNoBs(false);
+    setCurrentSection("landing");
+  }, []);
+
+  function renderSection(id: string) {
+    switch (id) {
+      case "landing":
+        return <Landing key="landing" persona={persona || "general"} onResetPersona={handleResetPersona} onToggleMinimal={handleToggleMinimal} />;
+      case "work-experience":
+        return <WorkExperienceView key="work-experience" />;
+      case "research":
+        return <ResearchView key="research" />;
+      case "education":
+        return <Education key="education" />;
+      case "projects":
+        return <ProjectsView key="projects" />;
+      case "contact":
+        return <ContactView key="contact" />;
+      default:
+        return null;
+    }
+  }
+
+  const showSelector = !persona;
+
   return (
-    <div ref={scrollContainerRef} className="overflow-y-scroll overflow-x-hidden snap-y snap-mandatory h-screen font-[family-name:var(--font-geist-sans)] scrollbar-hide" >
-      <Sidebar currentSection={currentSection} setCurrentSection={setCurrentSection} onClose={() => {}} />
-      <Landing currentSection={currentSection} setCurrentSection={setCurrentSection} />
-      <WorkExperienceView currentSection={currentSection} setCurrentSection={setCurrentSection}/>
-      <ResearchView currentSection={currentSection} setCurrentSection={setCurrentSection}/>
-      <Education currentSection={currentSection} setCurrentSection={setCurrentSection}/>
-      <ProjectsView currentSection={currentSection} setCurrentSection={setCurrentSection}/>
-      <ContactView currentSection={currentSection} setCurrentSection={setCurrentSection} />
-      
-    </div>
+    <>
+      <div
+        className={`fixed inset-0 z-[200] bg-[#0a0a0a] pointer-events-none transition-opacity duration-500 ${
+          isReady ? "opacity-0" : "opacity-100"
+        }`}
+      />
+
+      {showSelector ? (
+        <ProfileSelectView
+          onSelect={handlePersonaSelect}
+          isTransitioning={isTransitioning}
+        />
+      ) : noBs ? (
+        <MinimalResumeView
+          persona={persona || "general"}
+          onToggleMinimal={handleToggleMinimal}
+          onResetPersona={handleResetPersona}
+        />
+      ) : (
+        <div
+          ref={scrollContainerRef}
+          className="overflow-y-scroll overflow-x-hidden snap-y snap-mandatory h-screen font-[family-name:var(--font-geist-sans)] scrollbar-hide"
+        >
+          <Sidebar
+            currentSection={currentSection}
+            setCurrentSection={setCurrentSection}
+            sections={navSections}
+            onResetPersona={handleResetPersona}
+            onToggleMinimal={handleToggleMinimal}
+            noBs={noBs}
+            onClose={() => {}}
+          />
+          {sectionOrder.map((id) => renderSection(id))}
+        </div>
+      )}
+    </>
   );
 }

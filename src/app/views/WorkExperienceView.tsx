@@ -8,7 +8,7 @@ import ScrollToContinue from '@/app/components/ScrollToContinue';
 import FadingScroll from '@/app/components/FadingScroll';
 import type { WorkEntry } from '@/app/types/WorkEntry';
 
-export default function WorkExperienceView({ currentSection, setCurrentSection }: { currentSection: string; setCurrentSection: (section: string) => void }) {
+export default function WorkExperienceView() {
   const [entries, setEntries] = useState<WorkEntry[]>([]);
   const [isSelected, setIsSelected] = useState<number>(-1);
   const cardRefs = React.useRef<Record<number, HTMLDivElement | null>>({});
@@ -30,32 +30,6 @@ export default function WorkExperienceView({ currentSection, setCurrentSection }
 
   const selectedEntry = entries.find((e) => e.id === isSelected);
 
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.key === "Enter" || e.key === " ") && !e.shiftKey && currentSection === 'work-experience') {
-        setCurrentSection('research');
-
-        const nextSection = document.getElementById('research');
-        if (nextSection) {
-          nextSection.scrollIntoView({ behavior: "smooth" });
-        }
-      }
-      // Easter egg: Shift+Enter or Shift+Space to go back
-      if ((e.key === "Enter" || e.key === " ") && e.shiftKey && currentSection === 'work-experience') {
-        e.preventDefault();
-        setCurrentSection('landing');
-
-        const prevSection = document.getElementById('landing');
-        if (prevSection) {
-          prevSection.scrollIntoView({ behavior: "smooth" });
-        }
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [currentSection, setCurrentSection]);
 
 
 

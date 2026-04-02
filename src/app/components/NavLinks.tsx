@@ -1,21 +1,18 @@
 import React from 'react';
 import NavLink from '@/app/components/NavLink';
 
+interface NavSection {
+    id: string;
+    displayText: string;
+}
+
 interface NavLinksProps {
     currentSection: string;
     onNavigate: (section: string) => void;
+    sections: NavSection[];
 }
 
-const NavLinks: React.FC<NavLinksProps> = ({ currentSection, onNavigate }) => {
-    const sections = [
-        { id: 'landing', displayText: 'home' }, 
-        { id: 'work-experience', displayText: 'work_experience' }, 
-        { id: 'research', displayText: 'research' },
-        { id: 'education', displayText: 'education' },
-        { id: 'projects', displayText: 'projects'},
-        { id: 'contact', displayText: 'contact' }
-    ]; // Define sections with optional display text
-
+const NavLinks: React.FC<NavLinksProps> = ({ currentSection, onNavigate, sections }) => {
     return (
         <div className="flex flex-col gap-1 mt-[30px] mr-[30px]">
             {sections.map(({ id, displayText }) => (

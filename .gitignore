@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# large demo files (too big for GitHub)
+public/demos/Bike-share.mp4

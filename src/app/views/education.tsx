@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import TerminalHeader from "@/app/components/TerminalHeader";
 import ScrollToContinue from "@/app/components/ScrollToContinue";
 import EducationCard from "@/app/components/EducationCard";
@@ -32,32 +32,7 @@ const educationData = [
     },
 ];
 
-export default function Education({ currentSection, setCurrentSection }: { currentSection: string; setCurrentSection: (section: string) => void }) {
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.key === "Enter" || e.key === " ") && !e.shiftKey && currentSection === 'education') {
-        setCurrentSection('projects');
-
-        const nextSection = document.getElementById('projects');
-        if (nextSection) {
-          nextSection.scrollIntoView({ behavior: "smooth" });
-        }
-      }
-      // Easter egg: Shift+Enter or Shift+Space to go back
-      if ((e.key === "Enter" || e.key === " ") && e.shiftKey && currentSection === 'education') {
-        e.preventDefault();
-        setCurrentSection('research');
-
-        const prevSection = document.getElementById('research');
-        if (prevSection) {
-          prevSection.scrollIntoView({ behavior: "smooth" });
-        }
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [currentSection, setCurrentSection]);
+export default function Education() {
     
     return (
         <section 

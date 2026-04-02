@@ -8,7 +8,7 @@ import ScrollToContinue from '@/app/components/ScrollToContinue';
 import FadingScroll from '@/app/components/FadingScroll';
 import type { ResearchEntry } from '@/app/types/ResearchEntry';
 
-export default function ResearchView({ currentSection, setCurrentSection }: { currentSection: string; setCurrentSection: (section: string) => void }) {
+export default function ResearchView() {
   const [entries, setEntries] = useState<ResearchEntry[]>([]);
   const [isSelected, setIsSelected] = useState<number>(-1);
 
@@ -18,31 +18,6 @@ export default function ResearchView({ currentSection, setCurrentSection }: { cu
 
   const selectedEntry = entries.find((e) => e.id === isSelected);
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.key === "Enter" || e.key === " ") && !e.shiftKey && currentSection === 'research') {
-        setCurrentSection('education');
-
-        const nextSection = document.getElementById('education');
-        if (nextSection) {
-          nextSection.scrollIntoView({ behavior: "smooth" });
-        }
-      }
-      // Easter egg: Shift+Enter or Shift+Space to go back
-      if ((e.key === "Enter" || e.key === " ") && e.shiftKey && currentSection === 'research') {
-        e.preventDefault();
-        setCurrentSection('work-experience');
-
-        const prevSection = document.getElementById('work-experience');
-        if (prevSection) {
-          prevSection.scrollIntoView({ behavior: "smooth" });
-        }
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [currentSection, setCurrentSection]);
 
   return (
     <section 

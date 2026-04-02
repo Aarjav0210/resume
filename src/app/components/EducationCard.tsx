@@ -108,9 +108,9 @@ const EducationCard: React.FC<EducationEntry> = ({
                         <Image
                             src={imageSrc}
                             alt={`${institution} logo`}
-                            width={28}
-                            height={28}
-                            className="object-contain max-h-full max-w-full scale-[1.5]"
+                            width={96}
+                            height={96}
+                            className="object-contain w-7 h-7 scale-[1.5]"
                             priority
                             style={imageStyle}
                         />

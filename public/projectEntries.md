@@ -78,7 +78,6 @@ entries:
 
   - id: 4
     title: "Bike-Share Navigation System"
-    demoVideo: "/demos/Bike-share.mp4"
     description: |
       Led a team of **10** to build a **Flutter (Dart)** app integrating the **Santander Cycle API** and **Firebase**, implementing **route-optimization** to recommend the most cost-efficient journeys across London's bike-share network.
     skills:

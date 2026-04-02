@@ -8,7 +8,7 @@ import ScrollToContinue from '@/app/components/ScrollToContinue';
 import { fetchProjectEntries } from '@/app/lib/projectEntryParser';
 import type { ProjectEntry } from '@/app/types/ProjectEntry';
 
-export default function ProjectView({ currentSection, setCurrentSection }: { currentSection: string; setCurrentSection: (section: string) => void }) {
+export default function ProjectView() {
   const [entries, setEntries] = useState<ProjectEntry[]>([]);
   const [selectedId, setSelectedId] = useState<number>(-1);
 
@@ -16,31 +16,6 @@ export default function ProjectView({ currentSection, setCurrentSection }: { cur
 
   const selected = entries.find((e) => e.id === selectedId);
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.key === "Enter" || e.key === " ") && !e.shiftKey && currentSection === 'projects') {
-        setCurrentSection('contact');
-
-        const nextSection = document.getElementById('contact');
-        if (nextSection) {
-          nextSection.scrollIntoView({ behavior: "smooth" });
-        }
-      }
-      // Easter egg: Shift+Enter or Shift+Space to go back
-      if ((e.key === "Enter" || e.key === " ") && e.shiftKey && currentSection === 'projects') {
-        e.preventDefault();
-        setCurrentSection('education');
-
-        const prevSection = document.getElementById('education');
-        if (prevSection) {
-          prevSection.scrollIntoView({ behavior: "smooth" });
-        }
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [currentSection, setCurrentSection]);
 
   return (
     <section 

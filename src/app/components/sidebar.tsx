@@ -1,11 +1,20 @@
-// Sidebar.js
 import React, { useState, useEffect } from 'react';
-import '@/app/components/Sidebar.css'; // Assuming you have some CSS for styling
-import NavLinks from '@/app/components/NavLinks'; // Import the new NavLinks component
+import '@/app/components/Sidebar.css';
+import NavLinks from '@/app/components/NavLinks';
 import Image from 'next/image';
 import profilePhoto from '/public/assets/aarjav-profile-photo.jpg';
 
-const Sidebar: React.FC<{ onClose: () => void; currentSection: string; setCurrentSection: (section: string) => void }> = ({ onClose, currentSection, setCurrentSection }) => {
+interface SidebarProps {
+    onClose: () => void;
+    currentSection: string;
+    setCurrentSection: (section: string) => void;
+    sections: { id: string; displayText: string }[];
+    onResetPersona: () => void;
+    onToggleMinimal: () => void;
+    noBs: boolean;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ onClose, currentSection, setCurrentSection, sections, onResetPersona, onToggleMinimal, noBs }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleSidebar = () => {
@@ -21,16 +30,18 @@ const Sidebar: React.FC<{ onClose: () => void; currentSection: string; setCurren
     }, [isOpen]);
 
     const handleNavigation = (section: string) => {
-        console.log(`Navigating to section: ${section}`); // Debugging log
         const element = document.getElementById(section);
         if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
-            setIsOpen(false); // Close the sidebar after navigation
-            if (onClose) onClose(); // Call the onClose function if it exists
-            setCurrentSection(section); // Update the current section when navigating
-        } else {
-            console.error(`Element with ID ${section} not found`); // Error log if element is not found
+            setIsOpen(false);
+            if (onClose) onClose();
+            setCurrentSection(section);
         }
+    };
+
+    const handleSwitchProfile = () => {
+        setIsOpen(false);
+        onResetPersona();
     };
 
     return (
@@ -41,9 +52,7 @@ const Sidebar: React.FC<{ onClose: () => void; currentSection: string; setCurren
                 style={{ position: 'absolute', top: '70px', right: '50px' }}
             >
                 <div className='text-base flex items-center gap-1'>
-                    {/* <span className='opacity-0 pointer-events-none md:opacity-100 md:pointer-events-auto' aria-hidden="true" tabIndex={-1}>navigate </span> */}
                     <span className='hidden md:inline text-white group-hover:text-[#84EF12] transition-colors duration-300'>navigate </span>
-                    
                     <span className={`text-[#84EF12] rotate-icon ${isOpen ? 'open' : ''}`}>&lt;</span>
                 </div>
             </button>
@@ -55,10 +64,22 @@ const Sidebar: React.FC<{ onClose: () => void; currentSection: string; setCurren
                   </div>
                 </div>
                 <div className="sidebar-nav-glow">
-                  <NavLinks currentSection={currentSection} onNavigate={handleNavigation} />
+                  <NavLinks currentSection={currentSection} onNavigate={handleNavigation} sections={sections} />
                 </div>
-                {/* Download CV Link */}
-                <div className="absolute bottom-8 right-8">
+
+                <div className="absolute bottom-8 right-8 flex flex-col items-end gap-3">
+                    <button
+                        onClick={() => { setIsOpen(false); onToggleMinimal(); }}
+                        className="sidebar-download-link text-xs cursor-pointer opacity-60 hover:opacity-100 transition-opacity duration-300"
+                    >
+                        {noBs ? "animated" : "minimal"} <span className="text-[#84EF12]">&lt;</span>
+                    </button>
+                    <button
+                        onClick={handleSwitchProfile}
+                        className="sidebar-download-link text-xs cursor-pointer opacity-60 hover:opacity-100 transition-opacity duration-300"
+                    >
+                        switch_profile <span className="text-[#84EF12]">&lt;</span>
+                    </button>
                     <a 
                         href="/assets/Aarjav_Jain_CV.pdf" 
                         download
