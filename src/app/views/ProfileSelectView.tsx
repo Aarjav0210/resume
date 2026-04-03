@@ -14,7 +14,7 @@ interface ProfileSelectViewProps {
 export default function ProfileSelectView({ onSelect, isTransitioning, theme, onToggleTheme }: ProfileSelectViewProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number>(-1);
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
-  const [minimal, setMinimal] = useState(false);
+  const [minimal, setMinimal] = useState<boolean | null>(null);
   const [showContent, setShowContent] = useState(false);
   const [inputText, setInputText] = useState("");
 
@@ -28,7 +28,7 @@ export default function ProfileSelectView({ onSelect, isTransitioning, theme, on
       if (selectedIndex !== -1) return;
       setSelectedIndex(index);
       setInputText(personaOptions[index].key);
-      setTimeout(() => onSelect(personaOptions[index].id, minimal), 600);
+      setTimeout(() => onSelect(personaOptions[index].id, minimal ?? false), 600);
     },
     [onSelect, selectedIndex, minimal]
   );
@@ -38,7 +38,7 @@ export default function ProfileSelectView({ onSelect, isTransitioning, theme, on
       if (selectedIndex !== -1) return;
 
       if (e.key === "m" || e.key === "M") {
-        setMinimal((prev) => !prev);
+        setMinimal((prev) => prev === null ? true : !prev);
         return;
       }
 
@@ -159,7 +159,7 @@ export default function ProfileSelectView({ onSelect, isTransitioning, theme, on
             onClick={() => setMinimal(false)}
             disabled={selectedIndex !== -1}
             className={`px-3 py-1.5 rounded border text-xs cursor-pointer transition-all duration-200 ${
-              !minimal
+              minimal === false
                 ? "border-[var(--color-cyan)]/40 bg-[var(--color-cyan)]/10 text-[var(--color-cyan)]"
                 : "border-white/10 bg-white/[0.03] text-white/40 hover:text-white/70 hover:border-white/20"
             }`}
@@ -170,7 +170,7 @@ export default function ProfileSelectView({ onSelect, isTransitioning, theme, on
             onClick={() => setMinimal(true)}
             disabled={selectedIndex !== -1}
             className={`px-3 py-1.5 rounded border text-xs cursor-pointer transition-all duration-200 ${
-              minimal
+              minimal === true
                 ? "border-[var(--color-cyan)]/40 bg-[var(--color-cyan)]/10 text-[var(--color-cyan)]"
                 : "border-white/10 bg-white/[0.03] text-white/40 hover:text-white/70 hover:border-white/20"
             }`}
