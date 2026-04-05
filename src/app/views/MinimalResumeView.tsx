@@ -287,7 +287,7 @@ function MinimalSidebar({
         <a
           href={cvHref}
           download
-          className="block w-full text-left font-mono text-xs py-1.5 transition-all duration-200 text-white/25 hover:text-[var(--color-green)] mt-4"
+          className="block w-full text-left font-mono text-xs py-1.5 transition-all duration-200 opacity-25 hover:opacity-100 hover:text-[var(--color-green)] mt-4 theme-fg"
         >
           download_cv
         </a>
