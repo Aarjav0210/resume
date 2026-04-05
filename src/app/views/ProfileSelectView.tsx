@@ -15,6 +15,7 @@ export default function ProfileSelectView({ onSelect, isTransitioning, theme, on
   const [hoveredIndex, setHoveredIndex] = useState<number>(-1);
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
   const [minimal, setMinimal] = useState<boolean | null>(null);
+  const [navigating, setNavigating] = useState(false);
   const [showContent, setShowContent] = useState(false);
   const [inputText, setInputText] = useState("");
 
@@ -23,19 +24,33 @@ export default function ProfileSelectView({ onSelect, isTransitioning, theme, on
     return () => clearTimeout(timer);
   }, []);
 
-  const handleSelect = useCallback(
+  const handleSelectPersona = useCallback(
     (index: number) => {
-      if (selectedIndex !== -1) return;
+      if (navigating) return;
       setSelectedIndex(index);
       setInputText(personaOptions[index].key);
-      setTimeout(() => onSelect(personaOptions[index].id, minimal ?? false), 600);
     },
-    [onSelect, selectedIndex, minimal]
+    [navigating]
+  );
+
+  const handleSelectMode = useCallback(
+    (isMinimal: boolean) => {
+      if (navigating) return;
+      setMinimal(isMinimal);
+    },
+    [navigating]
   );
 
   useEffect(() => {
+    if (selectedIndex !== -1 && minimal !== null && !navigating) {
+      setNavigating(true);
+      setTimeout(() => onSelect(personaOptions[selectedIndex].id, minimal), 600);
+    }
+  }, [selectedIndex, minimal, navigating, onSelect]);
+
+  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (selectedIndex !== -1) return;
+      if (navigating) return;
 
       if (e.key === "m" || e.key === "M") {
         setMinimal((prev) => prev === null ? true : !prev);
@@ -44,12 +59,12 @@ export default function ProfileSelectView({ onSelect, isTransitioning, theme, on
 
       const num = parseInt(e.key);
       if (num >= 1 && num <= 4) {
-        handleSelect(num - 1);
+        handleSelectPersona(num - 1);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [selectedIndex, handleSelect]);
+  }, [navigating, handleSelectPersona]);
 
   return (
     <div
@@ -92,19 +107,21 @@ export default function ProfileSelectView({ onSelect, isTransitioning, theme, on
           {personaOptions.map((option, i) => (
             <button
               key={option.id}
-              onClick={() => handleSelect(i)}
+              onClick={() => handleSelectPersona(i)}
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(-1)}
-              disabled={selectedIndex !== -1}
+              disabled={navigating}
               className={`
                 group relative text-left font-mono px-5 py-4 rounded-lg border cursor-pointer
                 transition-all duration-300
                 ${
                   selectedIndex === i
                     ? "border-[var(--color-green)] bg-[var(--color-green)]/10 scale-[1.02] shadow-[0_0_24px_var(--color-green-shadow,0.15)]"
-                    : selectedIndex !== -1
+                    : navigating
                       ? "border-white/5 bg-white/[0.02] opacity-30 scale-[0.98]"
-                      : "border-white/10 bg-white/[0.04] hover:border-[var(--color-cyan)]/40 hover:bg-[var(--color-cyan)]/[0.06] hover:-translate-y-1 hover:scale-[1.015] hover:shadow-[0_0_20px_var(--color-cyan-shadow,0.12),0_4px_16px_rgba(0,0,0,0.3)]"
+                      : selectedIndex !== -1
+                        ? "border-white/10 bg-white/[0.02] opacity-50 hover:border-[var(--color-cyan)]/40 hover:opacity-100"
+                        : "border-white/10 bg-white/[0.04] hover:border-[var(--color-cyan)]/40 hover:bg-[var(--color-cyan)]/[0.06] hover:-translate-y-1 hover:scale-[1.015] hover:shadow-[0_0_20px_var(--color-cyan-shadow,0.12),0_4px_16px_rgba(0,0,0,0.3)]"
                 }
                 ${showContent ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"}
               `}
@@ -156,8 +173,8 @@ export default function ProfileSelectView({ onSelect, isTransitioning, theme, on
         >
           <span className="text-gray-500 text-xs">mode:</span>
           <button
-            onClick={() => setMinimal(false)}
-            disabled={selectedIndex !== -1}
+            onClick={() => handleSelectMode(false)}
+            disabled={navigating}
             className={`px-3 py-1.5 rounded border text-xs cursor-pointer transition-all duration-200 ${
               minimal === false
                 ? "border-[var(--color-cyan)]/40 bg-[var(--color-cyan)]/10 text-[var(--color-cyan)]"
@@ -167,8 +184,8 @@ export default function ProfileSelectView({ onSelect, isTransitioning, theme, on
             animated
           </button>
           <button
-            onClick={() => setMinimal(true)}
-            disabled={selectedIndex !== -1}
+            onClick={() => handleSelectMode(true)}
+            disabled={navigating}
             className={`px-3 py-1.5 rounded border text-xs cursor-pointer transition-all duration-200 ${
               minimal === true
                 ? "border-[var(--color-cyan)]/40 bg-[var(--color-cyan)]/10 text-[var(--color-cyan)]"
@@ -190,7 +207,7 @@ export default function ProfileSelectView({ onSelect, isTransitioning, theme, on
           <span className="text-gray-500 text-xs">theme:</span>
           <button
             onClick={() => onToggleTheme()}
-            disabled={selectedIndex !== -1}
+            disabled={navigating}
             className="px-3 py-1.5 rounded border text-xs cursor-pointer transition-all duration-200 border-white/10 bg-white/[0.03] text-white/40 hover:text-white/70 hover:border-white/20"
           >
             {theme === "dark" ? "☀ light" : "🌙 dark"}
