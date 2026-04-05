@@ -254,9 +254,11 @@ function DemoModal(props: DemoModalProps) {
 function MinimalSidebar({
   sections,
   activeSection,
+  cvHref,
 }: {
   sections: { id: string; label: string }[];
   activeSection: string;
+  cvHref: string;
 }) {
   const handleClick = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -282,6 +284,13 @@ function MinimalSidebar({
             </button>
           );
         })}
+        <a
+          href={cvHref}
+          download
+          className="block w-full text-left font-mono text-xs py-1.5 transition-all duration-200 text-white/25 hover:text-[var(--color-green)] mt-4"
+        >
+          download_cv
+        </a>
       </div>
     </nav>
   );
@@ -494,7 +503,7 @@ export default function MinimalResumeView({ persona, onToggleMinimal, onResetPer
 
   return (
     <div ref={containerRef} className="min-h-screen theme-bg theme-fg font-[family-name:var(--font-geist-sans)]">
-      <MinimalSidebar sections={sidebarSections} activeSection={activeSection} />
+      <MinimalSidebar sections={sidebarSections} activeSection={activeSection} cvHref={persona === "researcher" ? "/assets/Aarjav_Jain_CV_Research.pdf" : "/assets/Aarjav_Jain_CV.pdf"} />
 
       <div className="max-w-4xl mx-auto px-8 py-16 lg:ml-48">
         {/* Header with avatar */}
