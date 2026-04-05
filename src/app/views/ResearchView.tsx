@@ -7,14 +7,15 @@ import ResearchModal from '@/app/components/ResearchModal';
 import ScrollToContinue from '@/app/components/ScrollToContinue';
 import FadingScroll from '@/app/components/FadingScroll';
 import type { ResearchEntry } from '@/app/types/ResearchEntry';
+import type { Persona } from '@/app/types/Persona';
 
-export default function ResearchView() {
+export default function ResearchView({ persona }: { persona?: Persona }) {
   const [entries, setEntries] = useState<ResearchEntry[]>([]);
   const [isSelected, setIsSelected] = useState<number>(-1);
 
   useEffect(() => {
-    fetchResearchEntries().then(setEntries);
-  }, []);
+    fetchResearchEntries(persona).then(setEntries);
+  }, [persona]);
 
   const selectedEntry = entries.find((e) => e.id === isSelected);
 

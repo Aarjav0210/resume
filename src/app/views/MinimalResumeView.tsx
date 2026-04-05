@@ -48,6 +48,36 @@ const educationData = [
   },
 ];
 
+const educationDataResearcher = [
+  {
+    id: 1,
+    institution: "Brown University",
+    timePeriod: "Aug '25 – Present",
+    degree: "MSc Computer Science (AI + Computational Biology Track)",
+    notes: "GTA – Data Structures, Algorithms & Intractability · Deep Learning in Genomics, Statistical Methods for High-Dimensional Genomics",
+    logo: "/assets/brown-icon.png",
+    logoBg: "#ffffff",
+  },
+  {
+    id: 2,
+    institution: "King's College London",
+    timePeriod: "Sep '20 – May '24",
+    degree: "BSc Computer Science (Artificial Intelligence) with Management and a Year Abroad",
+    notes: "First Class Honours · Study Abroad: AI + Biotechnology @ University of Toronto",
+    logo: "/assets/kings-icon.png",
+    logoBg: "#cc0000",
+  },
+  {
+    id: 3,
+    institution: "University of Toronto",
+    timePeriod: "Sep '22 – Apr '23",
+    degree: "Visiting Exchange Student",
+    notes: "AI & Biotechnology",
+    logo: "/assets/uoft-icon.png",
+    logoBg: "#ffffff",
+  },
+];
+
 /* ─── Description rendering helpers ─── */
 
 function DescriptionBlock({ parts }: { parts: Description[] }) {
@@ -276,10 +306,10 @@ export default function MinimalResumeView({ persona, onToggleMinimal, onResetPer
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    fetchWorkEntries().then(setWorkEntries);
-    fetchResearchEntries().then(setResearchEntries);
-    fetchProjectEntries().then(setProjectEntries);
-  }, []);
+    fetchWorkEntries(persona).then(setWorkEntries);
+    fetchResearchEntries(persona).then(setResearchEntries);
+    fetchProjectEntries(persona).then(setProjectEntries);
+  }, [persona]);
 
   const personaLabel = personaOptions.find((p) => p.id === persona)?.label ?? persona;
   const roles = personaTypewriterText[persona];
@@ -371,7 +401,7 @@ export default function MinimalResumeView({ persona, onToggleMinimal, onResetPer
           <div key="education" id="minimal-education">
             <SectionHeading text="ls education" id="minimal-education-heading" />
             <div className="space-y-5">
-              {educationData.map((entry) => (
+              {(persona === "researcher" ? educationDataResearcher : educationData).map((entry) => (
                 <div key={entry.id} className="border-l border-white/10 pl-5 flex items-start gap-4">
                   <div
                     className="shrink-0 w-10 h-10 rounded-md overflow-hidden mt-0.5"
@@ -451,7 +481,7 @@ export default function MinimalResumeView({ persona, onToggleMinimal, onResetPer
               >
                 linkedin.com/in/aarjav-jain
               </a>
-              <a href="/assets/Aarjav_Jain_CV.pdf" download className="text-[var(--color-green)] hover:underline">
+              <a href={persona === "researcher" ? "/assets/Aarjav_Jain_CV_Research.pdf" : "/assets/Aarjav_Jain_CV.pdf"} download className="text-[var(--color-green)] hover:underline">
                 download_cv
               </a>
             </div>

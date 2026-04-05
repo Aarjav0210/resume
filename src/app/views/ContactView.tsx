@@ -3,8 +3,9 @@ import React from "react";
 import { FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { MdOutlineFileDownload } from "react-icons/md";
 import TerminalHeader from "@/app/components/TerminalHeader";
+import type { Persona } from "@/app/types/Persona";
 
-const ContactView = () => {
+const ContactView = ({ persona }: { persona?: Persona }) => {
   const email = "aarjav02@gmail.com";
   const linkedinUrl = "https://www.linkedin.com/in/aarjav-jain/";
 
@@ -87,7 +88,7 @@ const ContactView = () => {
               </a>
 
               <a
-                href="/assets/Aarjav_Jain_CV.pdf"
+                href={persona === "researcher" ? "/assets/Aarjav_Jain_CV_Research.pdf" : "/assets/Aarjav_Jain_CV.pdf"}
                 download
                 className="group flex items-center gap-4 rounded-xl border border-white/10 bg-white/[0.04] px-5 py-4 transition duration-300 hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/[0.07]"
                 aria-label="Download CV"

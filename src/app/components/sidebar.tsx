@@ -3,6 +3,7 @@ import '@/app/components/Sidebar.css';
 import NavLinks from '@/app/components/NavLinks';
 import Image from 'next/image';
 import profilePhoto from '/public/assets/aarjav-profile-photo.jpg';
+import type { Persona } from '@/app/types/Persona';
 
 interface SidebarProps {
     onClose: () => void;
@@ -14,9 +15,10 @@ interface SidebarProps {
     noBs: boolean;
     theme: "dark" | "light";
     onToggleTheme: () => void;
+    persona?: Persona;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ onClose, currentSection, setCurrentSection, sections, onResetPersona, onToggleMinimal, noBs, theme, onToggleTheme }) => {
+const Sidebar: React.FC<SidebarProps> = ({ onClose, currentSection, setCurrentSection, sections, onResetPersona, onToggleMinimal, noBs, theme, onToggleTheme, persona }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleSidebar = () => {
@@ -89,7 +91,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose, currentSection, setCurrentSe
                         switch_profile <span className="text-[var(--color-green)]">&lt;</span>
                     </button>
                     <a 
-                        href="/assets/Aarjav_Jain_CV.pdf" 
+                        href={persona === "researcher" ? "/assets/Aarjav_Jain_CV_Research.pdf" : "/assets/Aarjav_Jain_CV.pdf"} 
                         download
                         className="sidebar-download-link text-base cursor-pointer"
                     >

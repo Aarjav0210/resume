@@ -7,8 +7,9 @@ import WorkExperienceModal from '@/app/components/WorkExperienceModal';
 import ScrollToContinue from '@/app/components/ScrollToContinue';
 import FadingScroll from '@/app/components/FadingScroll';
 import type { WorkEntry } from '@/app/types/WorkEntry';
+import type { Persona } from '@/app/types/Persona';
 
-export default function WorkExperienceView() {
+export default function WorkExperienceView({ persona }: { persona?: Persona }) {
   const [entries, setEntries] = useState<WorkEntry[]>([]);
   const [isSelected, setIsSelected] = useState<number>(-1);
   const cardRefs = React.useRef<Record<number, HTMLDivElement | null>>({});
@@ -25,8 +26,8 @@ export default function WorkExperienceView() {
   ];
 
   useEffect(() => {
-    fetchWorkEntries().then(setEntries);
-  }, []);
+    fetchWorkEntries(persona).then(setEntries);
+  }, [persona]);
 
   const selectedEntry = entries.find((e) => e.id === isSelected);
 

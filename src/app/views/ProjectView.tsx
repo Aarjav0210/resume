@@ -7,12 +7,13 @@ import ProjectModal from '@/app/components/ProjectModal';
 import ScrollToContinue from '@/app/components/ScrollToContinue';
 import { fetchProjectEntries } from '@/app/lib/projectEntryParser';
 import type { ProjectEntry } from '@/app/types/ProjectEntry';
+import type { Persona } from '@/app/types/Persona';
 
-export default function ProjectView() {
+export default function ProjectView({ persona }: { persona?: Persona }) {
   const [entries, setEntries] = useState<ProjectEntry[]>([]);
   const [selectedId, setSelectedId] = useState<number>(-1);
 
-  useEffect(() => { fetchProjectEntries().then(setEntries) }, []);
+  useEffect(() => { fetchProjectEntries(persona).then(setEntries) }, [persona]);
 
   const selected = entries.find((e) => e.id === selectedId);
 

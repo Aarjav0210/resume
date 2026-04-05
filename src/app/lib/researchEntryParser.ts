@@ -67,8 +67,9 @@ export function parseResearchEntries(rawMd: string): ResearchEntry[] {
 /**
  * Fetch the markdown file from public and parse it into ResearchEntry[]
  */
-export async function fetchResearchEntries(): Promise<ResearchEntry[]> {
-  const res = await fetch('/researchEntries.md');
+export async function fetchResearchEntries(persona?: string): Promise<ResearchEntry[]> {
+  const file = persona === 'researcher' ? '/researchEntries.researcher.md' : '/researchEntries.md';
+  const res = await fetch(file);
   const raw = await res.text();
   return parseResearchEntries(raw);
 };

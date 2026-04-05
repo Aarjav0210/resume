@@ -51,10 +51,11 @@ export function parseProjectEntries(rawMd: string): ProjectEntry[] {
   }))
 }
 
-export async function fetchProjectEntries(): Promise<ProjectEntry[]> {
-  const res = await fetch('/projectEntries.md', { cache: 'no-store' })
+export async function fetchProjectEntries(persona?: string): Promise<ProjectEntry[]> {
+  const file = persona === 'researcher' ? '/projectEntries.researcher.md' : '/projectEntries.md';
+  const res = await fetch(file, { cache: 'no-store' })
   if (!res.ok) {
-    console.error('Failed to load projectEntries.md', res.status)
+    console.error(`Failed to load ${file}`, res.status)
     return []
   }
   const raw = await res.text()

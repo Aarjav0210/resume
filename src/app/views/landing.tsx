@@ -60,7 +60,7 @@ export default function Landing({ persona, onResetPersona, onToggleMinimal, onTo
           
           <div className="absolute right-[50px] top-10">
             <a 
-              href="/assets/Aarjav_Jain_CV.pdf" 
+              href={persona === "researcher" ? "/assets/Aarjav_Jain_CV_Research.pdf" : "/assets/Aarjav_Jain_CV.pdf"} 
               download
               className="text-base font-mono cursor-pointer flex items-center gap-1 group"
               aria-label="Download CV"

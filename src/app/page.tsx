@@ -152,15 +152,15 @@ export default function Home() {
       case "landing":
         return <Landing key="landing" persona={persona || "general"} onResetPersona={handleResetPersona} onToggleMinimal={handleToggleMinimal} onToggleTheme={handleToggleTheme} theme={theme} />;
       case "work-experience":
-        return <WorkExperienceView key="work-experience" />;
+        return <WorkExperienceView key="work-experience" persona={persona || "general"} />;
       case "research":
-        return <ResearchView key="research" />;
+        return <ResearchView key="research" persona={persona || "general"} />;
       case "education":
-        return <Education key="education" />;
+        return <Education key="education" persona={persona || "general"} />;
       case "projects":
-        return <ProjectsView key="projects" />;
+        return <ProjectsView key="projects" persona={persona || "general"} />;
       case "contact":
-        return <ContactView key="contact" />;
+        return <ContactView key="contact" persona={persona || "general"} />;
       default:
         return null;
     }
@@ -206,6 +206,7 @@ export default function Home() {
             onClose={() => {}}
             theme={theme}
             onToggleTheme={handleToggleTheme}
+            persona={persona || "general"}
           />
           {sectionOrder.map((id) => renderSection(id))}
         </div>
